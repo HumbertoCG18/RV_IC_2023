@@ -9,7 +9,6 @@ public class PlacaBalanca : MonoBehaviour{
     public float PesoAtivarMax;
     public GameObject Ativar;
 
-    // Update is called once per frame
     void Update()
     {
         if(Peso < PesoAtivarMin || Peso> PesoAtivarMax)
