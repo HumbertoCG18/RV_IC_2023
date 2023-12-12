@@ -478,7 +478,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_UIScrollAction.m_Action.m_Id
-    value: 05ce1f06-6826-4055-ba6a-5581f1902682
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_UIScrollAction.m_Action.m_Processors

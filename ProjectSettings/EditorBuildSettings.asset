@@ -11,7 +11,7 @@ EditorBuildSettings:
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 927f011ba7bef5a4592aefb7de88351e, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
-    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9bec1ce6a03ccba4b9a8215241b32e63, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 497bf7fe2b783f7428fe8b6b8e0154db, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: a49cadc1a815591479693b955ccf08c1, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 36322440395a43d438f60ed6eacab5ad, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 94f2017dd1cbba54b8fe291062cdbbe7, type: 2}
