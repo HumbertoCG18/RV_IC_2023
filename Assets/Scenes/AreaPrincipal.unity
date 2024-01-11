@@ -10540,6 +10540,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -5205.0054
       objectReference: {fileID: 0}
+    - target: {fileID: 8220637500062412480, guid: b157bc8c3192d2647aeb0ac97668cc2f, type: 3}
+      propertyPath: m_InteractionManager
+      value: 
+      objectReference: {fileID: 381304589}
+    - target: {fileID: 8220637500062412480, guid: b157bc8c3192d2647aeb0ac97668cc2f, type: 3}
+      propertyPath: m_TeleportationProvider
+      value: 
+      objectReference: {fileID: 381304588}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
