@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AudioPlayer : MonoBehaviour
 {
- public static AudioPlayer instance;
+    [SerializeField] private AudioSource bgmAudio;
+    [SerializeField] private AudioSource sfxAudio;
+
+    public static AudioPlayer instance;
 
     private void Awake()
     {
@@ -27,7 +31,7 @@ public class AudioPlayer : MonoBehaviour
         sfxAudio.PlayOneShot(_efeitoSonoro);
     }
 
-    public void PararSFX()s
+    public void PararSFX()
     {
         sfxAudio.Stop();
     }
