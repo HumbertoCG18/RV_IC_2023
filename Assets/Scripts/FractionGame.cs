@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 
+/*
 public class FractionGame : MonoBehaviour
 {
     public Text feedbackText;
@@ -75,3 +76,4 @@ public class FractionGame : MonoBehaviour
         // Implemente a lógica para reproduzir um som de errado
     }
 }
+*/
