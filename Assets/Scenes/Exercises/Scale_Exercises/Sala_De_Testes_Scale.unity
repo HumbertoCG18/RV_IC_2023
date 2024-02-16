@@ -5713,6 +5713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2875228346559020191}
+  - component: {fileID: 3219242906749036070}
   m_Layer: 0
   m_Name: "Balan\xE7a - 2 Edi\xE7\xE3o "
   m_TagString: Untagged
@@ -5720,6 +5721,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3219242906749036070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3219242906749036069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03ad2bfb4a75074baf140d80a05d1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  haste: {fileID: 4026943711791325340}
+  pontoConexaoEsquerda: {fileID: 1416742526}
+  pontoConexaoDireita: {fileID: 717402122}
+  suportePratoEsquerda: {fileID: 6926411601860447193}
+  suportePratoDireita: {fileID: 8484902388456347953}
+  forcaTorque: 10
 --- !u!33 &3247929886910669057
 MeshFilter:
   m_ObjectHideFlags: 0
