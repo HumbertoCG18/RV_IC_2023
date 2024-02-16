@@ -1,4 +1,0 @@
-repository "RV_IC_2023@PUCRS_IC_2023@cloud"
-  path "/"
-    br "/main"
-    co "/main"
