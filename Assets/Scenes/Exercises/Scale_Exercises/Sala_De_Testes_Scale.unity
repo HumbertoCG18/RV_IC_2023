@@ -2713,6 +2713,7 @@ GameObject:
   - component: {fileID: 717402123}
   - component: {fileID: 717402125}
   - component: {fileID: 717402124}
+  - component: {fileID: 717402126}
   m_Layer: 0
   m_Name: PontoEsquerda
   m_TagString: Untagged
@@ -2864,6 +2865,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &717402126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717402122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eabe110e4b3ae74b814f66a084741f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extremidadeHaste: {fileID: 717402122}
+  suportePrato: {fileID: 6926411601860447193}
+  conectarAsteAoSuporte: 1
 --- !u!1001 &737177691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4122,6 +4138,7 @@ GameObject:
   - component: {fileID: 1416742527}
   - component: {fileID: 1416742529}
   - component: {fileID: 1416742528}
+  - component: {fileID: 1416742530}
   m_Layer: 0
   m_Name: PontoDireita
   m_TagString: Untagged
@@ -4273,6 +4290,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1416742530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416742526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eabe110e4b3ae74b814f66a084741f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extremidadeHaste: {fileID: 1416742526}
+  suportePrato: {fileID: 8484902388456347953}
+  conectarAsteAoSuporte: 1
 --- !u!1 &1493784773
 GameObject:
   m_ObjectHideFlags: 0
