@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
 /*
 public class FractionGame : MonoBehaviour
 {
-    public Text feedbackText;
+    public GameObject feedbackText;
     public GameObject correctCheckmark;
     public GameObject wrongCross;
     public XRController controller;
@@ -59,7 +58,7 @@ public class FractionGame : MonoBehaviour
     // Função para exibir uma dica sobre a fração 1/2
     private void ShowFractionHint()
     {
-        feedbackText.text; // += "\n A fração 1/2 corresponde a um inteiro dividido em duas partes.";
+        feedbackText.feedback; // += "\n A fração 1/2 corresponde a um inteiro dividido em duas partes.";
     }
 
     // Função para passar o próximo nível 
@@ -76,7 +75,4 @@ public class FractionGame : MonoBehaviour
             Debug.LogError("Nome do próximo nível não definido!");
         }
     }
-}
-
-}
 }
