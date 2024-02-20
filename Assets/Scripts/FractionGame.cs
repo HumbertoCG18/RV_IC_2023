@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
 public class FractionGame : MonoBehaviour
@@ -9,23 +10,22 @@ public class FractionGame : MonoBehaviour
     public GameObject correctCheckmark;
     public GameObject wrongCross;
     public XRController controller;
-
-    private bool fractionSelected = false;
+    public bool fractionSelected; 
 
     private void Update()
     {
-        // Verifica se houve uma interação de poke no controlador XR 
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool pokePressed) && pokePressed) // CommonUsages.primaryButton é o botão de poke, que é o gatilho no controle Xr
+    // Verifica se houve uma interação de poke no controlador XR 
+        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool pokePressed) && pokePressed) 
+    // CommonUsages.primaryButton é o botão de poke, que é o gatilho no controle Xr
         {
-            // Dispara um raio a partir da posição do controlador XR
+         // Dispara um raio a partir da posição do controlador XR
             Ray ray = new Ray(controller.transform.position, controller.transform.forward); // Ray é um raio que começa na posição do controlador e vai para a frente
             RaycastHit hit; // RaycastHit é uma estrutura que armazena informações sobre o raio atingindo um objeto na cena 
-
-            // Se o raio atingir um objeto na cena
+        // Se o raio atingir um objeto na cena
             if (Physics.Raycast(ray, out hit))
             {
-                // Verifica se o objeto atingido é uma fração válida (1/2)
-                if (hit.collider.CompareTag("Fraction"))
+              // Verifica se o objeto atingido é uma fração válida (1/2)
+                if (hit.collider.CompareTag("Fraction")) // como que ele sabe? 
                 {
                     fractionSelected = true;
                     CheckFraction(hit.collider.gameObject);
@@ -33,17 +33,15 @@ public class FractionGame : MonoBehaviour
             }
         }
     }
-
     // Função para verificar se a fração selecionada está correta
     private void CheckFraction(GameObject fraction)
     {
         if (fractionSelected)
         {
-            // Verifica se a fração selecionada é 1/2
-            if (fraction.name == "HalfFraction")
+            if (fraction.AddComponent.onetwo == "HalfFraction")
             {
                 // Ativa o feedback de correto
-                feedbackText.text = "Correto!";
+                feedbackText.text; // = "Correto!";
                 correctCheckmark.SetActive(true);
                 PlayCorrectSound();
             }
@@ -61,19 +59,24 @@ public class FractionGame : MonoBehaviour
     // Função para exibir uma dica sobre a fração 1/2
     private void ShowFractionHint()
     {
-        feedbackText.text += "\n A fração 1/2 corresponde a um inteiro dividido em duas partes.";
+        feedbackText.text; // += "\n A fração 1/2 corresponde a um inteiro dividido em duas partes.";
     }
 
-    // Função para reproduzir um som de correto
-    private void PlayCorrectSound()
+    // Função para passar o próximo nível 
+    public void PassarProximoNivel()
     {
-        // Implemente a lógica para reproduzir um som de correto
-    }
-
-    // Função para reproduzir um som de errado
-    private void PlayWrongSound()
-    {
-        // Implemente a lógica para reproduzir um som de errado
+        // Verifica se o nome do próximo nível está definido
+        if (!string.IsNullOrEmpty(proximoNivel))
+        {
+            // Carrega o próximo nível
+            SceneManager.LoadScene(proximoNivel);
+        }
+        else
+        {
+            Debug.LogError("Nome do próximo nível não definido!");
+        }
     }
 }
-*/
+
+}
+}
