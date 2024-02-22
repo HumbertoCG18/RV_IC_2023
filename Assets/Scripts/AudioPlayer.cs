@@ -38,44 +38,44 @@ public class AudioPlayer : MonoBehaviour
 }
 
 /*
- *  // Método para tocar música de fundo
+ *  // Mï¿½todo para tocar mï¿½sica de fundo
     public void TocarBGM(AudioClip _musica)
     {
         bgmAudio.clip = _musica;
         bgmAudio.Play();
     }
 
-    // Método para parar a música de fundo
+    // Mï¿½todo para parar a mï¿½sica de fundo
     public void PararBGM()
     {
         bgmAudio.Stop();
     }
 
-    // Método para tocar efeito sonoro
+    // Mï¿½todo para tocar efeito sonoro
     public void TocarSFX(AudioClip _efeitoSonoro)
     {
         sfxAudio.PlayOneShot(_efeitoSonoro);
     }
 
-    // Método para parar os efeitos sonoros
+    // Mï¿½todo para parar os efeitos sonoros
     public void PararSFX()
     {
         sfxAudio.Stop();
     }
 
-    // Método para ajustar o volume da música de fundo
+    // Mï¿½todo para ajustar o volume da mï¿½sica de fundo
     public void AjustarVolumeBGM(float volume)
     {
         bgmAudio.volume = volume;
     }
 
-    // Método para ajustar o volume dos efeitos sonoros
+    // Mï¿½todo para ajustar o volume dos efeitos sonoros
     public void AjustarVolumeSFX(float volume)
     {
         sfxAudio.volume = volume;
     }
 }
-// Ajustar o volume da música de fundo para 0.5 (50%)
+// Ajustar o volume da mï¿½sica de fundo para 0.5 (50%)
 soundManager.AjustarVolumeBGM(0.5f);
 
 // Ajustar o volume dos efeitos sonoros para 0.7 (70%)
