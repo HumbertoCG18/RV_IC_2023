@@ -11,6 +11,8 @@ public class ChangeColorOnSelect : MonoBehaviour
     private Renderer objectRenderer;
     private Color originalColor;
 
+    private bool isSelected = false;
+
     void Start()
     {
         // Obtém referências para os componentes necessários
@@ -27,14 +29,24 @@ public class ChangeColorOnSelect : MonoBehaviour
 
     private void OnSelectEntered(SelectEnterEventArgs args)
     {
-        // Muda a cor do objeto quando ele é selecionado para a cor especificada
-        objectRenderer.material.color = selectedColor;
+        if (!isSelected)
+        {
+            // Muda a cor do objeto para a cor especificada quando ele é selecionado
+            objectRenderer.material.color = selectedColor;
+            isSelected = true;
+        }
+        else
+        {
+            // Restaura a cor original se o objeto já estiver selecionado
+            objectRenderer.material.color = originalColor;
+            isSelected = false;
+        }
     }
 
     private void OnSelectExited(SelectExitEventArgs args)
     {
-        // Restaura a cor original quando a seleção é encerrada
-        objectRenderer.material.color = originalColor;
+        // Não faz nada quando a seleção é encerrada
+        // Isso permitirá que o objeto mantenha a cor selecionada até ser selecionado novamente
     }
 }
 
