@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ChangeColorOnSelect : MonoBehaviour
 {
-    public Color selectedColor = Color.blue; // Cor padrão para quando o objeto for selecionado
+    public Color selectedColor = Color.blue; // Cor padrï¿½o para quando o objeto for selecionado
 
     private XRBaseInteractable interactable;
     private Renderer objectRenderer;
@@ -13,27 +13,27 @@ public class ChangeColorOnSelect : MonoBehaviour
 
     void Start()
     {
-        // Obtém referências para os componentes necessários
+        // Obtï¿½m referï¿½ncias para os componentes necessï¿½rios
         interactable = GetComponent<XRBaseInteractable>();
         objectRenderer = GetComponent<Renderer>();
 
         // Salva a cor original do objeto
         originalColor = objectRenderer.material.color;
 
-        // Adiciona listeners para os eventos de seleção
+        // Adiciona listeners para os eventos de seleï¿½ï¿½o
         interactable.selectEntered.AddListener(OnSelectEntered);
         interactable.selectExited.AddListener(OnSelectExited);
     }
 
     private void OnSelectEntered(SelectEnterEventArgs args)
     {
-        // Muda a cor do objeto quando ele é selecionado para a cor especificada
+        // Muda a cor do objeto quando ele ï¿½ selecionado para a cor especificada
         objectRenderer.material.color = selectedColor;
     }
 
     private void OnSelectExited(SelectExitEventArgs args)
     {
-        // Restaura a cor original quando a seleção é encerrada
+        // Restaura a cor original quando a seleï¿½ï¿½o ï¿½ encerrada
         objectRenderer.material.color = originalColor;
     }
 }
