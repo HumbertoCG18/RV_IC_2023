@@ -5,36 +5,48 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ChangeColorOnSelect : MonoBehaviour
 {
-    public Color selectedColor = Color.blue; // Cor padrï¿½o para quando o objeto for selecionado
+    public Color selectedColor = Color.blue; // Cor padrão para quando o objeto for selecionado
 
     private XRBaseInteractable interactable;
     private Renderer objectRenderer;
     private Color originalColor;
 
+    private bool isSelected = false;
+
     void Start()
     {
-        // Obtï¿½m referï¿½ncias para os componentes necessï¿½rios
+        // Obtém referências para os componentes necessários
         interactable = GetComponent<XRBaseInteractable>();
         objectRenderer = GetComponent<Renderer>();
 
         // Salva a cor original do objeto
         originalColor = objectRenderer.material.color;
 
-        // Adiciona listeners para os eventos de seleï¿½ï¿½o
+        // Adiciona listeners para os eventos de seleção
         interactable.selectEntered.AddListener(OnSelectEntered);
         interactable.selectExited.AddListener(OnSelectExited);
     }
 
     private void OnSelectEntered(SelectEnterEventArgs args)
     {
-        // Muda a cor do objeto quando ele ï¿½ selecionado para a cor especificada
-        objectRenderer.material.color = selectedColor;
+        if (!isSelected)
+        {
+            // Muda a cor do objeto para a cor especificada quando ele é selecionado
+            objectRenderer.material.color = selectedColor;
+            isSelected = true;
+        }
+        else
+        {
+            // Restaura a cor original se o objeto já estiver selecionado
+            objectRenderer.material.color = originalColor;
+            isSelected = false;
+        }
     }
 
     private void OnSelectExited(SelectExitEventArgs args)
     {
-        // Restaura a cor original quando a seleï¿½ï¿½o ï¿½ encerrada
-        objectRenderer.material.color = originalColor;
+        // Não faz nada quando a seleção é encerrada
+        // Isso permitirá que o objeto mantenha a cor selecionada até ser selecionado novamente
     }
 }
 
