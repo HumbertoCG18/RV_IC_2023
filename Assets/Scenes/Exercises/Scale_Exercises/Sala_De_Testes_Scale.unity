@@ -2748,7 +2748,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 7.1975837, y: 0.5892291, z: 1.9055521}
+  m_ConnectedAnchor: {x: 7.197582, y: 0.5755237, z: 1.9075148}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -4173,7 +4173,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 7.1975837, y: 0.58892906, z: 3.7436523}
+  m_ConnectedAnchor: {x: 7.197582, y: 0.6025635, z: 3.7454162}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -5757,15 +5757,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026943711791325340}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -231.23125, y: -43.507084, z: 30.538593}
+  m_LocalRotation: {x: -0.7070864, y: -0.005258828, z: 0.005258947, w: 0.7070882}
+  m_LocalPosition: {x: -229.71434, y: -43.387634, z: 30.538582}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1416742527}
   - {fileID: 717402123}
   m_Father: {fileID: 2875228346559020191}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.852, y: 90.01, z: -90.01001}
 --- !u!222 &3283436617237228658
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6046,6 +6046,7 @@ GameObject:
   - component: {fileID: 3251965580309724311}
   - component: {fileID: 7881686163163255783}
   - component: {fileID: 4093965982710164784}
+  - component: {fileID: 7881686163163255784}
   m_Layer: 0
   m_Name: "Aste da balan\xE7a"
   m_TagString: Untagged
@@ -6349,6 +6350,7 @@ GameObject:
   - component: {fileID: 3247929886910669057}
   - component: {fileID: 2794936383797430348}
   - component: {fileID: 6926411601860447194}
+  - component: {fileID: 6926411601860447195}
   m_Layer: 0
   m_Name: Suporte prato esquerda
   m_TagString: Untagged
@@ -6383,6 +6385,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!138 &6926411601860447195
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926411601860447193}
+  m_ConnectedBody: {fileID: 717402125}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!114 &7099149789343043170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6556,7 +6573,7 @@ FixedJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
@@ -6851,6 +6868,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026943711791325340}
   m_Mesh: {fileID: -2899259182045451829, guid: 29e7c9672524a2f4da198ef488eb0937, type: 3}
+--- !u!114 &7881686163163255784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026943711791325340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877c6ba4d8207e14993c5daf9357ed45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftPlate: {fileID: 0}
+  rightPlate: {fileID: 0}
+  rotationSpeed: 5
+  rotationSmoothing: 5
 --- !u!1001 &8271609141845518986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6968,6 +7001,7 @@ GameObject:
   - component: {fileID: 7350892300488370636}
   - component: {fileID: 7430117106608281544}
   - component: {fileID: 8484902388456347954}
+  - component: {fileID: 8484902388456347955}
   m_Layer: 0
   m_Name: Suporte prato direita
   m_TagString: Untagged
@@ -7002,6 +7036,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!138 &8484902388456347955
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8484902388456347953}
+  m_ConnectedBody: {fileID: 1416742529}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!4 &8529092723692118807
 Transform:
   m_ObjectHideFlags: 0
