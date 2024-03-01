@@ -6733,6 +6733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271496231}
+  - component: {fileID: 271496232}
   m_Layer: 0
   m_Name: Unit_one
   m_TagString: Untagged
@@ -6756,6 +6757,21 @@ Transform:
   - {fileID: 2006064745}
   m_Father: {fileID: 679742613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &271496232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271496230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4f4065a0d98944394d8ec6e6bf36c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 2006064754}
+  baseValue: 1
 --- !u!1 &271745052
 GameObject:
   m_ObjectHideFlags: 0
@@ -53834,6 +53850,8 @@ GameObject:
   - component: {fileID: 2006064748}
   - component: {fileID: 2006064752}
   - component: {fileID: 2006064751}
+  - component: {fileID: 2006064754}
+  - component: {fileID: 2006064753}
   m_Layer: 0
   m_Name: OneOne(Unit_One)
   m_TagString: Untagged
@@ -54043,6 +54061,30 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2006064753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006064744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef270a1b0a49b04b87101e0cef98e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2006064754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006064744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef270a1b0a49b04b87101e0cef98e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2008793453
 GameObject:
   m_ObjectHideFlags: 0
