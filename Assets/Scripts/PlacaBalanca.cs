@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlacaBalanca : MonoBehaviour
 {
-    public float Peso { get; private set; } = 0f;
-    public float PesoAtivarMin = 0f;
-    public float PesoAtivarMax = 0f;
-    public GameObject Ativar;
+    public float peso { get; private set; } = 0f;
+    public float pesoAtivarMin = 0f;
+    public float pesoAtivarMax = 0f;
+    public GameObject ativar;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,21 +30,21 @@ public class PlacaBalanca : MonoBehaviour
 
     private void AdicionarPeso(float massa)
     {
-        Peso += massa;
+        peso += massa;
         VerificarAtivacao();
     }
 
     private void RemoverPeso(float massa)
     {
-        Peso -= massa;
+        peso -= massa;
         VerificarAtivacao();
     }
 
     private void VerificarAtivacao()
     {
-        if (Peso < PesoAtivarMin || Peso > PesoAtivarMax)
+        if (peso < pesoAtivarMin || peso > pesoAtivarMax)
         {
-            Ativar.SetActive(true);
+            ativar.SetActive(true);
         }
     }
 }

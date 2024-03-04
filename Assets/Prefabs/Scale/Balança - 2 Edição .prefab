@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3369184081330313370}
   - component: {fileID: 2272760418020230027}
   m_Layer: 0
-  m_Name: PontoDireita
+  m_Name: PontoEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4636375913785911514}
   - component: {fileID: 8719310652355671107}
   m_Layer: 0
-  m_Name: Y(Placa Esquerda)
+  m_Name: Y(Prato Direita)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 8864289078697067592}
   - component: {fileID: 315596384699292828}
   m_Layer: 0
-  m_Name: Suporte prato esquerda
+  m_Name: Suporte prato Direito
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 6720855100167838876}
   - component: {fileID: 7790319775298219682}
   m_Layer: 0
-  m_Name: PontoEsquerda
+  m_Name: PontoDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,9 +339,8 @@ GameObject:
   - component: {fileID: 8395465641470786767}
   - component: {fileID: 2500109571223510032}
   - component: {fileID: 5569739534167771002}
-  - component: {fileID: 8842258706021361778}
   m_Layer: 0
-  m_Name: Prato Esquerda
+  m_Name: Prato Direito
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,19 +459,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8842258706021361778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900663071113321808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a99ce942650224eb8a97db2a44136f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  suportePrato: {fileID: 1154887143653998608}
 --- !u!1 &4252793313082050704
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,8 +471,6 @@ GameObject:
   - component: {fileID: 3036340408053075807}
   - component: {fileID: 866596167075361529}
   - component: {fileID: 5150641901727821635}
-  - component: {fileID: 9177648908332824879}
-  - component: {fileID: 9046629054973998953}
   m_Layer: 0
   m_Name: "Aste da balan\xE7a"
   m_TagString: Untagged
@@ -588,32 +572,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &9177648908332824879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4252793313082050704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb7acb91aefa17941bcfdb34e119b1b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  suporteBase: {fileID: 5440228946182215233}
-  meioAste: {fileID: 8466985586096507049}
---- !u!114 &9046629054973998953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4252793313082050704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3225b54c585e8ed44b186c95dafd21bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4370174610465206255
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +586,7 @@ GameObject:
   - component: {fileID: 7839891916553086979}
   - component: {fileID: 1482325337874360332}
   m_Layer: 0
-  m_Name: Suporte prato direita
+  m_Name: Suporte prato esquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,7 +844,7 @@ GameObject:
   - component: {fileID: 9122504156335967873}
   - component: {fileID: 4781172561568412580}
   m_Layer: 0
-  m_Name: X(Prato Direita)
+  m_Name: X(Prato Esquerda)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089389058934061116}
-  - component: {fileID: 7321961902986531129}
+  - component: {fileID: 1549208662709474961}
   m_Layer: 0
   m_Name: "Balan\xE7a - 2 Edi\xE7\xE3o "
   m_TagString: Untagged
@@ -960,7 +918,7 @@ Transform:
   - {fileID: 3128216056738764080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &7321961902986531129
+--- !u!114 &1549208662709474961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -969,13 +927,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6207659382755034111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03ad2bfb4a75074baf140d80a05d1fa, type: 3}
+  m_Script: {fileID: 11500000, guid: a0c443ddcf5de9146802d02e1b8987ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pratoEsquerdo: {fileID: 1038564840437383814}
-  pratoDireito: {fileID: 5750861091469672364}
-  aste: {fileID: 4252793313082050704}
-  forcaTorque: 0
+  pratoEsquerdo: {fileID: 6711114855102594116}
+  suportePratoEsquerdo: {fileID: 4370174610465206255}
+  pratoDireito: {fileID: 1900663071113321808}
+  suportePratoDireito: {fileID: 1154887143653998608}
+  pontoDireita: {fileID: 1325949850148516263}
+  pontoEsquerda: {fileID: 58444960169735099}
 --- !u!1 &6711114855102594116
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,9 +949,8 @@ GameObject:
   - component: {fileID: 8835556875605061535}
   - component: {fileID: 4436770360591661997}
   - component: {fileID: 5095956305899547101}
-  - component: {fileID: 3959479914267959887}
   m_Layer: 0
-  m_Name: Prato Direita
+  m_Name: Prato Esquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1110,19 +1069,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &3959479914267959887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6711114855102594116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a99ce942650224eb8a97db2a44136f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  suportePrato: {fileID: 4370174610465206255}
 --- !u!1 &8466985586096507049
 GameObject:
   m_ObjectHideFlags: 0
