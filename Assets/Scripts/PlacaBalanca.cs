@@ -3,33 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlacaBalanca : MonoBehaviour{
-    public float Peso;
-    public float PesoAtivarMin;
-    public float PesoAtivarMax;
+public class PlacaBalanca : MonoBehaviour
+{
+    public float Peso { get; private set; } = 0f;
+    public float PesoAtivarMin = 0f;
+    public float PesoAtivarMax = 0f;
     public GameObject Ativar;
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if(Peso < PesoAtivarMin || Peso> PesoAtivarMax)
+        Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+        if (otherRigidbody != null)
         {
-            Ativar.SetActive(true);    
+            AdicionarPeso(otherRigidbody.mass);
         }
     }
 
-    void OnTriggerEnter(Collider Coll)
+    private void OnTriggerExit(Collider other)
     {
-        if (Coll.GetComponent<Rigidbody>())
+        Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+        if (otherRigidbody != null)
         {
-            Peso += Coll.GetComponent<Rigidbody>().mass;
+            RemoverPeso(otherRigidbody.mass);
         }
     }
 
-    void OnTriggerExit(Collider Coll)
+    private void AdicionarPeso(float massa)
     {
-        if (!Coll.GetComponent<Rigidbody>())
+        Peso += massa;
+        VerificarAtivacao();
+    }
+
+    private void RemoverPeso(float massa)
+    {
+        Peso -= massa;
+        VerificarAtivacao();
+    }
+
+    private void VerificarAtivacao()
+    {
+        if (Peso < PesoAtivarMin || Peso > PesoAtivarMax)
         {
-            Peso -= Coll.GetComponent<Rigidbody>().mass;
+            Ativar.SetActive(true);
         }
     }
 }
