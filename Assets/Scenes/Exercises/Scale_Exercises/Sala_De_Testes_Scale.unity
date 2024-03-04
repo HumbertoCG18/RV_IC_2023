@@ -5411,13 +5411,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5519770685771695220, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 4693822287650634612, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
+      propertyPath: m_Size.z
+      value: 1.9747883
       objectReference: {fileID: 0}
-    - target: {fileID: 5519770685771695220, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 43.3
+    - target: {fileID: 4693822287650634612, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
+      propertyPath: m_Center.x
+      value: -7.510055
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693822287650634612, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.000066581095
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693822287650634612, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
+      propertyPath: m_Center.z
+      value: -1.0126064
       objectReference: {fileID: 0}
     - target: {fileID: 6207659382755034111, guid: 83de171f85d8d244b9d5bce122892e4b, type: 3}
       propertyPath: m_Name
