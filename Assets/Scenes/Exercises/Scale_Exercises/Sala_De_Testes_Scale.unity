@@ -4247,6 +4247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1658647285}
+  - component: {fileID: 1658647286}
   m_Layer: 0
   m_Name: MeioHaste
   m_TagString: Untagged
@@ -4269,6 +4270,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2494588798539028209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1658647286
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658647284}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1745916490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,7 +4983,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
@@ -5002,7 +5030,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5029,7 +5057,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5116,7 +5144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4056571358264739528}
-  - component: {fileID: 5103267883992664152}
   m_Layer: 0
   m_Name: X(Prato Esquerda)
   m_TagString: Untagged
@@ -5154,7 +5181,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5300,7 +5327,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -5583,7 +5610,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
@@ -5950,10 +5977,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d82646f916a8e549acc639e3ee2f221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pratoEsquerda: {fileID: 656780812605257701}
-  pratoDireita: {fileID: 5241004840589576911}
+  pratoEsquerda: {fileID: 2013347066733294605}
+  pratoDireita: {fileID: 6679667159374976281}
   haste: {fileID: 9067584322783101145}
   meioHaste: {fileID: 1658647284}
+  meioSuporte: {fileID: 1419066590}
+  suporteConectadoEsquerda: {fileID: 8824673440842606502}
+  suporteConectadoDireita: {fileID: 6256776033872332889}
+  pontoEsquerda: {fileID: 5052423586277424114}
+  pontoDireita: {fileID: 6103726901788899822}
 --- !u!23 &4344926013201442774
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5996,33 +6028,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &4455807059095964673
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6256776033872332889}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
 --- !u!23 &4691668061525322760
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6101,21 +6106,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5103267883992664152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656780812605257701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab9fe48bfab4284fa649d912749dfad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pesoAtivarMin: 0
-  pesoAtivarMax: 0
-  ativar: {fileID: 0}
 --- !u!4 &5157139924427787643
 Transform:
   m_ObjectHideFlags: 0
@@ -6140,7 +6130,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469997575708614803}
-  - component: {fileID: 5241004840589576912}
   m_Layer: 0
   m_Name: Y(Prato Direita)
   m_TagString: Untagged
@@ -6148,21 +6137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5241004840589576912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5241004840589576911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab9fe48bfab4284fa649d912749dfad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pesoAtivarMin: 0
-  pesoAtivarMax: 0
-  ativar: {fileID: 0}
 --- !u!23 &5392136437694413488
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6293,7 +6267,6 @@ GameObject:
   - component: {fileID: 8088785699713110359}
   - component: {fileID: 2093256001841013766}
   - component: {fileID: 8958481290329117872}
-  - component: {fileID: 4455807059095964673}
   m_Layer: 0
   m_Name: suporteConectado_D
   m_TagString: Untagged
@@ -6471,7 +6444,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -7094,8 +7067,6 @@ GameObject:
   - component: {fileID: 7850139848250869526}
   - component: {fileID: 5392136437694413488}
   - component: {fileID: 119541786609739530}
-  - component: {fileID: 9067584322783101147}
-  - component: {fileID: 9067584322783101146}
   m_Layer: 0
   m_Name: Haste
   m_TagString: Untagged
@@ -7103,32 +7074,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &9067584322783101146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9067584322783101145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc1f1e9cd59cd940ad8e1d5dc7dd8a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9067584322783101147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9067584322783101145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35123ff6e3f924a469918992142b5e04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anguloMaximo: 90
-  anguloMinimo: -90
 --- !u!222 &9186285420168147881
 CanvasRenderer:
   m_ObjectHideFlags: 0
