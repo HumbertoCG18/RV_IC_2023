@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlacaBalanca : MonoBehaviour
 {
-    public float pesoPrato { get; private set; } = 0f;
+    public float PesoPrato { get { return pesoPrato; } }
+    public float pesoPrato;
     public float pesoAtivarMin = 0f;
     public float pesoAtivarMax = 0f;
     public GameObject ativar;
@@ -12,11 +13,11 @@ public class PlacaBalanca : MonoBehaviour
         Rigidbody otherRigidbody = other.attachedRigidbody;
         if (otherRigidbody != null)
         {
-            if (other.transform.IsChildOf(transform.Find("X(Prato Esquerda)")))
+            if (other.transform.Find("pratoEsquerda"))
             {
                 AdicionarPesoPrato(otherRigidbody.mass);
             }
-            else if (other.transform.IsChildOf(transform.Find("Y(Prato Direita)")))
+            else if (other.transform.Find("pratoDireito"))
             {
                 AdicionarPesoPrato(otherRigidbody.mass);
             }
@@ -28,11 +29,11 @@ public class PlacaBalanca : MonoBehaviour
         Rigidbody otherRigidbody = other.attachedRigidbody;
         if (otherRigidbody != null)
         {
-            if (other.transform.IsChildOf(transform.Find("X(Prato Esquerda)")))
+            if (other.transform.Find("pratoEsquerda"))
             {
                 RemoverPesoPrato(otherRigidbody.mass);
             }
-            else if (other.transform.IsChildOf(transform.Find("Y(Prato Direita)")))
+            else if (other.transform.Find("pratoDireito"))
             {
                 RemoverPesoPrato(otherRigidbody.mass);
             }
