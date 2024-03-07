@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FractionManeger : MonoBehaviour
+public class Unit_two : MonoBehaviour
 {
-    
- public void Metodo() {
-        Debug.Log("teste");
-
-
-    }
+    double oneTwo = 0.5;
+    double twotwo = 0.5;
 
     // Start is called before the first frame update
     void Start()
