@@ -2,59 +2,60 @@ using UnityEngine;
 
 public class PlacaBalanca : MonoBehaviour
 {
-    public float PesoPrato { get { return pesoPrato; } }
-    public float pesoPrato;
+    public float pesoPratoEsquerda;
+    public float pesoPratoDireita;
     public float pesoAtivarMin = 0f;
     public float pesoAtivarMax = 0f;
     public GameObject ativar;
 
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody otherRigidbody = other.attachedRigidbody;
-        if (otherRigidbody != null)
+        if (other.CompareTag("PratoEsquerda"))
         {
-            if (other.transform.Find("pratoEsquerda"))
+            Rigidbody otherRigidbody = other.attachedRigidbody;
+            if (otherRigidbody != null)
             {
-                AdicionarPesoPrato(otherRigidbody.mass);
+                pesoPratoEsquerda += otherRigidbody.mass;
+                VerificarAtivacao();
             }
-            else if (other.transform.Find("pratoDireito"))
+        }
+        else if (other.CompareTag("PratoDireita"))
+        {
+            Rigidbody otherRigidbody = other.attachedRigidbody;
+            if (otherRigidbody != null)
             {
-                AdicionarPesoPrato(otherRigidbody.mass);
+                pesoPratoDireita += otherRigidbody.mass;
+                VerificarAtivacao();
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Rigidbody otherRigidbody = other.attachedRigidbody;
-        if (otherRigidbody != null)
+        if (other.CompareTag("PratoEsquerda"))
         {
-            if (other.transform.Find("pratoEsquerda"))
+            Rigidbody otherRigidbody = other.attachedRigidbody;
+            if (otherRigidbody != null)
             {
-                RemoverPesoPrato(otherRigidbody.mass);
+                pesoPratoEsquerda -= otherRigidbody.mass;
+                VerificarAtivacao();
             }
-            else if (other.transform.Find("pratoDireito"))
+        }
+        else if (other.CompareTag("PratoDireita"))
+        {
+            Rigidbody otherRigidbody = other.attachedRigidbody;
+            if (otherRigidbody != null)
             {
-                RemoverPesoPrato(otherRigidbody.mass);
+                pesoPratoDireita -= otherRigidbody.mass;
+                VerificarAtivacao();
             }
         }
     }
 
-    private void AdicionarPesoPrato(float massa)
-    {
-        pesoPrato += massa;
-        VerificarAtivacao();
-    }
-
-    private void RemoverPesoPrato(float massa)
-    {
-        pesoPrato -= massa;
-        VerificarAtivacao();
-    }
-
     private void VerificarAtivacao()
     {
-        if (pesoPrato < pesoAtivarMin || pesoPrato > pesoAtivarMax)
+        if (pesoPratoEsquerda < pesoAtivarMin || pesoPratoEsquerda > pesoAtivarMax ||
+            pesoPratoDireita < pesoAtivarMin || pesoPratoDireita > pesoAtivarMax)
         {
             ativar.SetActive(true);
         }

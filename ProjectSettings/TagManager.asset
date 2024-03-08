@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Anchor
   - Interativeis
+  - PratoEsquerda
+  - PratoDireita
   layers:
   - Default
   - TransparentFX
