@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e199c17296f7b40acda17952e0cc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PesoAtivarMin: 0
-  PesoAtivarMax: 0
-  Ativar: {fileID: 0}
+  pesoPrato: 0
+  pesoAtivarMin: 0
+  pesoAtivarMax: 0
+  ativar: {fileID: 0}
 --- !u!1 &1154887143653998608
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ GameObject:
   - component: {fileID: 8864289078697067592}
   - component: {fileID: 315596384699292828}
   m_Layer: 0
-  m_Name: Suporte prato Direito
+  m_Name: SuporteDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,7 +341,7 @@ GameObject:
   - component: {fileID: 2500109571223510032}
   - component: {fileID: 5569739534167771002}
   m_Layer: 0
-  m_Name: Prato Direito
+  m_Name: PratoDireita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,6 +460,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &2192747073706609050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9034629635144904883}
+  m_Layer: 0
+  m_Name: MeioHaste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9034629635144904883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2192747073706609050}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000012516972, y: 0.007437189, z: -0.0000000845175, w: 0.99997234}
+  m_LocalPosition: {x: -8.265495, y: -0.46122742, z: 88.82042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7227428929909071544}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4252793313082050704
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +504,7 @@ GameObject:
   - component: {fileID: 866596167075361529}
   - component: {fileID: 5150641901727821635}
   m_Layer: 0
-  m_Name: "Aste da balan\xE7a"
+  m_Name: Haste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,6 +525,7 @@ Transform:
   m_Children:
   - {fileID: 6119452680137525941}
   - {fileID: 7035981854746783071}
+  - {fileID: 9034629635144904883}
   m_Father: {fileID: 9089389058934061116}
   m_LocalEulerAnglesHint: {x: -90.852, y: 90.01, z: -90.01001}
 --- !u!33 &3036340408053075807
@@ -586,7 +619,7 @@ GameObject:
   - component: {fileID: 7839891916553086979}
   - component: {fileID: 1482325337874360332}
   m_Layer: 0
-  m_Name: Suporte prato esquerda
+  m_Name: SuporteEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,7 +746,7 @@ GameObject:
   - component: {fileID: 5152588367421376382}
   - component: {fileID: 4693822287650634612}
   m_Layer: 0
-  m_Name: "Base da balan\xE7a"
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,9 +912,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e199c17296f7b40acda17952e0cc86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PesoAtivarMin: 0
-  PesoAtivarMax: 0
-  Ativar: {fileID: 0}
+  pesoPrato: 0
+  pesoAtivarMin: 0
+  pesoAtivarMax: 0
+  ativar: {fileID: 0}
 --- !u!1 &6207659382755034111
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +984,7 @@ GameObject:
   - component: {fileID: 4436770360591661997}
   - component: {fileID: 5095956305899547101}
   m_Layer: 0
-  m_Name: Prato Esquerda
+  m_Name: PratoEsquerda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1036,7 +1070,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1079,7 +1113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5519770685771695220}
   m_Layer: 0
-  m_Name: Meio
+  m_Name: MeioBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
