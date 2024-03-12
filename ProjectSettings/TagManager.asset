@@ -8,6 +8,7 @@ TagManager:
   - Interativeis
   - PratoEsquerda
   - PratoDireita
+  - Peso
   layers:
   - Default
   - TransparentFX
