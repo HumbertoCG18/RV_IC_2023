@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlacaBalanca : MonoBehaviour
@@ -9,7 +8,6 @@ public class PlacaBalanca : MonoBehaviour
     public float pesoPrato;
     public float pesoAtivarMin = 0f;
     public float pesoAtivarMax = 0f;
-    //public GameObject objetoAtivacao;
 
     void OnTriggerEnter(Collider other)
     {
@@ -18,11 +16,11 @@ public class PlacaBalanca : MonoBehaviour
             Rigidbody rb = other.attachedRigidbody;
             if (prato == PratoSelecionado.Esquerda && transform.CompareTag("PratoEsquerda"))
             {
-                CalcularPeso(rb, true);
+                CalcularPeso(rb.mass, true);
             }
             else if (prato == PratoSelecionado.Direita && transform.CompareTag("PratoDireita"))
             {
-                CalcularPeso(rb, true);
+                CalcularPeso(rb.mass, true);
             }
         }
     }
@@ -34,37 +32,30 @@ public class PlacaBalanca : MonoBehaviour
             Rigidbody rb = other.attachedRigidbody;
             if (prato == PratoSelecionado.Esquerda && transform.CompareTag("PratoEsquerda"))
             {
-                CalcularPeso(rb, false);
+                CalcularPeso(rb.mass, false);
             }
             else if (prato == PratoSelecionado.Direita && transform.CompareTag("PratoDireita"))
             {
-                CalcularPeso(rb, false);
+                CalcularPeso(rb.mass, false);
             }
         }
     }
 
-    void CalcularPeso(Rigidbody rb, bool adicionar)
+    void CalcularPeso(float massa, bool adicionar)
     {
-        if (rb == null) return;
-
-        float massa = rb.mass;
         pesoPrato += adicionar ? massa : -massa;
-        Debug.Log("Peso detectado no prato " + (prato == PratoSelecionado.Esquerda ? "Esquerda: " : "Direita: ") + massa);
-        /*
-         
-        if (pesoPrato < pesoAtivarMin || pesoPrato > pesoAtivarMax)
+        Debug.Log("Peso total detectado no prato da" + (prato == PratoSelecionado.Esquerda ? "Esquerda: " : "Direita: ") + pesoPrato);
+    }
+
+    public float GetPesoPrato(PratoSelecionado prato)
+    {
+        if (this.prato == prato)
         {
-            objetoAtivacao.SetActive(true);
+            return pesoPrato;
         }
         else
         {
-            objetoAtivacao.SetActive(false);
+            return 0f;
         }
-        */
-    }
-
-    internal float GetPesoPrato(PratoSelecionado prato)
-    {
-        throw new NotImplementedException();
     }
 }
