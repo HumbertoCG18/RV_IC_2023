@@ -44,7 +44,7 @@ public class PlacaBalanca : MonoBehaviour
     void CalcularPeso(float massa, bool adicionar)
     {
         pesoPrato += adicionar ? massa : -massa;
-        Debug.Log("Peso total detectado no prato da" + (prato == PratoSelecionado.Esquerda ? "Esquerda: " : "Direita: ") + pesoPrato);
+        Debug.Log("Peso total detectado no prato da" + (prato == PratoSelecionado.Esquerda ? " Esquerda: " : " Direita: ") + pesoPrato);
     }
 
     public float GetPesoPrato(PratoSelecionado prato)
