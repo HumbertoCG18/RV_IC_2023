@@ -6,6 +6,7 @@ Visual Studio Community 2022 (+ Unity package);
 Git; 
 GitCLI or GitHub Desktop;
 Oculus (App) + Drivers;
+Blender; 
 
 Further Instalattions Req: 
 Meta Quest Develop Hub (Debug) 
