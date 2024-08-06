@@ -1,0 +1,224 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+
+/*Arquivo bruto dos controles da mesa e das questões, necessita de várias otimizações, que podem incluir:
+ * - Separar o sistema de questões em um script distinto
+ * - Arrumar a força bruta no metodo gerador das frações
+ * - Encontrar um jeito mais eficiente de realizar o sistema de questões
+ * - Otimizar o código para legibilidade e compreensão (urgentemente)
+ * - A geração das frações não está relativa à mesa (Arrumar URGENTE)
+*/
+public class ControleMesa : MonoBehaviour
+{
+    public UnityEngine.UI.Button NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
+    public float Razao, RazãoQuestão;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos;
+    public bool Certo, CertoX;
+    public Vector3 Scale, Position;
+    public GameObject FracaoVariavel, FracaoInteira, FracaoInteiraQuestao;
+    public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
+    private GameObject[] pecasGeradasInput, pecasGeradasQuestao;
+
+
+    //Adicionar referências ao script questoes.cs e adaptar suas funcionalidades(funções do questoes.cs) neste script.
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        if (NumAdd != null)
+        {
+            NumAdd.onClick.AddListener(AddNumerador);
+        }
+        if (NumDim != null)
+        {
+            NumDim.onClick.AddListener(DimNumerador);
+        }
+        if (DenAdd != null)
+        {
+            DenAdd.onClick.AddListener(AddDenominador);
+        }
+        if (DenDim != null)
+        {
+            DenDim.onClick.AddListener(DimDenominador);
+        }
+        if (FracConfirm != null)
+        {
+            FracConfirm.onClick.AddListener(FracaoConfirmar);
+        }
+
+        NumeradorInicial = 1;
+        NumeradorY = 1;
+        DenominadorY = 1;
+
+        Numerador = 1;
+        Denominador = 1;
+        pecasGeradasInput = new GameObject[12];
+        pecasGeradasQuestao = new GameObject[12];
+        RazãoQuestão = 1f;
+        Certo = false;
+        CertoX = false;
+        Acertos = 0;
+
+        Nivel(FracaoInteiraQuestao);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Razao = (float)Numerador / Denominador;
+
+        ViewFracao();
+
+        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //--Função que gera as frações, levando como input a peça inteira
+
+        if(Certo != CertoX)
+        {
+            Nivel(FracaoInteiraQuestao);
+        }
+
+    }
+
+    //Aqui começam as funções responsáveis por pegar o input do usuário
+    void AddNumerador()
+    {
+        if (Numerador < Denominador)
+        {
+            Numerador++;
+        }
+    }
+    void DimNumerador()
+    {
+        if (Numerador - 1 > 0)
+        {
+            Numerador--;
+        }
+    }
+    void DimDenominador()
+    {
+        if (Denominador - 1 > 0 && Denominador > Numerador)
+        {
+            Denominador--;
+        }
+    }
+    void AddDenominador()
+    {
+        if (Denominador > 0 && Denominador < 12)
+        {
+            Denominador++;
+        }
+    }
+    void FracaoConfirmar()
+    {
+        DenominadorY = Denominador;
+        NumeradorY = Numerador;
+        CertoX = checaResultado();
+        Debug.Log("Fração Confirmada!" + CertoX);
+
+        //Executa função que checa o resultado --> Update deverá ter uma função que checa se há mudança no acerto e executa um retorno positivo ao usuário, mudando a fração
+    }
+    //Aqui se encerram
+
+    void ViewFracao() //Exibe a fração no painel da mesa.
+    {
+        ViewNumerador.text = Numerador.ToString();
+        ViewDenominador.text = Denominador.ToString();
+    }
+
+    void GeraFracao(GameObject Inteira, GameObject[] pecasGeradas, int Numerador, int Denominador)//Considerando inputs do usuário que vão até 12, gerar múltiplas (com base no numerador) peças do tamanho Inteira/Denominador.
+    {//A geração das frações não está relativa à mesa no eixo X --> arrumar
+        if (DenominadorX != Denominador || NumeradorX != Numerador) //Caso haja mudanças no numerador, ou denominador, o código é executado.
+        {
+            ResetaFracao(pecasGeradas);
+            
+            Vector3 PosicaoOriginal = Inteira.transform.localPosition; //PosiçãoOriginal em relação a peça maior
+            Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si só!!!!
+
+            float TamXPeca = EscalaOriginal.x / Denominador;
+
+            for (int i = 0; i < Numerador; i++)
+            {
+                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale;
+
+                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i)/50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
+
+                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, Quaternion.identity, Inteira.transform); //Criando peças em posições diferentes
+                //                                 Prefab       , Position   , Rotation           , Parenting
+
+                NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
+                novaPeca.transform.localScale = NovaEscala;//Setando o tamanho das peças
+
+                pecasGeradas[i] = novaPeca;
+            }
+        }
+        //Numerador e Denominador em um momento anterior
+        NumeradorX = Numerador;
+        DenominadorX = Denominador;
+    }
+
+    void ResetaFracao(GameObject[] pecasGeradas)
+    {
+        foreach(GameObject peca in pecasGeradas)
+        {
+            if (peca != null) 
+            {
+                Destroy(peca); //Fazer de um jeito reutilizável
+            }
+        }
+    }
+
+    //Aqui começa o sistema de questões (Mais pra frente deverão ser colocados em um outro arquivo por motivos de organização)
+    void Nivel(GameObject FracaoInteira) // Nível I --> Denominador limitado a 4
+    {
+        CertoX = false;
+        Enunciado.text = ("Identifique a fração");
+        Detalhamento.text = ("Uma fração aleatória será gerada. Utilize a interface da mesa para identificar qual é a fração!");
+
+        int DenominadorBase = 0;
+
+        if(Acertos == 0)
+        {
+            DenominadorBase = 4;
+        }
+        else if(Acertos > 1 && Acertos < 4)
+        {
+            DenominadorBase = 4 * Acertos;
+        }
+        else
+        {
+            DenominadorBase = 12;
+        }
+                
+        int Denominador = UnityEngine.Random.Range(1, DenominadorBase);// Seleciona um denominador aleatório <= 4                           
+        NumeradorInicial = UnityEngine.Random.Range(1, Denominador); // Seleciona um numerador aleatório <= denominador
+
+        GeraFracao(FracaoInteira, pecasGeradasQuestao, NumeradorInicial, Denominador);
+
+        RazãoQuestão =(float)NumeradorInicial / Denominador; // Pega a razão da fração
+        Debug.Log("Razão da Questão :" + RazãoQuestão);
+
+        
+    }// Talvez fazer uma função só que limita o denominador atravéz de um contador;
+
+    bool checaResultado()
+    {
+        Debug.Log("Razão Questão: " + RazãoQuestão + " Razão Input: " + Razao);
+        if (RazãoQuestão == Razao && Numerador == NumeradorY) //Razão Questão está como variável global e alguma coisa a faz retornar falso.
+        {         
+            Acertos++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+}
