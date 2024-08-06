@@ -13,6 +13,7 @@ using UnityEngine.UIElements;
  * - Encontrar um jeito mais eficiente de realizar o sistema de questões
  * - Otimizar o código para legibilidade e compreensão (urgentemente)
  * - A geração das frações não está relativa à mesa (Arrumar URGENTE)
+ * - Fazer ocm que um botão físico ative as funções -- Interactable Events -- possivelmente usar Activated == Chamar função no evnet 
 */
 public class ControleMesa : MonoBehaviour
 {
