@@ -4418,6 +4418,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648772237}
   m_CullTransparentMesh: 0
+--- !u!1001 &1669425050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2138656677982698215, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_InteractionManager
+      value: 
+      objectReference: {fileID: 381304589}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4682294
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822865336924119469, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837510218561179541, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
+      propertyPath: m_Name
+      value: Mesa de teste 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6acded4a45fc6204084d505edf3b57a1, type: 3}
 --- !u!1 &1729437689
 GameObject:
   m_ObjectHideFlags: 0
@@ -6819,3 +6880,4 @@ SceneRoots:
   - {fileID: 381304586}
   - {fileID: 2598912072712351099}
   - {fileID: 5761828795757054749}
+  - {fileID: 1669425050}
