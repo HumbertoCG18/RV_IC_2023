@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /*Arquivo bruto dos controles da mesa e das questões, necessita de várias otimizações, que podem incluir:
  * - Separar o sistema de questões em um script distinto
@@ -17,7 +18,7 @@ using UnityEngine.UIElements;
 */
 public class ControleMesa : MonoBehaviour
 {
-    public UnityEngine.UI.Button NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
+    public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
     public float Razao, RazãoQuestão;
     public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos;
     public bool Certo, CertoX;
@@ -35,23 +36,23 @@ public class ControleMesa : MonoBehaviour
 
         if (NumAdd != null)
         {
-            NumAdd.onClick.AddListener(AddNumerador);
+            NumAdd.activated.AddListener(AddNumerador);
         }
         if (NumDim != null)
         {
-            NumDim.onClick.AddListener(DimNumerador);
+            NumDim.activated.AddListener(DimNumerador);
         }
         if (DenAdd != null)
         {
-            DenAdd.onClick.AddListener(AddDenominador);
+            DenAdd.activated.AddListener(AddDenominador);
         }
         if (DenDim != null)
         {
-            DenDim.onClick.AddListener(DimDenominador);
+            DenDim.activated.AddListener(DimDenominador);
         }
         if (FracConfirm != null)
         {
-            FracConfirm.onClick.AddListener(FracaoConfirmar);
+            FracConfirm.activated.AddListener(FracaoConfirmar);
         }
 
         NumeradorInicial = 1;
@@ -87,35 +88,35 @@ public class ControleMesa : MonoBehaviour
     }
 
     //Aqui começam as funções responsáveis por pegar o input do usuário
-    void AddNumerador()
+    void AddNumerador(ActivateEventArgs args)
     {
         if (Numerador < Denominador)
         {
             Numerador++;
         }
     }
-    void DimNumerador()
+    void DimNumerador(ActivateEventArgs args)
     {
         if (Numerador - 1 > 0)
         {
             Numerador--;
         }
     }
-    void DimDenominador()
+    void DimDenominador(ActivateEventArgs args)
     {
         if (Denominador - 1 > 0 && Denominador > Numerador)
         {
             Denominador--;
         }
     }
-    void AddDenominador()
+    void AddDenominador(ActivateEventArgs args)
     {
         if (Denominador > 0 && Denominador < 12)
         {
             Denominador++;
         }
     }
-    void FracaoConfirmar()
+    void FracaoConfirmar(ActivateEventArgs args)
     {
         DenominadorY = Denominador;
         NumeradorY = Numerador;
