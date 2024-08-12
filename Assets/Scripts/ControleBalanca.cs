@@ -2,117 +2,125 @@ using UnityEngine;
 
 public class ControleBalanca : MonoBehaviour
 {
-    public PlacaBalanca placaEsquerda;
-    public PlacaBalanca placaDireita;
     public Transform pontoEsquerda;
     public Transform pontoDireita;
     public Transform meioHaste;
     public Transform meioBase;
+    public Transform suporteEsquerda;
+    public Transform suporteDireita;
 
-    private ArticulationBody articulationBodyMeioHaste;
-    private ArticulationBody articulationBodyMeioBase;
+    private ArticulationBody meioHasteAB;
+    private ArticulationBody meioBaseAB;
+    private ArticulationBody pontoEsquerdaAB;
+    private ArticulationBody pontoDireitaAB;
+    private Rigidbody suporteEsquerdaRB;
+    private Rigidbody suporteDireitaRB;
 
     void Start()
     {
-        // Configura ArticulationBody nos componentes necessários
-        articulationBodyMeioBase = ConfigurarArticulationBody(meioBase, ArticulationJointType.FixedJoint);
-        articulationBodyMeioHaste = ConfigurarArticulationBody(meioHaste, ArticulationJointType.RevoluteJoint);
-        ConfigurarArticulationBody(pontoEsquerda, ArticulationJointType.FixedJoint);
-        ConfigurarArticulationBody(pontoDireita, ArticulationJointType.FixedJoint);
+        // Adicionar ArticulationBody aos componentes necessários
+        AdicionarComponentes();
 
-        if (articulationBodyMeioHaste == null)
-        {
-            Debug.LogError("ArticulationBody do MeioHaste não encontrado.");
-            return;
-        }
+        // Conectar os suportes aos pontos da haste usando FixedJoint
+        ConectarSuportesAosPontosVirtuais();
 
-        // Configura o eixo de rotação do MeioHaste
-        articulationBodyMeioHaste.twistLock = ArticulationDofLock.LimitedMotion;
-        articulationBodyMeioHaste.swingYLock = ArticulationDofLock.LockedMotion;
-        articulationBodyMeioHaste.swingZLock = ArticulationDofLock.LockedMotion;
-        articulationBodyMeioHaste.anchorRotation = Quaternion.Euler(0, 0, 0);
-
-        // Configura os limites de rotação
-        ArticulationDrive xDrive = articulationBodyMeioHaste.xDrive;
-        xDrive.lowerLimit = -45.0f;
-        xDrive.upperLimit = 45.0f;
-        xDrive.stiffness = 10000;
-        xDrive.damping = 100;
-        xDrive.forceLimit = 1000;
-        articulationBodyMeioHaste.xDrive = xDrive;
+        // Conectar MeioHaste ao MeioBase usando ArticulationBody
+        ConectarMeioBase();
     }
 
-    ArticulationBody ConfigurarArticulationBody(Transform transform, ArticulationJointType jointType)
+    void Update()
     {
-        if (transform == null)
-        {
-            Debug.LogError("Transform fornecido é nulo.");
-            return null;
-        }
+        // Calcular a diferença de peso entre os pratos
+        float pesoEsquerda = suporteEsquerda.GetComponentInChildren<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda);
+        float pesoDireita = suporteDireita.GetComponentInChildren<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
+        float diferencaPeso = pesoDireita - pesoEsquerda;
 
-        ArticulationBody articulationBody = transform.gameObject.GetComponent<ArticulationBody>() ?? transform.gameObject.AddComponent<ArticulationBody>();
-        articulationBody.jointType = jointType;
-        return articulationBody;
+        // Ajustar o ângulo da haste com base na diferença de peso
+        AjustarHaste(diferencaPeso);
     }
 
-    void FixedUpdate()
+    void AdicionarComponentes()
     {
-        // Verifica se as referências são válidas
-        if (placaEsquerda == null)
+        // Adicionar ArticulationBody aos componentes MeioHaste, MeioBase, PontoEsquerda e PontoDireita
+        meioHasteAB = AdicionarArticulationBody(meioHaste);
+        meioBaseAB = AdicionarArticulationBody(meioBase, true);
+        pontoEsquerdaAB = AdicionarArticulationBody(pontoEsquerda);
+        pontoDireitaAB = AdicionarArticulationBody(pontoDireita);
+
+        // Adicionar Rigidbody aos suportes
+        suporteEsquerdaRB = AdicionarRigidbody(suporteEsquerda);
+        suporteDireitaRB = AdicionarRigidbody(suporteDireita);
+    }
+
+    ArticulationBody AdicionarArticulationBody(Transform obj, bool isImmovable = false)
+    {
+        ArticulationBody ab = obj.GetComponent<ArticulationBody>();
+        if (ab == null)
         {
-            Debug.LogError("placaEsquerda está ausente no ControleBalanca.");
-            return;
+            ab = obj.gameObject.AddComponent<ArticulationBody>();
         }
 
-        if (placaDireita == null)
+        if (isImmovable)
         {
-            Debug.LogError("placaDireita está ausente no ControleBalanca.");
-            return;
+            ab.immovable = true;
+        }
+        return ab;
+    }
+
+    Rigidbody AdicionarRigidbody(Transform obj)
+    {
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = obj.gameObject.AddComponent<Rigidbody>();
+        }
+        return rb;
+    }
+
+    void ConectarSuportesAosPontosVirtuais()
+    {
+        if (suporteDireitaRB != null && pontoDireitaAB != null)
+        {
+            FixedJoint jointDireita = suporteDireitaRB.gameObject.AddComponent<FixedJoint>();
+            jointDireita.connectedBody = pontoDireitaAB.GetComponent<Rigidbody>();
         }
 
-        if (articulationBodyMeioHaste == null)
+        if (suporteEsquerdaRB != null && pontoEsquerdaAB != null)
         {
-            Debug.LogError("articulationBodyMeioHaste está ausente no ControleBalanca.");
-            return;
+            FixedJoint jointEsquerda = suporteEsquerdaRB.gameObject.AddComponent<FixedJoint>();
+            jointEsquerda.connectedBody = pontoEsquerdaAB.GetComponent<Rigidbody>();
         }
+    }
 
-        if (articulationBodyMeioBase == null)
+    void ConectarMeioBase()
+    {
+        if (meioHasteAB != null && meioBaseAB != null)
         {
-            Debug.LogError("articulationBodyMeioBase está ausente no ControleBalanca.");
-            return;
+            meioHasteAB.jointType = ArticulationJointType.RevoluteJoint;
+            meioHasteAB.anchorPosition = Vector3.zero;
+            meioHasteAB.parentAnchorPosition = Vector3.zero;
+
+            var drive = meioHasteAB.zDrive;  // Usar zDrive para rotação no eixo Z
+            drive.lowerLimit = -30f;  // Ajuste para um valor mais suave
+            drive.upperLimit = 30f;
+            drive.stiffness = 500f;  // Reduza a rigidez para um movimento mais fluido
+            drive.damping = 100f;
+            drive.forceLimit = float.MaxValue;
+            meioHasteAB.zDrive = drive;
+
+            meioHasteAB.twistLock = ArticulationDofLock.LockedMotion;
+            meioHasteAB.swingYLock = ArticulationDofLock.LockedMotion;
+            meioHasteAB.swingZLock = ArticulationDofLock.LimitedMotion;
         }
+    }
 
-        // Calcula a diferença de peso entre os pratos
-        float diferencaPeso = placaEsquerda.GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda) - placaDireita.GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
+    void AjustarHaste(float diferencaPeso)
+    {
+        float angulo = diferencaPeso * 5f;  // Ajuste o fator de multiplicação para controlar a sensibilidade
+        angulo = Mathf.Clamp(angulo, -30f, 30f);  // Limitar o movimento dentro de um intervalo seguro
 
-        // Calcula o ângulo de rotação da haste com base na diferença de peso
-        float anguloX = Mathf.Clamp(diferencaPeso, -45f, 45f);
-
-        // Aplica a rotação na haste
-        ArticulationDrive xDrive = articulationBodyMeioHaste.xDrive;
-        xDrive.target = anguloX;
-        articulationBodyMeioHaste.xDrive = xDrive;
-
-        // Calcula a altura do suporte com base na rotação da haste
-        float alturaSuporte = Mathf.Clamp(0.1f * diferencaPeso, -0.5f, 0.5f);
-
-        // Move os pontos de suporte dos pratos para cima ou para baixo com base na diferença de peso e na rotação da haste
-        if (pontoEsquerda != null)
-        {
-            pontoEsquerda.localPosition = new Vector3(0f, alturaSuporte, 0f);
-        }
-        else
-        {
-            Debug.LogError("PontoEsquerda não está definido.");
-        }
-
-        if (pontoDireita != null)
-        {
-            pontoDireita.localPosition = new Vector3(0f, alturaSuporte, 0f);
-        }
-        else
-        {
-            Debug.LogError("PontoDireita não está definido.");
-        }
+        var drive = meioHasteAB.zDrive;  // Aplicar o ângulo no eixo Z
+        drive.target = angulo;
+        meioHasteAB.zDrive = drive;
     }
 }
