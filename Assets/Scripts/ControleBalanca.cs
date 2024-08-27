@@ -1,3 +1,6 @@
+//Fazer de alguma maneira, que o prato e o suporte sempre fiquem a 90 graus, mesmo quando é aplicada uma angulação a haste, pois, caso isso não ocorra, o peso cairá do prato
+    // Pode se pensar na possibiçidade do uso de attatchs points? (Não seria o ideal, mas funcionaria)
+
 using UnityEngine;
 
 public class ControleBalanca : MonoBehaviour
@@ -14,6 +17,7 @@ public class ControleBalanca : MonoBehaviour
 
     private ArticulationBody meioHasteAB;
     private ArticulationBody meioBaseAB;
+    private ArticulationBody hasteAB;
 
     void Start()
     {
@@ -26,13 +30,10 @@ public class ControleBalanca : MonoBehaviour
 
     void Update()
     {
-        // Sincronizar a posição dos suportes com os pontos de fixação
-        AtualizarPosicaoSuportes();
-
         // Calcular a diferença de peso entre os pratos
         float pesoEsquerda = pratoEsquerda.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda);
         float pesoDireita = pratoDireita.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
-        float diferencaPeso = pesoEsquerda - pesoDireita;
+        float diferencaPeso = pesoDireita - pesoEsquerda;
 
         // Ajustar o ângulo da haste com base na diferença de peso
         AjustarHaste(diferencaPeso);
@@ -42,6 +43,7 @@ public class ControleBalanca : MonoBehaviour
     {
         meioHasteAB = AdicionarArticulationBody(meioHaste);
         meioBaseAB = AdicionarArticulationBody(meioBase, true);
+        hasteAB = AdicionarArticulationBody(haste);
     }
 
     ArticulationBody AdicionarArticulationBody(Transform obj, bool isImmovable = false)
@@ -66,7 +68,6 @@ public class ControleBalanca : MonoBehaviour
         {
             meioHasteAB.jointType = ArticulationJointType.FixedJoint;
 
-            ArticulationBody hasteAB = haste.gameObject.AddComponent<ArticulationBody>();
             hasteAB.jointType = ArticulationJointType.RevoluteJoint;
             hasteAB.anchorPosition = Vector3.zero;
             hasteAB.parentAnchorPosition = Vector3.zero;
@@ -87,29 +88,15 @@ public class ControleBalanca : MonoBehaviour
 
     void AjustarHaste(float diferencaPeso)
     {
+        // Ajuste a rotação da haste conforme a diferença de peso
         float angulo = diferencaPeso * 5f;
         angulo = Mathf.Clamp(angulo, -30f, 30f);
 
-        ArticulationBody hasteAB = haste.GetComponent<ArticulationBody>();
         var drive = hasteAB.xDrive;
-        drive.target = -angulo;
+        drive.target = -angulo;  // Inversão do ângulo para corrigir a direção da rotação
         hasteAB.xDrive = drive;
     }
 
-    void AtualizarPosicaoSuportes()
-    {
-        // Posicionar os suportes nas posições dos pontos de fixação
-        suporteEsquerda.position = pontoEsquerdaPosition.position;
-        suporteDireita.position = pontoDireitaPosition.position;
 
-        // Manter os suportes sempre na orientação horizontal
-        suporteEsquerda.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-        suporteDireita.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-
-        // Manter os pratos também sempre na orientação horizontal
-        pratoEsquerda.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-        pratoDireita.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-    }
-
+    //Fazer um void para Atualizar a posição dos suportes e dos pratos. 
 }
-
