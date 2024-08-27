@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/AreaPrincipal.unity
     guid: e154f5b7cd791fa4d86c81bcf3e031a7
   - enabled: 1
-    path: Assets/Scenes/Test_Area/SalaDeTestes.unity
+    path: Assets/Prefabs/Elevador/SalaDeTestes.unity
     guid: 51ba81c9837015d4095878a0eb8b4140
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 927f011ba7bef5a4592aefb7de88351e, type: 2}

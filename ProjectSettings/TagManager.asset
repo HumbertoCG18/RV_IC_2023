@@ -9,6 +9,9 @@ TagManager:
   - PratoEsquerda
   - PratoDireita
   - Peso
+  - Dog
+  - Cat
+  - Hamster
   layers:
   - Default
   - TransparentFX
