@@ -14,7 +14,8 @@ using UnityEngine.XR.Interaction.Toolkit;
  * - Encontrar um jeito mais eficiente de realizar o sistema de questões
  * - Otimizar o código para legibilidade e compreensão (urgentemente)
  * - A geração das frações não está relativa à mesa (Arrumar URGENTE)
- * - Fazer ocm que um botão físico ative as funções -- Interactable Events -- possivelmente usar Activated == Chamar função no evnet 
+ * - Fazer com que um botão físico ative as funções -- Interactable Events -- possivelmente usar Activated == Chamar função no event
+ * - Arrumar bug em que as frações são geradas apenas no eixo X
 */
 public class ControleMesa : MonoBehaviour
 {
@@ -88,44 +89,44 @@ public class ControleMesa : MonoBehaviour
     }
 
     //Aqui começam as funções responsáveis por pegar o input do usuário
-    void AddNumerador(ActivateEventArgs args)
+    void AddNumerador(ActivateEventArgs args) //Se pressionado o botão de acrescentar ao numerador, soma 1 ao contador
     {
-        if (Numerador < Denominador)
+        if (Numerador < Denominador)//O numerador não deve ultrapassar o denominador, evitando frações impróprias
         {
             Numerador++;
         }
     }
     void DimNumerador(ActivateEventArgs args)
     {
-        if (Numerador - 1 > 0)
+        if (Numerador - 1 > 0) //O numerador não pode ser nulo --> não decresce, caso o (valor - 1) seja menor que 0
         {
             Numerador--;
         }
     }
     void DimDenominador(ActivateEventArgs args)
     {
-        if (Denominador - 1 > 0 && Denominador > Numerador)
+        if (Denominador - 1 > 0 && Denominador > Numerador)//O Denominador não pode ser nulo e deve ser maior que o numerador
         {
             Denominador--;
         }
     }
     void AddDenominador(ActivateEventArgs args)
     {
-        if (Denominador > 0 && Denominador < 12)
+        if (Denominador > 0 && Denominador < 12) //O denominador deve ser maior que 0 e ter o valor máximo de 12
         {
             Denominador++;
         }
     }
-    void FracaoConfirmar(ActivateEventArgs args)
+    void FracaoConfirmar(ActivateEventArgs args)//Botão de confirmação
     {
-        DenominadorY = Denominador;
-        NumeradorY = Numerador;
-        CertoX = checaResultado();
-        Debug.Log("Fração Confirmada!" + CertoX);
+        DenominadorY = Denominador;//Denominador no momento Y assume o valor inserido pelo usuário
+        NumeradorY = Numerador; //Numerador no momento Y assume o valor inserido pelo usuário
+        CertoX = checaResultado();//Variável assume o valor booleano de checaResultado();
+        Debug.Log("Fração Confirmada!" + CertoX);//É retornado pelo terminal se a resposta está correta
 
         //Executa função que checa o resultado --> Update deverá ter uma função que checa se há mudança no acerto e executa um retorno positivo ao usuário, mudando a fração
     }
-    //Aqui se encerram
+    //Aqui se encerram as funções responsáveis por pegar o input do usuário
 
     void ViewFracao() //Exibe a fração no painel da mesa.
     {
@@ -203,7 +204,7 @@ public class ControleMesa : MonoBehaviour
 
         GeraFracao(FracaoInteira, pecasGeradasQuestao, NumeradorInicial, Denominador);
 
-        RazãoQuestão =(float)NumeradorInicial / Denominador; // Pega a razão da fração
+        RazãoQuestão = (float)NumeradorInicial / Denominador; // Pega a razão da fração
         Debug.Log("Razão da Questão :" + RazãoQuestão);
 
         
