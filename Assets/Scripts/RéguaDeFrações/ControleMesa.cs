@@ -9,13 +9,14 @@ using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 
 /*Arquivo bruto dos controles da mesa e das questões, necessita de várias otimizações, que podem incluir:
- * - Separar o sistema de questões em um script distinto
- * - Arrumar a força bruta no metodo gerador das frações
- * - Encontrar um jeito mais eficiente de realizar o sistema de questões
+ * - Separar o sistema de questões em um script distinto (opcional)
+ * - Arrumar a força bruta no metodo gerador das frações (não me recordo ao que se refere, mas provavelmente já está em ordem)
+ * - Encontrar um jeito mais eficiente de realizar o sistema de questões (lembrar que o sistema está sujeito a alterações)
  * - Otimizar o código para legibilidade e compreensão (urgentemente)
- * - A geração das frações não está relativa à mesa (Arrumar URGENTE)
+ * - A geração das frações não está relativa à mesa (arrumar)
  * - Fazer com que um botão físico ative as funções -- Interactable Events -- possivelmente usar Activated == Chamar função no event
  * - Arrumar bug em que as frações são geradas apenas no eixo X
+ * - 
 */
 public class ControleMesa : MonoBehaviour
 {
@@ -59,7 +60,6 @@ public class ControleMesa : MonoBehaviour
         NumeradorInicial = 1;
         NumeradorY = 1;
         DenominadorY = 1;
-
         Numerador = 1;
         Denominador = 1;
         pecasGeradasInput = new GameObject[12];
@@ -69,6 +69,7 @@ public class ControleMesa : MonoBehaviour
         CertoX = false;
         Acertos = 0;
 
+        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador);
         Nivel(FracaoInteiraQuestao);
     }
 
@@ -94,6 +95,7 @@ public class ControleMesa : MonoBehaviour
         if (Numerador < Denominador)//O numerador não deve ultrapassar o denominador, evitando frações impróprias
         {
             Numerador++;
+            Debug.Log("AddNumerador pressionado");
         }
     }
     void DimNumerador(ActivateEventArgs args)
@@ -101,6 +103,7 @@ public class ControleMesa : MonoBehaviour
         if (Numerador - 1 > 0) //O numerador não pode ser nulo --> não decresce, caso o (valor - 1) seja menor que 0
         {
             Numerador--;
+            Debug.Log("DimNumerador pressionado");
         }
     }
     void DimDenominador(ActivateEventArgs args)
@@ -108,6 +111,7 @@ public class ControleMesa : MonoBehaviour
         if (Denominador - 1 > 0 && Denominador > Numerador)//O Denominador não pode ser nulo e deve ser maior que o numerador
         {
             Denominador--;
+            Debug.Log("DimDenominador pressionado");
         }
     }
     void AddDenominador(ActivateEventArgs args)
@@ -115,6 +119,7 @@ public class ControleMesa : MonoBehaviour
         if (Denominador > 0 && Denominador < 12) //O denominador deve ser maior que 0 e ter o valor máximo de 12
         {
             Denominador++;
+            Debug.Log("AddDenominador pressionado");
         }
     }
     void FracaoConfirmar(ActivateEventArgs args)//Botão de confirmação
@@ -142,6 +147,7 @@ public class ControleMesa : MonoBehaviour
 
             Vector3 PosicaoOriginal = Inteira.transform.localPosition; //PosiçãoOriginal em relação a peça maior
             Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si só!!!!
+            Quaternion MesaAngulo = Inteira.transform.rotation;
 
             float TamXPeca = EscalaOriginal.x / Denominador;
 
@@ -152,11 +158,11 @@ public class ControleMesa : MonoBehaviour
 
                 NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
 
-                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, Quaternion.identity, Inteira.transform); //Criando peças em posições diferentes
+                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peças em posições diferentes
                 //                                 Prefab       , Position   , Rotation           , Parenting
 
                 NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
-                novaPeca.transform.localScale = NovaEscala;//Setando o tamanho das peças
+                novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peças
 
                 pecasGeradas[i] = novaPeca;
             }
@@ -167,7 +173,7 @@ public class ControleMesa : MonoBehaviour
                 
                 NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
                 
-                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, Quaternion.identity, Inteira.transform);
+                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform);
 
                 NovaEscala.x = TamXPeca;
                 novaPeca.transform.localScale = NovaEscala;
