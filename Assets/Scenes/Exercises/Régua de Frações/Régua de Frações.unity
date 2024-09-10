@@ -5925,6 +5925,10 @@ PrefabInstance:
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3599189820494207810, guid: 9972d94c719223b49ba17c2317b16de5, type: 3}
+      propertyPath: ParteVazia
+      value: 
+      objectReference: {fileID: 8066122229264493982, guid: 079af47ab5a9f324497194c38da81175, type: 3}
     - target: {fileID: 4384925955087577031, guid: 9972d94c719223b49ba17c2317b16de5, type: 3}
       propertyPath: m_InteractionManager
       value: 

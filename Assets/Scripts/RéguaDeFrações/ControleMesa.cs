@@ -24,7 +24,7 @@ public class ControleMesa : MonoBehaviour
     public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos;
     public bool Certo, CertoX;
     public Vector3 Scale, Position;
-    public GameObject FracaoVariavel, FracaoInteira, FracaoInteiraQuestao;
+    public GameObject FracaoVariavel, ParteVazia, FracaoInteira, FracaoInteiraQuestao;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
     private GameObject[] pecasGeradasInput, pecasGeradasQuestao;
 
@@ -139,7 +139,7 @@ public class ControleMesa : MonoBehaviour
         if (DenominadorX != Denominador || NumeradorX != Numerador) //Caso haja mudanças no numerador, ou denominador, o código é executado.
         {
             ResetaFracao(pecasGeradas);
-            
+
             Vector3 PosicaoOriginal = Inteira.transform.localPosition; //PosiçãoOriginal em relação a peça maior
             Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si só!!!!
 
@@ -150,13 +150,27 @@ public class ControleMesa : MonoBehaviour
                 Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
                 Vector3 NovaEscala = FracaoVariavel.transform.localScale;
 
-                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i)/50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
+                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
 
                 GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, Quaternion.identity, Inteira.transform); //Criando peças em posições diferentes
                 //                                 Prefab       , Position   , Rotation           , Parenting
 
                 NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
                 novaPeca.transform.localScale = NovaEscala;//Setando o tamanho das peças
+
+                pecasGeradas[i] = novaPeca;
+            }
+            for(int i = Numerador; i < Denominador; i++)
+            {
+                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale;
+                
+                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
+                
+                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, Quaternion.identity, Inteira.transform);
+
+                NovaEscala.x = TamXPeca;
+                novaPeca.transform.localScale = NovaEscala;
 
                 pecasGeradas[i] = novaPeca;
             }
