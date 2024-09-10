@@ -30,6 +30,9 @@ public class ControleBalanca : MonoBehaviour
 
     void Update()
     {
+
+        AtualizarPosicaoSuportesEPratos();
+
         // Calcular a diferença de peso entre os pratos
         float pesoEsquerda = pratoEsquerda.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda);
         float pesoDireita = pratoDireita.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
@@ -98,5 +101,18 @@ public class ControleBalanca : MonoBehaviour
     }
 
 
-    //Fazer um void para Atualizar a posição dos suportes e dos pratos. 
+    void AtualizarPosicaoSuportesEPratos()
+    {
+        // Atualizar posição dos suportes para coincidir com os pontos virtuais
+        suporteEsquerda.SetPositionAndRotation(pontoEsquerdaPosition.position, Quaternion.identity);
+        suporteDireita.SetPositionAndRotation(pontoDireitaPosition.position, Quaternion.identity);
+
+        // Agora garantir que os pratos fiquem sempre alinhados horizontalmente
+        pratoEsquerda.position = suporteEsquerda.position; // Garantir que o prato segue o suporte
+        pratoEsquerda.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward); // Alinhar horizontalmente
+
+        pratoDireita.position = suporteDireita.position; // Garantir que o prato segue o suporte
+        pratoDireita.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward); // Alinhar horizontalmente
+    }
+
 }
