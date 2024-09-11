@@ -76,11 +76,11 @@ public class ControleMesa : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Razao = (float)Numerador / Denominador;
+        Razao = (float)Numerador / Denominador; //Calcula a fração atual
 
-        ViewFracao();
+        ViewFracao(); //Atualiza a fração no display
 
-        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //--Função que gera as frações, levando como input a peça inteira
+        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações
 
         if(Certo != CertoX)
         {
@@ -151,12 +151,12 @@ public class ControleMesa : MonoBehaviour
 
             float TamXPeca = EscalaOriginal.x / Denominador;
 
-            for (int i = 0; i < Numerador; i++)
+            for (int i = 0; i < Numerador; i++) //Iniciando em zero, gera as peças com base no numerador
             {
-                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale;
+                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z); //Pega a posição da peça inteira
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça variável
 
-                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
+                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //Cálculo da posição da peça i
 
                 GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peças em posições diferentes
                 //                                 Prefab       , Position   , Rotation           , Parenting
@@ -164,26 +164,26 @@ public class ControleMesa : MonoBehaviour
                 NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
                 novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peças
 
-                pecasGeradas[i] = novaPeca;
+                pecasGeradas[i] = novaPeca; //Armazena as peças geradas em um array, possibilitando excluí-las depois
             }
-            for(int i = Numerador; i < Denominador; i++)
+            for(int i = Numerador; i < Denominador; i++) //Iniciando no numerador, gera as peças "vazias" com base no denominador
             {
                 Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale;
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça que será modificada
                 
                 NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
                 
-                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform);
+                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform); //Gera a nova peça
 
-                NovaEscala.x = TamXPeca;
-                novaPeca.transform.localScale = NovaEscala;
+                NovaEscala.x = TamXPeca; //Ajusta o X do Vector3 (Posição) da peça
+                novaPeca.transform.localScale = NovaEscala; //Define a escala da peça que será modificada para a nova escala
 
-                pecasGeradas[i] = novaPeca;
+                pecasGeradas[i] = novaPeca; //Armazena as peças geradas em um array, possibilitando excluí-las depois
             }
         }
         //Numerador e Denominador em um momento anterior
-        NumeradorX = Numerador;
-        DenominadorX = Denominador;
+        NumeradorX = Numerador; //Armazena o valor do numerador no fim da execução
+        DenominadorX = Denominador; //Armazena o valor do numerador no fim da execução
     }
 
     void ResetaFracao(GameObject[] pecasGeradas)
