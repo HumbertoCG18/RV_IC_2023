@@ -58,10 +58,12 @@ public class ControleMesa : MonoBehaviour
         }
 
         NumeradorInicial = 1;
-        NumeradorY = 1;
+        NumeradorY = 1; //NumeradorY e DenominadorY são as variáveis auxiliares responsáveis por armazenar o input do usuário ao pressionar o botão de confirmar
         DenominadorY = 1;
-        Numerador = 1;
+
+        Numerador = 1; //Estas veriáveis são "flúidas". Se atualizam a todo o momento, com base nos inputs do usuário, por meio de contadores no código.
         Denominador = 1;
+
         pecasGeradasInput = new GameObject[12];
         pecasGeradasQuestao = new GameObject[12];
         RazãoQuestão = 1f;
@@ -70,21 +72,21 @@ public class ControleMesa : MonoBehaviour
         Acertos = 0;
 
         GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador);
-        Nivel(FracaoInteiraQuestao);
+        Aleatoria(FracaoInteiraQuestao);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Razao = (float)Numerador / Denominador; //Calcula a fração atual
+        Razao = (float)Numerador / Denominador; //Calcula a fração atual a cada frame (Ver como otimizar)
 
-        ViewFracao(); //Atualiza a fração no display
+        ViewFracao(); //Atualiza a fração no display a cada frame
 
-        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações
+        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações 
 
         if(Certo != CertoX)
         {
-            Nivel(FracaoInteiraQuestao);
+            Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a questão novamente
         }
 
     }
@@ -94,8 +96,8 @@ public class ControleMesa : MonoBehaviour
     {
         if (Numerador < Denominador)//O numerador não deve ultrapassar o denominador, evitando frações impróprias
         {
-            Numerador++;
-            Debug.Log("AddNumerador pressionado");
+            Numerador++; //Contador
+            Debug.Log("AddNumerador pressionado"); //Debug.Log para checar a funcionalidade do input (Não está funcionando por hora)
         }
     }
     void DimNumerador(ActivateEventArgs args)
@@ -197,8 +199,25 @@ public class ControleMesa : MonoBehaviour
         }
     }
 
-    //Aqui começa o sistema de questões (Mais pra frente deverão ser colocados em um outro arquivo por motivos de organização)
-    void Nivel(GameObject FracaoInteira) // Nível I --> Denominador limitado a 4
+
+
+    //Aqui começa o sistema de questões (Mais pra frente poderão ser colocados em um outro arquivo por motivos de organização)
+
+    bool checaResultado()
+    {
+        Debug.Log("Razão Questão: " + RazãoQuestão + " Razão Input: " + Razao);
+        if (RazãoQuestão == Razao && Numerador == NumeradorY) //Razão Questão está como variável global e alguma coisa a faz retornar falso.
+        {
+            Acertos++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void Aleatoria(GameObject FracaoInteira)
     {
         CertoX = false;
         Enunciado.text = ("Identifique a fração");
@@ -219,7 +238,7 @@ public class ControleMesa : MonoBehaviour
             DenominadorBase = 12;
         }
                 
-        int Denominador = UnityEngine.Random.Range(1, DenominadorBase);// Seleciona um denominador aleatório <= 4                           
+        int Denominador = UnityEngine.Random.Range(2, DenominadorBase);// Seleciona um denominador aleatório <= 4                           
         NumeradorInicial = UnityEngine.Random.Range(1, Denominador); // Seleciona um numerador aleatório <= denominador
 
         GeraFracao(FracaoInteira, pecasGeradasQuestao, NumeradorInicial, Denominador);
@@ -230,18 +249,19 @@ public class ControleMesa : MonoBehaviour
         
     }// Talvez fazer uma função só que limita o denominador atravéz de um contador;
 
-    bool checaResultado()
+    void Questao1() // Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade. Após, selecione todas as outras frações equivalentes a 1/2.
     {
-        Debug.Log("Razão Questão: " + RazãoQuestão + " Razão Input: " + Razao);
-        if (RazãoQuestão == Razao && Numerador == NumeradorY) //Razão Questão está como variável global e alguma coisa a faz retornar falso.
-        {         
-            Acertos++;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+
+    }
+
+    void Questao2() // 
+    {
+
+    }
+
+    void Questao3() // 
+    {
+
     }
 
 }
