@@ -16,7 +16,7 @@ using UnityEngine.XR.Interaction.Toolkit;
  * - A geração das frações não está relativa à mesa (arrumar)
  * - Fazer com que um botão físico ative as funções -- Interactable Events -- possivelmente usar Activated == Chamar função no event
  * - Arrumar bug em que as frações são geradas apenas no eixo X
- * - 
+ * - Qualquer dúvida, referir ao doc da régua, ou perguntar.
 */
 public class ControleMesa : MonoBehaviour
 {
@@ -66,9 +66,12 @@ public class ControleMesa : MonoBehaviour
 
         pecasGeradasInput = new GameObject[12];
         pecasGeradasQuestao = new GameObject[12];
+
         RazãoQuestão = 1f;
+
         Certo = false;
         CertoX = false;
+
         Acertos = 0;
 
         GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador);
@@ -198,8 +201,6 @@ public class ControleMesa : MonoBehaviour
             }
         }
     }
-
-
 
     //Aqui começa o sistema de questões (Mais pra frente poderão ser colocados em um outro arquivo por motivos de organização)
 
