@@ -22,12 +22,13 @@ public class ControleMesa : MonoBehaviour
 {
     public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
     public float Razao, RazãoQuestão;
-    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos, Questao;
     public bool Certo, CertoX;
     public Vector3 Scale, Position;
     public GameObject FracaoVariavel, ParteVazia, FracaoInteira, FracaoInteiraQuestao;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
     private GameObject[] pecasGeradasInput, pecasGeradasQuestao;
+    private int[] equivalenciaUmMeio;
 
 
     //Adicionar referências ao script questoes.cs e adaptar suas funcionalidades(funções do questoes.cs) neste script.
@@ -64,6 +65,9 @@ public class ControleMesa : MonoBehaviour
         Numerador = 1; //Estas veriáveis são "flúidas". Se atualizam a todo o momento, com base nos inputs do usuário, por meio de contadores no código.
         Denominador = 1;
 
+        Questao = 1;
+
+        equivalenciaUmMeio = new int[6]; //Equivalências de 1/2 com numerador máximo de 12
         pecasGeradasInput = new GameObject[12];
         pecasGeradasQuestao = new GameObject[12];
 
@@ -204,17 +208,29 @@ public class ControleMesa : MonoBehaviour
 
     //Aqui começa o sistema de questões (Mais pra frente poderão ser colocados em um outro arquivo por motivos de organização)
 
-    bool checaResultado()
+    bool checaResultado() // A comparação do numerador está errado. Está comparando o Numerador (atualmente selecionado) com o NumeradorY (confirmado na resposta), retornando sempre verdadeiro.
     {
-        Debug.Log("Razão Questão: " + RazãoQuestão + " Razão Input: " + Razao);
-        if (RazãoQuestão == Razao && Numerador == NumeradorY) //Razão Questão está como variável global e alguma coisa a faz retornar falso.
+        switch (Questao)
         {
-            Acertos++;
-            return true;
-        }
-        else
-        {
-            return false;
+            case 1:
+                //Condições Q1
+                Questao++;
+                return true;
+                break;
+            case 2:
+                //Condições Q2
+                Questao++;
+                return true;
+                break;
+            case 3:
+                //Condições Q3
+                Questao++;
+                return true;
+                break;
+            default:
+                return false;
+                break;
+
         }
     }
 
@@ -248,19 +264,21 @@ public class ControleMesa : MonoBehaviour
         Debug.Log("Razão da Questão :" + RazãoQuestão);
 
         
-    }// Talvez fazer uma função só que limita o denominador atravéz de um contador;
+    }//Talvez fazer uma função só que limita o denominador atravéz de um contador;
 
-    void Questao1() // Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade. Após, selecione todas as outras frações equivalentes a 1/2.
+    void Questao1() //Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade. Após, selecione todas as outras frações equivalentes a 1/2.
+    {
+        //Setar textos
+        //Deixar peças não usadas invisíveis
+
+    }
+
+    void Questao2() //Utilizando os botões da interface, seleciona todas as frações equivalentes a 1/3.
     {
 
     }
 
-    void Questao2() // 
-    {
-
-    }
-
-    void Questao3() // 
+    void Questao3() //Observe o valor desconhecido gerado acima. Utilizando os botões da interface e testando outros valores, encontre todas as frações equivalentes a este valor desconhecido.
     {
 
     }
