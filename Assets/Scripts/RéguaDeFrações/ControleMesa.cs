@@ -22,7 +22,7 @@ public class ControleMesa : MonoBehaviour
 {
     public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
     public float Razao, RazãoQuestão;
-    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos, Questao;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos, Questao, QuestaoAnt;
     public bool Certo, CertoX;
     public Vector3 Scale, Position;
     public GameObject FracaoVariavel, ParteVazia, FracaoInteira, FracaoInteiraQuestao;
@@ -65,7 +65,8 @@ public class ControleMesa : MonoBehaviour
         Numerador = 1; //Estas veriáveis são "flúidas". Se atualizam a todo o momento, com base nos inputs do usuário, por meio de contadores no código.
         Denominador = 1;
 
-        Questao = 1;
+        Questao = 1; //Variável que marca a questáo
+        QuestaoAnt = 0; //Variável auxiliar responsável por detectar progressão nas questões (Inicializa QuestaoAnt como diferente de Questao, pois este é checado a cada frame [Checar Update()])
 
         equivalenciaUmMeio = new int[6]; //Equivalências de 1/2 com numerador máximo de 12
         pecasGeradasInput = new GameObject[12];
@@ -94,6 +95,26 @@ public class ControleMesa : MonoBehaviour
         if(Certo != CertoX)
         {
             Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a questão novamente
+        }
+
+        if(QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma questão ainda está sendo executada, estes serão iguais)
+        {
+            switch (Questao)
+            {
+                case 1:
+                    QuestaoAnt = Questao; //Iguala QuestaoAnt a Questao
+                    Questao1();
+                    break;
+                case 2:
+                    Questao2(); 
+                    break;
+                case 3:
+                    Questao3();
+                    break;
+                default:
+                    Debug.Log("Erro, valor de questão inválido");
+                    break;
+            }
         }
 
     }
@@ -208,28 +229,24 @@ public class ControleMesa : MonoBehaviour
 
     //Aqui começa o sistema de questões (Mais pra frente poderão ser colocados em um outro arquivo por motivos de organização)
 
-    bool checaResultado() // A comparação do numerador está errado. Está comparando o Numerador (atualmente selecionado) com o NumeradorY (confirmado na resposta), retornando sempre verdadeiro.
+    bool checaResultado() // Checa se todas as condições foram cumpridas
     {
         switch (Questao)
         {
             case 1:
-                //Condições Q1
+                //Condições Q1 --> Fração 1/2 encontrada e todas as equivalentes dentro de (1 <= Denominador <= 12)
                 Questao++;
                 return true;
-                break;
             case 2:
                 //Condições Q2
                 Questao++;
                 return true;
-                break;
             case 3:
                 //Condições Q3
                 Questao++;
                 return true;
-                break;
             default:
                 return false;
-                break;
 
         }
     }
@@ -269,6 +286,8 @@ public class ControleMesa : MonoBehaviour
     void Questao1() //Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade. Após, selecione todas as outras frações equivalentes a 1/2.
     {
         //Setar textos
+        Enunciado.text = ("Identifique a fração");
+        Detalhamento.text = ("Uma fração aleatória será gerada. Utilize a interface da mesa para identificar qual é a fração!");
         //Deixar peças não usadas invisíveis
 
     }
