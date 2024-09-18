@@ -80,7 +80,7 @@ public class ControleMesa : MonoBehaviour
         Acertos = 0;
 
         GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador);
-        Aleatoria(FracaoInteiraQuestao);
+        //Aleatoria(FracaoInteiraQuestao);
     }
 
     // Update is called once per frame
@@ -92,17 +92,18 @@ public class ControleMesa : MonoBehaviour
 
         GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações 
 
-        if(Certo != CertoX)
-        {
-            Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a questão novamente
-        }
+        //if(Certo != CertoX)
+        //{
+        //    Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a questão novamente
+        //}
 
         if(QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma questão ainda está sendo executada, estes serão iguais)
         {
+            Debug.Log("Atualmente executando a questao " + Questao);
+            QuestaoAnt = Questao;
             switch (Questao)
             {
                 case 1:
-                    QuestaoAnt = Questao; //Iguala QuestaoAnt a Questao
                     Questao1();
                     break;
                 case 2:
@@ -235,7 +236,7 @@ public class ControleMesa : MonoBehaviour
         {
             case 1:
                 //Condições Q1 --> Fração 1/2 encontrada e todas as equivalentes dentro de (1 <= Denominador <= 12)
-                Questao++;
+                checaQ1();
                 return true;
             case 2:
                 //Condições Q2
@@ -289,7 +290,55 @@ public class ControleMesa : MonoBehaviour
         Enunciado.text = ("Identifique a fração");
         Detalhamento.text = ("Uma fração aleatória será gerada. Utilize a interface da mesa para identificar qual é a fração!");
         //Deixar peças não usadas invisíveis
+        // <Inserir código aqui>
+        if (CertoX == true)
+        {
+            Questao++;
+        }
+    }
 
+    //Criar um método bool que checa as condições de cada questão e, será usado simultaneamente com o Questao1() e o fracaoConfirm()
+    bool checaQ1()
+    {
+        if(NumeradorY == 1 && DenominadorY == 2) //Se o input for 1/2
+        {
+            Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2"); //Descubra as frações equivalentes
+            int i = 0;
+            while(equivalenciaUmMeio[5] == null) //Enquanto o vetor não estiver cheio
+            {
+                float RazaoY = (float)NumeradorY / DenominadorY;
+
+                if(RazaoY == 0.5 && pertenceAoArray(equivalenciaUmMeio, DenominadorY) == false)
+                {
+                    //Mais tarde haverá o retorno auditivo aqui
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + i + "de" + 6 + "Descobertas");
+
+                    equivalenciaUmMeio[i] = DenominadorY;
+                    i++;
+                }
+
+            }
+            Detalhamento.text = ("Muito bem! Carregando a próxima questão...");
+            //Passa a questão? (Atualmente no método Questao1())
+            //Pausar execução do código por X segundos
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool pertenceAoArray(int[] equivalentes, int DenominadorY) //Método temporário que eu criei pra comparar os elementos de um array
+    {
+        foreach (int i in equivalentes)
+        {
+            if (equivalentes[i] == DenominadorY)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Questao2() //Utilizando os botões da interface, seleciona todas as frações equivalentes a 1/3.
