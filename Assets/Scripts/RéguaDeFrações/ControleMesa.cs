@@ -8,22 +8,23 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
 
-/*Arquivo bruto dos controles da mesa e das questıes, necessita de v·rias otimizaÁıes, que podem incluir:
- * - Separar o sistema de questıes em um script distinto (opcional)
- * - Arrumar a forÁa bruta no metodo gerador das fraÁıes (n„o me recordo ao que se refere, mas provavelmente j· est· em ordem)
- * - Encontrar um jeito mais eficiente de realizar o sistema de questıes (lembrar que o sistema est· sujeito a alteraÁıes)
- * - Otimizar o cÛdigo para legibilidade e compreens„o (urgentemente)
- * - A geraÁ„o das fraÁıes n„o est· relativa ‡ mesa (arrumar)
- * - Fazer com que um bot„o fÌsico ative as funÁıes -- Interactable Events -- possivelmente usar Activated == Chamar funÁ„o no event
- * - Arrumar bug em que as fraÁıes s„o geradas apenas no eixo X
- * - Qualquer d˙vida, referir ao doc da rÈgua, ou perguntar.
+/*Arquivo bruto dos controles da mesa e das quest√µes, necessita de v√°rias otimiza√ß√µes, que podem incluir:
+ * - Separar o sistema de quest√µes em um script distinto (opcional)
+ * - Arrumar a for√ßa bruta no metodo gerador das fra√ß√µes (n√£o me recordo ao que se refere, mas provavelmente j√° est√° em ordem)
+ * - Encontrar um jeito mais eficiente de realizar o sistema de quest√µes (lembrar que o sistema est√° sujeito a altera√ß√µes)
+ * - Otimizar o c√≥digo para legibilidade e compreens√£o
+ * - A gera√ß√£o das fra√ß√µes n√£o est√° relativa √† mesa (arrumar)
+ * - Fazer com que um bot√£o f√≠sico ative as fun√ß√µes -- Interactable Events -- possivelmente usar Activated == Chamar fun√ß√£o no event
+ * - Arrumar bug em que as fra√ß√µes s√£o geradas apenas no eixo X
+ * - Qualquer d√∫vida, referir ao doc da r√©gua, ou perguntar.
+ * - O M√âTODO bool checaQ1() --> EST√Å CRASHANDO A UNITY (URGENTE)
 */
 public class ControleMesa : MonoBehaviour
 {
     public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
-    public float Razao, Raz„oQuest„o;
-    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos, Questao, QuestaoAnt;
-    public bool Certo, CertoX;
+    public float Razao, RazaoY, Raz√£oQuest√£o;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorX, DenominadorX, NumeradorY, DenominadorY, Acertos, Questao, QuestaoAnt, ContagemEquivalencia;
+    public bool Certo, CertoX, confirmarDebug;
     public Vector3 Scale, Position;
     public GameObject FracaoVariavel, ParteVazia, FracaoInteira, FracaoInteiraQuestao;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
@@ -31,7 +32,7 @@ public class ControleMesa : MonoBehaviour
     private int[] equivalenciaUmMeio;
 
 
-    //Adicionar referÍncias ao script questoes.cs e adaptar suas funcionalidades(funÁıes do questoes.cs) neste script.
+    //Adicionar refer√™ncias ao script questoes.cs e adaptar suas funcionalidades(fun√ß√µes do questoes.cs) neste script.
 
     // Start is called before the first frame update
     void Start()
@@ -59,25 +60,29 @@ public class ControleMesa : MonoBehaviour
         }
 
         NumeradorInicial = 1;
-        NumeradorY = 1; //NumeradorY e DenominadorY s„o as vari·veis auxiliares respons·veis por armazenar o input do usu·rio ao pressionar o bot„o de confirmar
+        NumeradorY = 1; //NumeradorY e DenominadorY s√£o as vari√°veis auxiliares respons√°veis por armazenar o input do usu√°rio ao pressionar o bot√£o de confirmar
         DenominadorY = 1;
+        ContagemEquivalencia = 0;
 
-        Numerador = 1; //Estas veri·veis s„o "fl˙idas". Se atualizam a todo o momento, com base nos inputs do usu·rio, por meio de contadores no cÛdigo.
+        Numerador = 1; //Estas veri√°veis s√£o "fl√∫idas". Se atualizam a todo o momento, com base nos inputs do usu√°rio, por meio de contadores no c√≥digo.
         Denominador = 1;
 
-        Questao = 1; //Vari·vel que marca a quest·o
-        QuestaoAnt = 0; //Vari·vel auxiliar respons·vel por detectar progress„o nas questıes (Inicializa QuestaoAnt como diferente de Questao, pois este È checado a cada frame [Checar Update()])
+        Questao = 1; //Vari√°vel que marca a quest√°o
+        QuestaoAnt = 0; //Vari√°vel auxiliar respons√°vel por detectar progress√£o nas quest√µes (Inicializa QuestaoAnt como diferente de Questao, pois este √© checado a cada frame [Checar Update()])
 
-        equivalenciaUmMeio = new int[6]; //EquivalÍncias de 1/2 com numerador m·ximo de 12
+        equivalenciaUmMeio = new int[5]; //Equival√™ncias de 1/2 com numerador m√°ximo de 12
         pecasGeradasInput = new GameObject[12];
         pecasGeradasQuestao = new GameObject[12];
 
-        Raz„oQuest„o = 1f;
+        Raz√£oQuest√£o = 1f;
 
+        confirmarDebug = false; //Vari√°vel utilizada para testar as entradas sem o VR conectado
         Certo = false;
         CertoX = false;
 
         Acertos = 0;
+
+        RazaoY = 1f;
 
         GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador);
         //Aleatoria(FracaoInteiraQuestao);
@@ -86,18 +91,18 @@ public class ControleMesa : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Razao = (float)Numerador / Denominador; //Calcula a fraÁ„o atual a cada frame (Ver como otimizar)
+        Razao = (float)Numerador / Denominador; //Calcula a fra√ß√£o atual a cada frame (Ver como otimizar)
 
-        ViewFracao(); //Atualiza a fraÁ„o no display a cada frame
+        ViewFracao(); //Atualiza a fra√ß√£o no display a cada frame
 
-        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //FunÁ„o que gera as fraÁıes 
+        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Fun√ß√£o que gera as fra√ß√µes 
 
         //if(Certo != CertoX)
         //{
-        //    Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a quest„o novamente
+        //    Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a quest√£o novamente
         //}
 
-        if(QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma quest„o ainda est· sendo executada, estes ser„o iguais)
+        if(QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma quest√£o ainda est√° sendo executada, estes ser√£o iguais)
         {
             Debug.Log("Atualmente executando a questao " + Questao);
             QuestaoAnt = Questao;
@@ -113,25 +118,31 @@ public class ControleMesa : MonoBehaviour
                     Questao3();
                     break;
                 default:
-                    Debug.Log("Erro, valor de quest„o inv·lido");
+                    Debug.Log("Erro, valor de quest√£o inv√°lido");
                     break;
             }
         }
 
+        if (confirmarDebug == true) //Utilizado para definir os inputs sem o VR conectado
+        {
+            FracaoConfirmarDebug();
+            confirmarDebug = false;
+        }
+
     }
 
-    //Aqui comeÁam as funÁıes respons·veis por pegar o input do usu·rio
-    void AddNumerador(ActivateEventArgs args) //Se pressionado o bot„o de acrescentar ao numerador, soma 1 ao contador
+    //Aqui come√ßam as fun√ß√µes respons√°veis por pegar o input do usu√°rio
+    void AddNumerador(ActivateEventArgs args) //Se pressionado o bot√£o de acrescentar ao numerador, soma 1 ao contador
     {
-        if (Numerador < Denominador)//O numerador n„o deve ultrapassar o denominador, evitando fraÁıes imprÛprias
+        if (Numerador < Denominador)//O numerador n√£o deve ultrapassar o denominador, evitando fra√ß√µes impr√≥prias
         {
             Numerador++; //Contador
-            Debug.Log("AddNumerador pressionado"); //Debug.Log para checar a funcionalidade do input (N„o est· funcionando por hora)
+            Debug.Log("AddNumerador pressionado"); //Debug.Log para checar a funcionalidade do input (N√£o est√° funcionando por hora)
         }
     }
     void DimNumerador(ActivateEventArgs args)
     {
-        if (Numerador - 1 > 0) //O numerador n„o pode ser nulo --> n„o decresce, caso o (valor - 1) seja menor que 0
+        if (Numerador - 1 > 0) //O numerador n√£o pode ser nulo --> n√£o decresce, caso o (valor - 1) seja menor que 0
         {
             Numerador--;
             Debug.Log("DimNumerador pressionado");
@@ -139,7 +150,7 @@ public class ControleMesa : MonoBehaviour
     }
     void DimDenominador(ActivateEventArgs args)
     {
-        if (Denominador - 1 > 0 && Denominador > Numerador)//O Denominador n„o pode ser nulo e deve ser maior que o numerador
+        if (Denominador - 1 > 0 && Denominador > Numerador)//O Denominador n√£o pode ser nulo e deve ser maior que o numerador
         {
             Denominador--;
             Debug.Log("DimDenominador pressionado");
@@ -147,74 +158,86 @@ public class ControleMesa : MonoBehaviour
     }
     void AddDenominador(ActivateEventArgs args)
     {
-        if (Denominador > 0 && Denominador < 12) //O denominador deve ser maior que 0 e ter o valor m·ximo de 12
+        if (Denominador > 0 && Denominador < 12) //O denominador deve ser maior que 0 e ter o valor m√°ximo de 12
         {
             Denominador++;
             Debug.Log("AddDenominador pressionado");
         }
     }
-    void FracaoConfirmar(ActivateEventArgs args)//Bot„o de confirmaÁ„o
+    void FracaoConfirmar(ActivateEventArgs args)//Bot√£o de confirma√ß√£o
     {
-        DenominadorY = Denominador;//Denominador no momento Y assume o valor inserido pelo usu·rio
-        NumeradorY = Numerador; //Numerador no momento Y assume o valor inserido pelo usu·rio
-        CertoX = checaResultado();//Vari·vel assume o valor booleano de checaResultado();
-        Debug.Log("FraÁ„o Confirmada!" + CertoX);//… retornado pelo terminal se a resposta est· correta
+        DenominadorY = Denominador;//Denominador no momento Y assume o valor inserido pelo usu√°rio
+        NumeradorY = Numerador; //Numerador no momento Y assume o valor inserido pelo usu√°rio
+        CertoX = checaResultado();//Vari√°vel assume o valor booleano de checaResultado();
+        Debug.Log("Fra√ß√£o Confirmada!" + CertoX);//√â retornado pelo terminal se a resposta est√° correta
+        CertoX = false;
 
-        //Executa funÁ„o que checa o resultado --> Update dever· ter uma funÁ„o que checa se h· mudanÁa no acerto e executa um retorno positivo ao usu·rio, mudando a fraÁ„o
+        //Executa fun√ß√£o que checa o resultado --> Update dever√° ter uma fun√ß√£o que checa se h√° mudan√ßa no acerto e executa um retorno positivo ao usu√°rio, mudando a fra√ß√£o
     }
-    //Aqui se encerram as funÁıes respons·veis por pegar o input do usu·rio
 
-    void ViewFracao() //Exibe a fraÁ„o no painel da mesa.
+    void FracaoConfirmarDebug() //M√©todo de confirma√ß√£o Debug (Sem o VR Conectado)
+    {
+        DenominadorY = Denominador;
+        NumeradorY = Numerador;
+        RazaoY = (float)NumeradorY / DenominadorY;
+
+        CertoX = checaResultado();
+        Debug.Log("Fra√ß√£o Confirmada pelo Debug: " + CertoX);
+    }
+
+    //Aqui se encerram as fun√ß√µes respons√°veis por pegar o input do usu√°rio
+
+    void ViewFracao() //Exibe a fra√ß√£o no painel da mesa.
     {
         ViewNumerador.text = Numerador.ToString();
         ViewDenominador.text = Denominador.ToString();
     }
 
-    void GeraFracao(GameObject Inteira, GameObject[] pecasGeradas, int Numerador, int Denominador)//Considerando inputs do usu·rio que v„o atÈ 12, gerar m˙ltiplas (com base no numerador) peÁas do tamanho Inteira/Denominador.
-    {//A geraÁ„o das fraÁıes n„o est· relativa ‡ mesa no eixo X --> arrumar
-        if (DenominadorX != Denominador || NumeradorX != Numerador) //Caso haja mudanÁas no numerador, ou denominador, o cÛdigo È executado.
+    void GeraFracao(GameObject Inteira, GameObject[] pecasGeradas, int Numerador, int Denominador)//Considerando inputs do usu√°rio que v√£o at√© 12, gerar m√∫ltiplas (com base no numerador) pe√ßas do tamanho Inteira/Denominador.
+    {//A gera√ß√£o das fra√ß√µes n√£o est√° relativa √† mesa no eixo X --> arrumar
+        if (DenominadorX != Denominador || NumeradorX != Numerador) //Caso haja mudan√ßas no numerador, ou denominador, o c√≥digo √© executado.
         {
             ResetaFracao(pecasGeradas);
 
-            Vector3 PosicaoOriginal = Inteira.transform.localPosition; //PosiÁ„oOriginal em relaÁ„o a peÁa maior
-            Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si sÛ!!!!
+            Vector3 PosicaoOriginal = Inteira.transform.localPosition; //Posi√ß√£oOriginal em rela√ß√£o a pe√ßa maior
+            Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si s√≥!!!!
             Quaternion MesaAngulo = Inteira.transform.rotation;
 
             float TamXPeca = EscalaOriginal.x / Denominador;
 
-            for (int i = 0; i < Numerador; i++) //Iniciando em zero, gera as peÁas com base no numerador
+            for (int i = 0; i < Numerador; i++) //Iniciando em zero, gera as pe√ßas com base no numerador
             {
-                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z); //Pega a posiÁ„o da peÁa inteira
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peÁa vari·vel
+                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z); //Pega a posi√ß√£o da pe√ßa inteira
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da pe√ßa vari√°vel
 
-                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //C·lculo da posiÁ„o da peÁa i
+                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //C√°lculo da posi√ß√£o da pe√ßa i
 
-                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peÁas em posiÁıes diferentes
+                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando pe√ßas em posi√ß√µes diferentes
                 //                                 Prefab       , Position   , Rotation           , Parenting
 
-                NovaEscala.x = TamXPeca; //Mudando o tamanho das peÁas
-                novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peÁas
+                NovaEscala.x = TamXPeca; //Mudando o tamanho das pe√ßas
+                novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das pe√ßas
 
-                pecasGeradas[i] = novaPeca; //Armazena as peÁas geradas em um array, possibilitando excluÌ-las depois
+                pecasGeradas[i] = novaPeca; //Armazena as pe√ßas geradas em um array, possibilitando exclu√≠-las depois
             }
-            for(int i = Numerador; i < Denominador; i++) //Iniciando no numerador, gera as peÁas "vazias" com base no denominador
+            for(int i = Numerador; i < Denominador; i++) //Iniciando no numerador, gera as pe√ßas "vazias" com base no denominador
             {
                 Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peÁa que ser· modificada
+                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da pe√ßa que ser√° modificada
                 
                 NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
                 
-                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform); //Gera a nova peÁa
+                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform); //Gera a nova pe√ßa
 
-                NovaEscala.x = TamXPeca; //Ajusta o X do Vector3 (PosiÁ„o) da peÁa
-                novaPeca.transform.localScale = NovaEscala; //Define a escala da peÁa que ser· modificada para a nova escala
+                NovaEscala.x = TamXPeca; //Ajusta o X do Vector3 (Posi√ß√£o) da pe√ßa
+                novaPeca.transform.localScale = NovaEscala; //Define a escala da pe√ßa que ser√° modificada para a nova escala
 
-                pecasGeradas[i] = novaPeca; //Armazena as peÁas geradas em um array, possibilitando excluÌ-las depois
+                pecasGeradas[i] = novaPeca; //Armazena as pe√ßas geradas em um array, possibilitando exclu√≠-las depois
             }
         }
         //Numerador e Denominador em um momento anterior
-        NumeradorX = Numerador; //Armazena o valor do numerador no fim da execuÁ„o
-        DenominadorX = Denominador; //Armazena o valor do numerador no fim da execuÁ„o
+        NumeradorX = Numerador; //Armazena o valor do numerador no fim da execu√ß√£o
+        DenominadorX = Denominador; //Armazena o valor do numerador no fim da execu√ß√£o
     }
 
     void ResetaFracao(GameObject[] pecasGeradas)
@@ -223,27 +246,26 @@ public class ControleMesa : MonoBehaviour
         {
             if (peca != null) 
             {
-                Destroy(peca); //Fazer de um jeito reutiliz·vel
+                Destroy(peca); //Fazer de um jeito reutiliz√°vel
             }
         }
     }
 
-    //Aqui comeÁa o sistema de questıes (Mais pra frente poder„o ser colocados em um outro arquivo por motivos de organizaÁ„o)
+    //Aqui come√ßa o sistema de quest√µes (Mais pra frente poder√£o ser colocados em um outro arquivo por motivos de organiza√ß√£o)
 
-    bool checaResultado() // Checa se todas as condiÁıes foram cumpridas
+    bool checaResultado() // Checa se todas as condi√ß√µes foram cumpridas
     {
         switch (Questao)
         {
             case 1:
-                //CondiÁıes Q1 --> FraÁ„o 1/2 encontrada e todas as equivalentes dentro de (1 <= Denominador <= 12)
-                checaQ1();
-                return true;
+                //Condi√ß√µes Q1 --> Fra√ß√£o 1/2 encontrada e todas as equivalentes dentro de (1 <= Denominador <= 12)
+                return checaQ1();
             case 2:
-                //CondiÁıes Q2
+                //Condi√ß√µes Q2
                 Questao++;
                 return true;
             case 3:
-                //CondiÁıes Q3
+                //Condi√ß√µes Q3
                 Questao++;
                 return true;
             default:
@@ -255,8 +277,8 @@ public class ControleMesa : MonoBehaviour
     void Aleatoria(GameObject FracaoInteira)
     {
         CertoX = false;
-        Enunciado.text = ("Identifique a fraÁ„o");
-        Detalhamento.text = ("Uma fraÁ„o aleatÛria ser· gerada. Utilize a interface da mesa para identificar qual È a fraÁ„o!");
+        Enunciado.text = ("Identifique a fra√ß√£o");
+        Detalhamento.text = ("Uma fra√ß√£o aleat√≥ria ser√° gerada. Utilize a interface da mesa para identificar qual √© a fra√ß√£o!");
 
         int DenominadorBase = 0;
 
@@ -273,67 +295,59 @@ public class ControleMesa : MonoBehaviour
             DenominadorBase = 12;
         }
                 
-        int Denominador = UnityEngine.Random.Range(2, DenominadorBase);// Seleciona um denominador aleatÛrio <= 4                           
-        NumeradorInicial = UnityEngine.Random.Range(1, Denominador); // Seleciona um numerador aleatÛrio <= denominador
+        int Denominador = UnityEngine.Random.Range(2, DenominadorBase);// Seleciona um denominador aleat√≥rio <= 4                           
+        NumeradorInicial = UnityEngine.Random.Range(1, Denominador); // Seleciona um numerador aleat√≥rio <= denominador
 
         GeraFracao(FracaoInteira, pecasGeradasQuestao, NumeradorInicial, Denominador);
 
-        Raz„oQuest„o = (float)NumeradorInicial / Denominador; // Pega a raz„o da fraÁ„o
-        Debug.Log("Raz„o da Quest„o :" + Raz„oQuest„o);
+        Raz√£oQuest√£o = (float)NumeradorInicial / Denominador; // Pega a raz√£o da fra√ß√£o
+        Debug.Log("Raz√£o da Quest√£o :" + Raz√£oQuest√£o);
 
         
-    }//Talvez fazer uma funÁ„o sÛ que limita o denominador atravÈz de um contador;
+    }//Talvez fazer uma fun√ß√£o s√≥ que limita o denominador atrav√©z de um contador;
 
-    void Questao1() //Utilizando os botıes da interface, selecione a fraÁ„o que representa 1/2 da unidade. ApÛs, selecione todas as outras fraÁıes equivalentes a 1/2.
+    void Questao1() //Utilizando os bot√µes da interface, selecione a fra√ß√£o que representa 1/2 da unidade. Ap√≥s, selecione todas as outras fra√ß√µes equivalentes a 1/2.
     {
         //Setar textos
-        Enunciado.text = ("Identifique a fraÁ„o");
-        Detalhamento.text = ("Uma fraÁ„o aleatÛria ser· gerada. Utilize a interface da mesa para identificar qual È a fraÁ„o!");
-        //Deixar peÁas n„o usadas invisÌveis
-        // <Inserir cÛdigo aqui>
-        if (CertoX == true)
-        {
-            Questao++;
-        }
+        Enunciado.text = ("Identifique 1/2");
+        Detalhamento.text = ("Utilizando os bot√µes da interface, selecione a fra√ß√£o que representa 1/2 da unidade");
+        //Deixar pe√ßas n√£o usadas invis√≠veis
+        // <Inserir c√≥digo aqui>
     }
 
-    //Criar um mÈtodo bool que checa as condiÁıes de cada quest„o e, ser· usado simultaneamente com o Questao1() e o fracaoConfirm()
-    bool checaQ1()
+    //Criar um m√©todo bool que checa as condi√ß√µes de cada quest√£o e, ser√° usado simultaneamente com o Questao1() e o fracaoConfirm()
+    bool checaQ1() //Est√° crashando a unity
     {
-        if(NumeradorY == 1 && DenominadorY == 2) //Se o input for 1/2
+        if (ContagemEquivalencia < 5) //Se o o n√∫mero de fra√ß√µes equivalentes encontradas n√£o for == 6
         {
-            Detalhamento.text = ("Agora descubra todas as fraÁıes que equivalentes a 1/2"); //Descubra as fraÁıes equivalentes
-            int i = 0;
-            while(equivalenciaUmMeio[5] == null) //Enquanto o vetor n„o estiver cheio
+            if (RazaoY == 0.5f && pertenceAoArray(equivalenciaUmMeio, DenominadorY) == false)
             {
-                float RazaoY = (float)NumeradorY / DenominadorY;
-
-                if(RazaoY == 0.5 && pertenceAoArray(equivalenciaUmMeio, DenominadorY) == false)
-                {
-                    //Mais tarde haver· o retorno auditivo aqui
-                    Detalhamento.text = ("Agora descubra todas as fraÁıes que equivalentes a 1/2\n" + i + "de" + 6 + "Descobertas");
-
-                    equivalenciaUmMeio[i] = DenominadorY;
-                    i++;
-                }
-
+                Debug.Log("ChecandoQ1");
+                //Mais tarde haver√° o retorno auditivo aqui
+                Detalhamento.text = ("Agora descubra todas as fra√ß√µes que equivalentes a 1/2\n" + ContagemEquivalencia + "de" + 7 + "Descobertas");
+                Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
+                equivalenciaUmMeio[ContagemEquivalencia] = DenominadorY;
+                ContagemEquivalencia++;
             }
-            Detalhamento.text = ("Muito bem! Carregando a prÛxima quest„o...");
-            //Passa a quest„o? (Atualmente no mÈtodo Questao1())
-            //Pausar execuÁ„o do cÛdigo por X segundos
-            return true;
+            if (pertenceAoArray(equivalenciaUmMeio, 2) == true)
+            {
+                Detalhamento.text = ("Agora descubra todas as fra√ß√µes que equivalentes a 1/2");
+            }
         }
         else
         {
-            return false;
+            Detalhamento.text = ("Muito bem! Carregando a pr√≥xima quest√£o...");
+            Questao++;
+            return true;
         }
+        return false;
     }
 
-    bool pertenceAoArray(int[] equivalentes, int DenominadorY) //MÈtodo tempor·rio que eu criei pra comparar os elementos de um array
+    bool pertenceAoArray(int[] equivalentes, int DenominadorY) //M√©todo tempor√°rio que eu criei pra comparar os elementos de um array
     {
-        foreach (int i in equivalentes)
+        foreach (int valor in equivalentes)
         {
-            if (equivalentes[i] == DenominadorY)
+            if (valor == DenominadorY)
             {
                 return true;
             }
@@ -341,12 +355,12 @@ public class ControleMesa : MonoBehaviour
         return false;
     }
 
-    void Questao2() //Utilizando os botıes da interface, seleciona todas as fraÁıes equivalentes a 1/3.
+    void Questao2() //Utilizando os bot√µes da interface, seleciona todas as fra√ß√µes equivalentes a 1/3.
     {
 
     }
 
-    void Questao3() //Observe o valor desconhecido gerado acima. Utilizando os botıes da interface e testando outros valores, encontre todas as fraÁıes equivalentes a este valor desconhecido.
+    void Questao3() //Observe o valor desconhecido gerado acima. Utilizando os bot√µes da interface e testando outros valores, encontre todas as fra√ß√µes equivalentes a este valor desconhecido.
     {
 
     }
