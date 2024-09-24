@@ -95,14 +95,17 @@ public class ControleMesa : MonoBehaviour
 
         ViewFracao(); //Atualiza a fração no display a cada frame
 
-        GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações 
-
         //if(Certo != CertoX)
         //{
         //    Aleatoria(FracaoInteiraQuestao); //Se a resposta se tornar correta, executa a questão novamente
         //}
 
-        if(QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma questão ainda está sendo executada, estes serão iguais)
+        if (DenominadorX != Denominador || NumeradorX != Numerador) //Se houverem mudanças no numerador ou denominador o método é executado
+        {
+            GeraFracao(FracaoInteira, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações 
+        }
+
+        if (QuestaoAnt != Questao) //Devem ser distintos para executar (Se uma questão ainda está sendo executada, estes serão iguais)
         {
             Debug.Log("Atualmente executando a questao " + Questao);
             QuestaoAnt = Questao;
@@ -194,46 +197,43 @@ public class ControleMesa : MonoBehaviour
     }
 
     void GeraFracao(GameObject Inteira, GameObject[] pecasGeradas, int Numerador, int Denominador)//Considerando inputs do usuário que vão até 12, gerar múltiplas (com base no numerador) peças do tamanho Inteira/Denominador.
-    {//A geração das frações não está relativa à mesa no eixo X --> arrumar
-        if (DenominadorX != Denominador || NumeradorX != Numerador) //Caso haja mudanças no numerador, ou denominador, o código é executado.
+    {
+        ResetaFracao(pecasGeradas);
+
+        Vector3 PosicaoOriginal = Inteira.transform.localPosition; //Armazena a posição da peça inteira
+        Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //Armazena a escala da peça inteira
+        Quaternion MesaAngulo = Inteira.transform.rotation; //Armazena a rotação da peça original
+
+        float TamXPeca = EscalaOriginal.x / Denominador; //É calculado o tamanho das peças que serão geradas com base no denominador
+
+        for (int i = 0; i < Numerador; i++) //Iniciando em zero, gera as peças com base no numerador
         {
-            ResetaFracao(pecasGeradas);
+            Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z); //Pega a posição da peça inteira
+            Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça variável
 
-            Vector3 PosicaoOriginal = Inteira.transform.localPosition; //PosiçãoOriginal em relação a peça maior
-            Vector3 EscalaOriginal = FracaoVariavel.transform.localScale; //EscalaOriginal por si só!!!!
-            Quaternion MesaAngulo = Inteira.transform.rotation;
+            NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //Cálculo da posição da peça i
 
-            float TamXPeca = EscalaOriginal.x / Denominador;
+            GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peças em posições diferentes
+                                                                                                           //                                 Prefab       , Position   , Rotation           , Parenting
 
-            for (int i = 0; i < Numerador; i++) //Iniciando em zero, gera as peças com base no numerador
-            {
-                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z); //Pega a posição da peça inteira
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça variável
+            NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
+            novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peças
 
-                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //Cálculo da posição da peça i
+            pecasGeradas[i] = novaPeca; //Armazena as "peças geradas em um array, possibilitando excluí-las depois
+        }
+        for (int i = Numerador; i < Denominador; i++) //Iniciando no numerador, gera as peças "vazias" com base no denominador
+        {
+            Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
+            Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça que será modificada
 
-                GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peças em posições diferentes
-                //                                 Prefab       , Position   , Rotation           , Parenting
+            NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
 
-                NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
-                novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peças
+            GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform); //Gera a nova peça
 
-                pecasGeradas[i] = novaPeca; //Armazena as peças geradas em um array, possibilitando excluí-las depois
-            }
-            for(int i = Numerador; i < Denominador; i++) //Iniciando no numerador, gera as peças "vazias" com base no denominador
-            {
-                Vector3 NovaPosicao = new Vector3(Inteira.transform.position.x, Inteira.transform.position.y, Inteira.transform.position.z);
-                Vector3 NovaEscala = FracaoVariavel.transform.localScale; //Pega a escala da peça que será modificada
-                
-                NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0);
-                
-                GameObject novaPeca = Instantiate(ParteVazia, NovaPosicao, MesaAngulo, Inteira.transform); //Gera a nova peça
+            NovaEscala.x = TamXPeca; //Ajusta o X do Vector3 (Posição) da peça
+            novaPeca.transform.localScale = NovaEscala; //Define a escala da peça que será modificada para a nova escala
 
-                NovaEscala.x = TamXPeca; //Ajusta o X do Vector3 (Posição) da peça
-                novaPeca.transform.localScale = NovaEscala; //Define a escala da peça que será modificada para a nova escala
-
-                pecasGeradas[i] = novaPeca; //Armazena as peças geradas em um array, possibilitando excluí-las depois
-            }
+            pecasGeradas[i] = novaPeca; //Armazena as peças geradas em um array, possibilitando excluí-las depois
         }
         //Numerador e Denominador em um momento anterior
         NumeradorX = Numerador; //Armazena o valor do numerador no fim da execução
@@ -262,11 +262,9 @@ public class ControleMesa : MonoBehaviour
                 return checaQ1();
             case 2:
                 //Condições Q2
-                Questao++;
-                return true;
+                return checaQ2();
             case 3:
                 //Condições Q3
-                Questao++;
                 return true;
             default:
                 return false;
@@ -357,12 +355,26 @@ public class ControleMesa : MonoBehaviour
 
     void Questao2() //Utilizando os botões da interface, seleciona todas as frações equivalentes a 1/3.
     {
+        Enunciado.text = ("Identifique 1/2");
+        Detalhamento.text = ("Utilizando os botões da interface, selecione todas frações que representam 1/3 da unidade");
+    }
 
+    bool checaQ2()
+    {
+
+
+
+        return true;
     }
 
     void Questao3() //Observe o valor desconhecido gerado acima. Utilizando os botões da interface e testando outros valores, encontre todas as frações equivalentes a este valor desconhecido.
     {
 
+    }
+
+    bool checa3()
+    {
+        return true;
     }
 
 }
