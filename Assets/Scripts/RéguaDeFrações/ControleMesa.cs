@@ -214,7 +214,7 @@ public class ControleMesa : MonoBehaviour
             NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (EscalaOriginal.x / 100) + (TamXPeca / 100), 0, 0); //Cálculo da posição da peça i
 
             GameObject novaPeca = Instantiate(FracaoVariavel, NovaPosicao, MesaAngulo, Inteira.transform); //Criando peças em posições diferentes
-                                                                                                           //                                 Prefab       , Position   , Rotation           , Parenting
+            //                                 Prefab       , Position   , Rotation           , Parenting
 
             NovaEscala.x = TamXPeca; //Mudando o tamanho das peças
             novaPeca.transform.localScale = NovaEscala; //Setando o tamanho das peças
@@ -238,6 +238,21 @@ public class ControleMesa : MonoBehaviour
         //Numerador e Denominador em um momento anterior
         NumeradorX = Numerador; //Armazena o valor do numerador no fim da execução
         DenominadorX = Denominador; //Armazena o valor do numerador no fim da execução
+    }
+
+    void geraRegua()
+    {
+        GameObject[] temp = new GameObject[12];
+
+        Vector3 Posicao = FracaoInteira.transform.localPosition;
+        Vector3 Escala = FracaoInteira.transform.localScale;
+        Quaternion Angulo = FracaoInteira.transform.rotation;
+
+        //Posicao = Posicao + ParteVazia.
+
+        GameObject pecaReferencia = Instantiate(ParteVazia, Posicao, Angulo, FracaoInteira.transform);
+        //                                      Prefab    , Position, Rotation, Parenting
+        GeraFracao(pecaReferencia, temp, Numerador, Denominador); //FracaoInteira
     }
 
     void ResetaFracao(GameObject[] pecasGeradas)
