@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2191430915038907571}
   - component: {fileID: 620272098612008233}
   m_Layer: 0
-  m_Name: "Pe\xE7aInteira"
+  m_Name: PecaReferencia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
