@@ -7,12 +7,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Threading;
 
 /* Arquivo dos controles da mesa fracionária e das questões de frações.
  * 
  * Otimizações a serem feitas (Por ordem prioritária):
  * 1. Otimizar o uso e o nome das variáveis, que estão confusos.
- * 2. 
+ * 2. Arrumar a força bruta na geração de frações para a régua (Método duplicado)
  * 3. 
  * 
  * Bugs e defeitos:
@@ -30,12 +31,12 @@ public class ControleMesa : MonoBehaviour
 {
     public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
     public float Razao, RazaoInput, RazãoQuestão;
-    public int Numerador, Denominador, NumeradorInicial, NumeradorAnt, DenominadorAnt, NumeradorInput, DenominadorInput, Acertos, QuestaoEmExecucao, QuestaoAnt, ContagemEquivalencia;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorAnt, DenominadorAnt, NumeradorInput, DenominadorInput, Acertos, QuestaoEmExecucao, QuestaoAnt, ContagemEquivalencia, ReguaCont;
     public bool Certo, CertoInput, confirmarDebug;
     public Vector3 Scale, Position;
-    public GameObject PartesFracao, PartesVazias, PecaReferencia, PecaReferenciaQuestao;
+    public GameObject PartesFracao, PartesVazias, PecaReferencia, PecaReferenciaQuestao, PrefabReferencia;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
-    private GameObject[] pecasGeradasInput, pecasGeradasQuestao, reguasEquivalencia;
+    private GameObject[] pecasGeradasInput, pecasGeradasQuestao, reguasEquivalencia, reguas, pecasRegua;
     private int[] equivalenciaUmMeio;
 
     //Start is called before the first frame update
@@ -63,40 +64,45 @@ public class ControleMesa : MonoBehaviour
             FracConfirm.activated.AddListener(FracaoConfirmar);
         }
 
-        //Variáveis que armazenam as frações inputs do usuário
+        //(Int) Variáveis que armazenam as frações inputs do usuário
         NumeradorInput = 1;
         DenominadorInput = 1;
 
-        //Contagem de quantas equivalências já foram encontradas pelo usuário
+        //(Int) Contagem de quantas equivalências já foram encontradas pelo usuário
         ContagemEquivalencia = 0;
 
-        //Usado nas questões aleatórias (Não sei o quão necessário é)
+        //(Int) Usado nas questões aleatórias (Não sei o quão necessário é)
         NumeradorInicial = 1;
 
-        //Variáveis que acompanham o valor do numerador, denominador e a razão na medida em que são alterados pelo usuário
+        //(Int e Float) Variáveis que acompanham o valor do numerador, denominador e a razão na medida em que são alterados pelo usuário
         Numerador = 1;
         Denominador = 1;
         RazãoQuestão = 1f;
 
-        //Contadores da questao que está sendo executada e a "anterior" --> Devem ser inicializadas diferentes e serão igualadas durante a execução de uma questão
+        //(Int) Contadores da questao que está sendo executada e a "anterior" --> Devem ser inicializadas diferentes e serão igualadas durante a execução de uma questão
         QuestaoEmExecucao = 1;
         QuestaoAnt = 0;
 
-        //Arrays que armazenam as equivalencias, as peças de cada fração gerada e cada regua gerada, respectivamente
-        equivalenciaUmMeio = new int[5];
+        //(Arrays) Arrays que armazenam as equivalencias, as peças de cada fração gerada e cada regua gerada, respectivamente
+        equivalenciaUmMeio = new int[6];
         pecasGeradasInput = new GameObject[12];
         pecasGeradasQuestao = new GameObject[12];
         reguasEquivalencia = new GameObject[12];
+        reguas = new GameObject[12];
+        pecasRegua = new GameObject[100];
 
-        //Variável 
+        //(Booleanos) Variáveis checadoras do input e variável usada para executar o FracaoConfirmarDebug();
         Certo = false;
         CertoInput = false;
+        confirmarDebug = false;
 
-        confirmarDebug = false; //Variável utilizada para testar as entradas sem o VR conectado
+        //(Int) Contador das réguas geradas
+        int ReguaCont = 0;
 
-        //Contador dos acertos
+        //(Int) Contador dos acertos
         Acertos = 0;
 
+        //(Float) Razao do Input
         RazaoInput = 1f;
 
         //Inicializa a geração das 
@@ -229,6 +235,7 @@ public class ControleMesa : MonoBehaviour
 
         //Variável armazena o valor booleando de checaResultado(). Checa se o input do usuário está correto
         CertoInput = checaResultado();
+
         Debug.Log("Fração Confirmada pelo Debug: " + CertoInput);
     }
 
@@ -308,42 +315,103 @@ public class ControleMesa : MonoBehaviour
         DenominadorAnt = Denominador;
     }
 
-    void geraRegua(int i)
+    void GeraFracaoParaRegua(GameObject PecaReferencia, GameObject[] pecasGeradas, int Numerador, int Denominador)
+    {
+        //Armazena a posição, escala e a rotação da peça inteira, respectivamente.
+        Vector3 PosicaoReferencia = PecaReferencia.transform.localPosition;
+        Vector3 TamanhoOriginalPartes = PartesFracao.transform.localScale;
+        Quaternion RotacaoReferencia = PecaReferencia.transform.rotation;
+
+        //Calcula o tamanho das partes da fração
+        float TamXPeca = TamanhoOriginalPartes.x / Denominador;
+
+        //Iniciando em zero, gera as peças com base no numerador
+        for (int i = 0; i < Numerador; i++)
+        {
+            //Pega a posição da peça inteira
+            Vector3 NovaPosicao = new Vector3(PecaReferencia.transform.position.x, PecaReferencia.transform.position.y, PecaReferencia.transform.position.z);
+            //Pega o tamanho da peça variável
+            Vector3 NovoTamanho = PartesFracao.transform.localScale;
+
+            //Cálculo da posição da peça i ((ComprimentoAjustado * pecasGeradas)/2) - ComprimentoOriginal + ComprimentoAjustado)
+            NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (TamanhoOriginalPartes.x / 100) + (TamXPeca / 100), 0, 0);
+
+            //Criando peças em posições diferentes (Instantiate(Prefab, Position, Rotation, Parenting))
+            GameObject novaPeca = Instantiate(PartesFracao, NovaPosicao, RotacaoReferencia, PecaReferencia.transform);
+
+            //Mudando o tamanho das peças
+            NovoTamanho.x = TamXPeca;
+            //Setando o tamanho das peças
+            novaPeca.transform.localScale = NovoTamanho;
+
+            //Armazena as peças geradas em um array, possibilitando excluí-las depois
+            pecasGeradas[i] = novaPeca;
+        }
+        //Iniciando no numerador, gera as peças "vazias" com base no denominador
+        for (int i = Numerador; i < Denominador; i++)
+        {
+            //Vector3 da posição que será definida (é inicializado com a posição da peça inteira)
+            Vector3 NovaPosicao = new Vector3(PecaReferencia.transform.position.x, PecaReferencia.transform.position.y, PecaReferencia.transform.position.z);
+            //Vector3 que armazena a escala da peça que vamos modificar
+            Vector3 NovoTamanho = PartesFracao.transform.localScale;
+
+            //Calcula a posição da próxima peça a ser gerada (Comprimento ajustado de uma peça vezes a quantidade de peças já geradas dividido por 2, menos o comprimento original, mais o comprimento ajustado)
+            NovaPosicao = NovaPosicao + new Vector3((TamXPeca * i) / 50 - (TamanhoOriginalPartes.x / 100) + (TamXPeca / 100), 0, 0); // ((ComprimentoAjustado * pecasGeradas)/2) - ComprimentoOriginal + ComprimentoAjustado)
+
+            //Criando peças em posições diferentes (Instantiate(Prefab, Position, Rotation, Parenting))
+            GameObject novaPeca = Instantiate(PartesVazias, NovaPosicao, RotacaoReferencia, PecaReferencia.transform);
+
+            //Ajusta o X do Vector3 (Posição) da peça
+            NovoTamanho.x = TamXPeca;
+            //Define a escala da peça que será modificada para a nova escala
+            novaPeca.transform.localScale = NovoTamanho;
+
+            //Armazena as peças geradas em um array, possibilitando excluí-las depois
+            pecasGeradas[i] = novaPeca;
+        }
+
+        //Armazena o valor do numerador no fim da execução
+        NumeradorAnt = Numerador;
+        //Armazena o valor do denominador no fim da execução
+        DenominadorAnt = Denominador;
+    }
+
+    void geraRegua(int i, int Numerador, int Denominador)
     {
         //Armazena a posicao, tamanho e orientacao(rotacao) da peca de referencia e o tamanho original do prefab das partes, respectivamente
-        Vector3 Posicao = PecaReferenciaQuestao.transform.localPosition;
-        Vector3 Escala = PecaReferenciaQuestao.transform.localScale;
+        Vector3 Posicao = new Vector3(0, 0, 0);
+        Vector3 Escala = new Vector3(1, 1, 1);
         Quaternion Angulo = PecaReferenciaQuestao.transform.rotation;
-        Vector3 TamanhoOriginalPartes = PartesFracao.transform.localScale;
+        Vector3 TamanhoOriginalPartes = PrefabReferencia.transform.localScale;
 
+        //Variavel que armazena a altura das pecas e a posicao de referencia
         float Altura = TamanhoOriginalPartes.y;
-        //Tenho que saber a altura das peças e a posição de referência
+        Debug.Log("TamanhoOriginalPartes.y: " + TamanhoOriginalPartes.y);
 
-        //A nova posicao é inicializada a posicao da peca de referencia
+        //A nova posicao e inicializada a posicao da peca de referencia
         Vector3 NovaPosicao = Posicao;
 
-        //Evita que NovaPosicao.y assuma um valor nulo quando i == 0;
-        if(i == 0)
-        {
-            //A nova posição se manterá inalterada
-            NovaPosicao = Posicao;
-        }
-        else
-        {
-            //A altura da posicao é ajustada
-            NovaPosicao.y = Altura * i;
-        }
+        //Calcula a altura de onde a peca sera gerada
+        NovaPosicao.y = 1 * (i - 1);
+        Debug.Log("NovaPosicao: " + NovaPosicao);
 
-        //Criando a nova peça de referencia(Instantiate(Prefab, Position, Rotation, Parenting))
-        GameObject pecaReferencia = Instantiate(PartesVazias, NovaPosicao, Angulo, PecaReferencia.transform);
+        //ReguaCont;
 
-        //Matriz de GameObjects (Cada peça de referência terá as suas peças de geração) -----> É realmente necessário?
-        //GameObject[][] = new PecasReferencia[12][12];
+        //Criando a nova peça de referencia(Instantiate(Prefab, Position, Rotation, Parenting)) --> Alguma coisa errada na posicao em que esta sendo gerada
+        Debug.Log("Posicao: " + NovaPosicao + "\nAngulo: " + Angulo);
+        GameObject pecaReferencia = Instantiate(PrefabReferencia, NovaPosicao, Angulo, PecaReferenciaQuestao.transform);
+        Debug.Log("Criando nova peça de referência");
 
-        //PecasReferencia[i, 0] = pecaReferencia
+        //Seta o tamanho e a posicao da peça de referencia 
+        pecaReferencia.transform.localScale = Escala;
+        pecaReferencia.transform.localPosition = NovaPosicao;
 
-        //Gera uma fracao na peca de referência
-        GeraFracao(pecaReferencia, reguasEquivalencia, Numerador, Denominador);
+        //Armazena a peça de referencia gerada no vetor reguas
+        reguas[i] = pecaReferencia;
+        Debug.Log("Reguas: " + reguas[i]);
+
+        //Gera a fracao de forma relativa a peca de referencia
+        GeraFracaoParaRegua(pecaReferencia, pecasRegua, Numerador, Denominador);
     }
 
     void ResetaFracao(GameObject[] pecasGeradas)
@@ -454,32 +522,44 @@ public class ControleMesa : MonoBehaviour
     //Método bool que checa as condições da questão 1
     bool checaQ1()
     {
-        //Atualmente não há checagem para valores iniciais diferentes de um meio (arrumar)
-
         //Se o o número de frações equivalentes encontradas não for == 6
         if (ContagemEquivalencia < 5)
         {
-            //Se a RazaoInput (da fração Input do usuário) for igual a 0.5 e não pertence ao array
-            if (RazaoInput == 0.5f && pertenceAoArray(equivalenciaUmMeio, DenominadorInput) == false)
+            //Se 1/2 não foi inserido
+            if (RazaoInput == 0.5f && pertenceAoArray(equivalenciaUmMeio, 2) == false && DenominadorInput == 2)
             {
-                //Seta o texto do enunciado e mostra quantas frações faltam
-                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + "de" + 6 + "Descobertas");
-                Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
-
-                //Sinaliza no console que a questão está sendo checada
-                Debug.Log("ChecandoQ1");
-
-                //Armazena o denominador da fração definida pelo usuário no array
                 equivalenciaUmMeio[ContagemEquivalencia] = DenominadorInput;
-
-                //Passa para o próximo index do array
+                geraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
                 ContagemEquivalencia++;
             }
-            //Se alguma das frações inseridas for equivalente a um meio
+            //Se 1/2 já foi inserido
             if (pertenceAoArray(equivalenciaUmMeio, 2) == true)
             {
                 Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2");
+
+                //Se a RazaoInput (da fração Input do usuário) for igual a 0.5 e não pertence ao array
+                if (RazaoInput == 0.5f && pertenceAoArray(equivalenciaUmMeio, DenominadorInput) == false)
+                {
+                    //Seta o texto do enunciado e mostra quantas frações faltam
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + "de" + 6 + "Descobertas");
+                    Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
+
+                    //Sinaliza no console que a questão está sendo checada
+                    Debug.Log("ChecandoQ1");
+
+                    //Armazena o denominador da fração definida pelo usuário no array
+                    equivalenciaUmMeio[ContagemEquivalencia] = DenominadorInput;
+
+                    //Passa para o próximo index do array
+                    ContagemEquivalencia++;
+
+                    //Gera a regua inserida
+                    geraRegua(ContagemEquivalencia, NumeradorInput, DenominadorInput);
+                    //ReguaCont++;
+
+                }
             }
+
         }
         //Se o número de equivalências inseridos no vetor for igual a 6 (Todas as equivalências de um meio)
         else
@@ -487,8 +567,13 @@ public class ControleMesa : MonoBehaviour
             //Retorna ao usuário que a próxima questão será executada
             Detalhamento.text = ("Muito bem! Carregando a próxima questão...");
 
+            //Encontrar algum jeito de pausar a execução por 10 ou 15 segundos (Provavelmente pedir para apertar o botão de confirmar para continuar)
+
             //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
             QuestaoEmExecucao++;
+
+            //Deleta a régua fracionária gerada
+            ResetaFracao(pecasRegua);
 
             //Retorna verdadeiro
             return true;
@@ -515,7 +600,10 @@ public class ControleMesa : MonoBehaviour
     //Método que seta o ambiente para a questão 2
     void Questao2()
     {
-        Enunciado.text = ("Identifique 1/2");
+        //Limpa o vetor da regua
+        ResetaFracao(reguas);
+
+        Enunciado.text = ("Identifique 1/3");
         Detalhamento.text = ("Utilizando os botões da interface, selecione todas frações que representam 1/3 da unidade");
     }
 
