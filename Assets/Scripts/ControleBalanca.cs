@@ -108,11 +108,8 @@ public class ControleBalanca : MonoBehaviour
         suporteDireita.SetPositionAndRotation(pontoDireitaPosition.position, Quaternion.identity);
 
         // Agora garantir que os pratos fiquem sempre alinhados horizontalmente
-        pratoEsquerda.position = suporteEsquerda.position; // Garantir que o prato segue o suporte
-        pratoEsquerda.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward); // Alinhar horizontalmente
-
-        pratoDireita.position = suporteDireita.position; // Garantir que o prato segue o suporte
-        pratoDireita.rotation = Quaternion.LookRotation(Vector3.up, Vector3.forward); // Alinhar horizontalmente
+        pratoEsquerda.SetPositionAndRotation(suporteEsquerda.position, Quaternion.LookRotation(Vector3.up, Vector3.forward));
+        pratoDireita.SetPositionAndRotation(suporteDireita.position, Quaternion.LookRotation(Vector3.up, Vector3.forward));
     }
 
 }
