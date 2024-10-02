@@ -34,12 +34,10 @@ public class ControleMesa : MonoBehaviour
     public float Razao, RazaoInput, RazaoQuestao;
     public int Numerador, Denominador, NumeradorInicial, NumeradorAnt, DenominadorAnt, NumeradorInput, DenominadorInput, Acertos, QuestaoEmExecucao, QuestaoAnt, ContagemEquivalencia, ReguaCont;
     public bool Certo, CertoInput, confirmarDebug;
-    public Vector3 Scale, Position;
     public GameObject PartesFracao, PartesVazias, PecaReferencia, PecaReferenciaQuestao, PrefabReferencia;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
     private GameObject[] pecasGeradasInput, pecasGeradasQuestao, reguasEquivalencia, reguas, pecasRegua;
     private int[] equivalencias, zerado;
-    private Renderer RenderReferenciaQuestao;
 
     //Start is called before the first frame update
     void Start()
@@ -64,12 +62,6 @@ public class ControleMesa : MonoBehaviour
         if (FracConfirm != null)
         {
             FracConfirm.activated.AddListener(FracaoConfirmar);
-        }
-
-        //(Renderer) Renderer da peca referencia das questoes
-        if(PecaReferenciaQuestao != null)
-        {
-            Renderer RenderReferenciaQuestao = PecaReferenciaQuestao.GetComponent<Renderer>();
         }
 
         //(Int) Variáveis que armazenam as frações inputs do usuário
@@ -114,30 +106,30 @@ public class ControleMesa : MonoBehaviour
         //(Float) Razao do Input
         RazaoInput = 1f;
 
-        //Inicializa a geração das 
+        //Inicializa a geração das frações
         GeraFracao(PecaReferencia, pecasGeradasInput, Numerador, Denominador);
 
-        //Aleatoria(PecaReferenciaQuestao);
+        //Inicializa o display das frações
+        ViewFracao();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //Atualiza a fração no display a cada frame
-        ViewFracao();
-
-        //if(Certo != CertoInput)
-        //{
-        //    Aleatoria(PecaReferenciaQuestao); //Se a resposta se tornar correta, executa a questão novamente
-        //}
-
-        if (DenominadorAnt != Denominador || NumeradorAnt != Numerador) //Se houverem mudanças no numerador ou denominador o método é executado
+        //Se houverem mudanças no numerador ou denominador o método é executado
+        if (DenominadorAnt != Denominador || NumeradorAnt != Numerador)
         {
+            //Atualiza a fração no display a cada frame
+            ViewFracao();
+
             //Calcula a razao dos valores fluidos
             Razao = (float)Numerador / Denominador;
+
+            //Apaga a fração (as peças geradas)
             ResetaFracao(pecasGeradasInput);
-            GeraFracao(PecaReferencia, pecasGeradasInput, Numerador, Denominador); //Função que gera as frações 
+
+            //Gera a nova fração (novas peças)
+            GeraFracao(PecaReferencia, pecasGeradasInput, Numerador, Denominador);
         }
 
         //Checa se a QuestaoEmExecucao é distinta da auxiliar QuestaoAnt (Se for, significa que o contador QuestaoEmExecucao foi incrementado)
@@ -162,13 +154,10 @@ public class ControleMesa : MonoBehaviour
                     Questao3();
                     break;
                 case 4:
-                    while(Acertos < 8)
-                    {
-                        Aleatoria(PecaReferenciaQuestao);
-                    }
+                    Aleatoria(PecaReferenciaQuestao);
                     break;
                 default:
-                    Debug.Log("Erro, valor de questão inválido");
+                    Debug.Log("Erro: Número de questão inválido");
                     QuestaoEmExecucao = 1;
                     break;
             }
@@ -238,6 +227,17 @@ public class ControleMesa : MonoBehaviour
         CertoInput = ChecaResultado();
         Debug.Log("Fração Confirmada!" + CertoInput);//É retornado pelo terminal se a resposta está correta
 
+        //Se a questao em execucao for a 4, e a sua resposta estiver correta
+        if (QuestaoEmExecucao == 4 && CertoInput)
+        {
+            //Aumentamos o número de acertos das questoes aleatorias
+            Acertos++;
+
+            //Geramos uma nova "questão" aleatória
+            Aleatoria(PecaReferenciaQuestao);
+
+        }
+
         //Ao fim, define CertoInput como falso
         CertoInput = false;
     }
@@ -252,19 +252,23 @@ public class ControleMesa : MonoBehaviour
         //Variável armazena o valor booleando de checaResultado(). Checa se o input do usuário está correto
         CertoInput = ChecaResultado();
 
+        //Se a questao em execucao for a 4, e a sua resposta estiver correta
+        if(QuestaoEmExecucao == 4 && CertoInput)
+        {
+            //Aumentamos o número de acertos das questoes aleatorias
+            Acertos++;
+
+            //Geramos uma nova "questão" aleatória
+            Aleatoria(PecaReferenciaQuestao);
+            
+        }
+
         Debug.Log("Fração Confirmada pelo Debug: " + CertoInput);
     }
 
       //=========================================================================================//=========================================================================================//
      //  Aqui se encerram as funções responsáveis por pegar o input do usuário                                                                                                             //
     //=========================================================================================//=========================================================================================//
-    
-    //Exibe a fração no painel da mesa.
-    void ViewFracao()
-    {
-        ViewNumerador.text = Numerador.ToString();
-        ViewDenominador.text = Denominador.ToString();
-    }
 
     //Método que gera as frações
     void GeraFracao(GameObject PecaReferencia, GameObject[] pecasGeradas, int Numerador, int Denominador)
@@ -391,6 +395,9 @@ public class ControleMesa : MonoBehaviour
      * -
      * -
      * 
+     * Otimizações Possíveis:
+     * - Passar grande parte da checagem para um método global, como a lógica é sempre a mesma
+     * 
      */
 
 
@@ -401,7 +408,8 @@ public class ControleMesa : MonoBehaviour
         {
             case 1:
                 //Condições Q1 --> Fração 1/2 encontrada e todas as equivalentes dentro de (1 <= Denominador <= 12)
-                return ChecaQ1();
+                //return ChecaQ1();
+                return Checa(1, 2, 6);
             case 2:
                 //Condições Q2
                 return ChecaQ2();
@@ -411,6 +419,8 @@ public class ControleMesa : MonoBehaviour
             case 4:
                 return ChecaAleatoria();
             default:
+                Debug.Log("Erro: Número de questão inválido");
+                QuestaoEmExecucao = 1;
                 return false;
 
         }
@@ -418,12 +428,18 @@ public class ControleMesa : MonoBehaviour
 
     void Aleatoria(GameObject FracaoInteira)
     {
+        //Reseta as pecas geradas
         ResetaFracao(pecasGeradasQuestao);
 
-        //RenderReferenciaQuestao.enabled = true;
+        //Limpa o vetor da regua
+        ResetaFracao(reguas);
+
+        //Reseta Numerador e Denominador
+        ResetNumDen();
 
         //Define a variável checadora como falsa
         CertoInput = false;
+
         //Seta o enunciado
         Enunciado.text = ("Identifique a fração");
         Detalhamento.text = ("Uma fração aleatória será gerada. Utilize a interface da mesa para identificar qual é a fração!");
@@ -447,6 +463,7 @@ public class ControleMesa : MonoBehaviour
 
         //Seleciona um denominador aleatório <= 4
         int Denominador = UnityEngine.Random.Range(2, DenominadorBase);
+
         //Seleciona um numerador aleatório <= denominador
         NumeradorInicial = UnityEngine.Random.Range(1, Denominador);
 
@@ -475,6 +492,9 @@ public class ControleMesa : MonoBehaviour
         //Limpa o vetor da regua (Caso esteja preenchido por algum motivo desconhecido)
         ResetaFracao(reguas);
 
+        //Reseta Numerador e Denominador
+        ResetNumDen();
+
         //Seta os enunciados
         Enunciado.text = ("Identifique 1/2");
         Detalhamento.text = ("Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade");
@@ -496,13 +516,13 @@ public class ControleMesa : MonoBehaviour
             //Se 1/2 já foi inserido
             if (PertenceAoArray(equivalencias, 2) == true)
             {
-                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2");
+                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
 
                 //Se a RazaoInput (da fração Input do usuário) for igual a 0.5 e não pertence ao array
                 if (RazaoInput == 0.5f && PertenceAoArray(equivalencias, DenominadorInput) == false)
                 {
                     //Seta o texto do enunciado e mostra quantas frações faltam
-                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + "de" + 6 + "Descobertas");
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
                     Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
 
                     //Sinaliza no console que a questão está sendo checada
@@ -513,6 +533,9 @@ public class ControleMesa : MonoBehaviour
 
                     //Passa para o próximo index do array
                     ContagemEquivalencia++;
+
+                    //Seta o texto do enunciado e mostra quantas frações faltam
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
 
                     //Gera a regua inserida
                     GeraRegua(ContagemEquivalencia, NumeradorInput, DenominadorInput);
@@ -554,25 +577,12 @@ public class ControleMesa : MonoBehaviour
         return false;
     }
 
-    //Método temporário que eu criei pra comparar os elementos de um array (Esqueci os do C# kkkkkkkkk)
-    bool PertenceAoArray(int[] equivalentes, int DenominadorY)
-    {
-        //Para cada elemento dentro do array inserido
-        foreach (int valor in equivalentes)
-        {
-            //Se o elemento do array for igual ao input do usuário, retorna verdadeiro
-            if (valor == DenominadorY)
-            {
-                return true;
-            }
-        }
-        //Se não pertence, retorna falso
-        return false;
-    }
-
     //Método que seta o ambiente para a questão 2
     void Questao2()
     {
+        //Reseta Numerador e Denominador
+        ResetNumDen();
+
         //Limpa o vetor da regua
         ResetaFracao(reguas);
 
@@ -584,21 +594,14 @@ public class ControleMesa : MonoBehaviour
     //Método bool que checa as condições da questão 2
     bool ChecaQ2() // 1/3 possuí um total de 4 equivalências (Com ele mesmo incluso) --> 1/3, 2/6, 3/9, 4/12
     {
-     //   Debug.Log("ContagemEquivalencia Q2: " + ContagemEquivalencia); // = 0
-
-     //   for(int i = 0; i < 10; i++)
-     //   {
-     //       Debug.Log("Conteúdos vetor equivalencias: " + equivalencias[i]); //Todos 0
-     //   }
+        //Guarda a razao de 1/3 para realizara comparação corretamente
+        float Terco = (float)1 / 3;
 
         //Se o o número de frações equivalentes encontradas não for == 4
         if (ContagemEquivalencia < 3)
         {
-            Debug.Log("Razao Input == 1/3:  " + (RazaoInput == 0.3333333f));
-            Debug.Log("Razao Input: " + RazaoInput);
-            Debug.Log("Razao que queremos: " + 0.3333333f);
             //Se 1/3 não foi inserido
-            if (RazaoInput == 0.3333333 && PertenceAoArray(equivalencias, 3) == false && DenominadorInput == 3)
+            if (RazaoInput == Terco && PertenceAoArray(equivalencias, 3) == false && DenominadorInput == 3)
             {
                 equivalencias[ContagemEquivalencia] = DenominadorInput;
                 GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
@@ -607,13 +610,11 @@ public class ControleMesa : MonoBehaviour
             //Se 1/3 já foi inserido
             if (PertenceAoArray(equivalencias, 3) == true)
             {
-                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3");
+                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3\n" + ContagemEquivalencia + " de " + 4 + " Descobertas");
 
                 //Se a RazaoInput (da fração Input do usuário) for igual a 0.3333333 e não pertence ao array
-                if (RazaoInput == 0.3333333f && PertenceAoArray(equivalencias, DenominadorInput) == false)
+                if (RazaoInput == Terco && PertenceAoArray(equivalencias, DenominadorInput) == false)
                 {
-                    //Seta o texto do enunciado e mostra quantas frações faltam
-                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3\n" + ContagemEquivalencia + "de" + 4 + "Descobertas");
                     Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
 
                     //Sinaliza no console que a questão está sendo checada
@@ -624,6 +625,9 @@ public class ControleMesa : MonoBehaviour
 
                     //Passa para o próximo index do array
                     ContagemEquivalencia++;
+
+                    //Seta o texto do enunciado e mostra quantas frações faltam
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3\n" + ContagemEquivalencia + " de " + 4 + " Descobertas");
 
                     //Gera a regua inserida
                     GeraRegua(ContagemEquivalencia, NumeradorInput, DenominadorInput);
@@ -668,15 +672,144 @@ public class ControleMesa : MonoBehaviour
     //Método que seta o ambiente para a questão 3
     void Questao3()
     {
+        //Reseta Numerador e Denominador
+        ResetNumDen();
+
         //Limpa o vetor da regua
         ResetaFracao(reguas);
 
         //Seta os enunciados
-        Enunciado.text = ("Identifique o valor desconhecido");
+        Enunciado.text = ("Identifique o valor");
         Detalhamento.text = ("Utilizando os botões da interface, identifique a fração do valor desconhecido gerado");
 
         //Gera a fração desconhecida na peca de referencia
         GeraFracao(PecaReferenciaQuestao, pecasGeradasQuestao, 1, 4); //Por hora colocado 1/4 --> Ver com o João o valor da questão
+    }
+
+    bool Checa(int NumeradorQuestao, int DenominadorQuestao, int NumeroDeEquivalencias)
+    {
+        //Calcula a razao da questao
+        float RazaoDaQuestao = (float) NumeradorQuestao / DenominadorQuestao;
+
+        //E possivel fazer um metodo que automaticamente retorna o numero de equivalencias, mas é realmente interessante?
+
+        if (ContagemEquivalencia < (NumeroDeEquivalencias - 1))
+        {
+            //Se a fracao da questao ainda nao foi inserida e o input for a fracao da questao
+            if (RazaoInput == RazaoDaQuestao && PertenceAoArray(equivalencias, DenominadorQuestao) == false && DenominadorInput == DenominadorQuestao)
+            {
+                //Seta o texto do enunciado e mostra quantas frações faltam
+                switch (QuestaoEmExecucao)
+                {
+                    case 1:
+                        GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
+                        Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
+                        break;
+                    case 2:
+                        GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
+                        Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3\n" + ContagemEquivalencia + " de " + 4 + " Descobertas");
+                        break;
+                    case 3:
+                        Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4\n" + ContagemEquivalencia + " de " + 3 + " Descobertas");
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        Debug.Log("Erro: Número de questão inválido");
+                        QuestaoEmExecucao = 1;
+                        break;
+                }
+                //O Denominador do Input do usuário eh armazenado no array de equivalencias descobertas
+                equivalencias[ContagemEquivalencia] = DenominadorInput;
+                ContagemEquivalencia++;
+            }
+            //Se a fracao da questao ja foi inserida
+            if (PertenceAoArray(equivalencias, DenominadorQuestao) == true)
+            {
+                //Se a RazaoInput for igual a RazaoDaQuestao e o input nao esta no vetor
+                if (RazaoInput == RazaoDaQuestao && PertenceAoArray(equivalencias, DenominadorInput) == false)
+                {
+                    //Retorna no console a contagem das equivalencias
+                    Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
+
+                    //Sinaliza no console que a questão está sendo checada
+                    Debug.Log("Checando Questão " + QuestaoEmExecucao);
+
+                    //Armazena o denominador da fração definida pelo usuário no array
+                    equivalencias[ContagemEquivalencia] = DenominadorInput;
+
+                    //Passa para o próximo index do array
+                    ContagemEquivalencia++;
+
+                    //Seta o texto do enunciado e mostra quantas fracoes faltam, com base na questao que esta sendo executada
+                    switch (QuestaoEmExecucao)
+                    {
+                        case 1:
+                            Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
+                            break;
+                        case 2:
+                            Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/3\n" + ContagemEquivalencia + " de " + 4 + " Descobertas");
+                            break;
+                        case 3:
+                            Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4\n" + ContagemEquivalencia + " de " + 3 + " Descobertas");
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            Debug.Log("Erro: Número de questão inválido");
+                            QuestaoEmExecucao = 1;
+                            break;
+                    }
+                    //Gera a regua inserida
+                    GeraRegua(ContagemEquivalencia, NumeradorInput, DenominadorInput);
+                }
+            }
+        }
+        else if (ContagemEquivalencia == NumeroDeEquivalencias)
+        {
+            //Deleta a régua fracionária gerada
+            ResetaFracao(pecasRegua);
+
+            //Reseta o array das equivalencias
+            equivalencias = zerado;
+
+            //Reseta a contagem das equivalencias
+            ContagemEquivalencia = 0;
+
+            //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
+            QuestaoEmExecucao++;
+
+            //Retorna verdadeiro
+            return true;
+        }
+        else
+        {
+            //Gera a ultima regua inserida
+            GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
+
+            //Retorna ao usuário que a questão foi resolvida e aguarda seu input para continuar.
+            switch (QuestaoEmExecucao)
+            {
+                case 1:
+                    Detalhamento.text = ("Muito bem! Você gerou a régua fracionária das equivalências de 1/2. Aperte o botão de confirmação para avançar para a próxima questão");
+                    break;
+                case 2:
+                    Detalhamento.text = ("Muito bem! Você gerou a régua fracionária das equivalências de 1/3. Aperte o botão de confirmação para avançar para a próxima questão");
+                    break;
+                case 3:
+                    Detalhamento.text = ("Muito bem! Você identificou o valor desconhecido como 1/4 e gerou todas suas equivalências. Aperte o botão de confirmação para avançar para a próxima questão");
+                    break;
+                default:
+                    Debug.Log("Erro: Número de questão inválido");
+                    QuestaoEmExecucao = 1;
+                    break;
+            }
+
+            //Passa para o próximo passo da checagem (Else if(ContagemEquivalencia == 3))
+            ContagemEquivalencia++;
+        }
+
+        return false;
     }
 
     //Método bool que checa as condições da questão 3
@@ -693,12 +826,11 @@ public class ControleMesa : MonoBehaviour
             //Se 1/4 já foi inserido
             if (PertenceAoArray(equivalencias, 4) == true)
             {
-                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4");
+                Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4\n" + ContagemEquivalencia + " de " + 3 + " Descobertas");
 
                 //Se a RazaoInput (da fração Input do usuário) for igual a 0.3333333 e não pertence ao array
                 if (RazaoInput == 0.25f && PertenceAoArray(equivalencias, DenominadorInput) == false)
                 {
-                    //Seta o texto do enunciado e mostra quantas frações faltam
                     //Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4\n" + ContagemEquivalencia + "de" + 3 + "Descobertas");
                     Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
 
@@ -711,40 +843,78 @@ public class ControleMesa : MonoBehaviour
                     //Passa para o próximo index do array
                     ContagemEquivalencia++;
 
+                    //Seta o texto do enunciado e mostra quantas frações faltam
+                    Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/4\n" + ContagemEquivalencia + " de " + 3 + " Descobertas");
+
                     //Gera a regua inserida
                     GeraRegua(ContagemEquivalencia, NumeradorInput, DenominadorInput);
 
                 }
             }
-            else if (ContagemEquivalencia == 3)
+        }
+        else if (ContagemEquivalencia == 3)
+        {
+            //Deleta a régua fracionária gerada
+            ResetaFracao(pecasRegua);
+
+            //Reseta o array das equivalencias
+            equivalencias = zerado;
+
+            //Reseta a contagem das equivalencias
+            ContagemEquivalencia = 0;
+
+            //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
+            QuestaoEmExecucao++;
+
+            //Retorna verdadeiro
+            return true;
+        }
+        else
+        {
+            //Gera a ultima regua inserida
+            GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
+
+            //Retorna ao usuário que a questão foi resolvida e aguarda seu input para continuar.
+            Detalhamento.text = ("Muito bem! Você identificou o valor desconhecido como 1/4 e gerou todas suas equivalências. Aperte o botão de confirmação para avançar para a próxima questão");
+
+            //Passa para o próximo passo da checagem (Else if(ContagemEquivalencia == 3))
+            ContagemEquivalencia++;
+        }
+
+        return false;
+    }
+
+      //=========================================================================================//=========================================================================================//
+     //  Aqui começam pequenos métodos auxiliares                                                                                                                                          //
+    //=========================================================================================//=========================================================================================//
+
+    //Exibe a fração no painel da mesa.
+    void ViewFracao()
+    {
+        ViewNumerador.text = Numerador.ToString();
+        ViewDenominador.text = Denominador.ToString();
+    }
+
+    //Método que reseta o numerador e denominador
+    void ResetNumDen()
+    {
+        Numerador = 1;
+        Denominador = 1;
+    }
+
+    //Método temporário que eu criei pra comparar os elementos de um array (Esqueci os do C# kkkkkkkkk)
+    bool PertenceAoArray(int[] equivalentes, int DenominadorY)
+    {
+        //Para cada elemento dentro do array inserido
+        foreach (int valor in equivalentes)
+        {
+            //Se o elemento do array for igual ao input do usuário, retorna verdadeiro
+            if (valor == DenominadorY)
             {
-                //Deleta a régua fracionária gerada
-                ResetaFracao(pecasRegua);
-
-                //Reseta o array das equivalencias
-                equivalencias = zerado;
-
-                //Reseta a contagem das equivalencias
-                ContagemEquivalencia = 0;
-
-                //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
-                QuestaoEmExecucao++;
-
-                //Retorna verdadeiro
                 return true;
             }
-            else
-            {
-                //Gera a ultima regua inserida
-                GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
-
-                //Retorna ao usuário que a questão foi resolvida e aguarda seu input para continuar.
-                Detalhamento.text = ("Muito bem! Você identificou o valor desconhecido como 1/4 e gerou todas suas equivalências. Aperte o botão de confirmação para avançar para a próxima questão");
-
-                //Passa para o próximo passo da checagem (Else if(ContagemEquivalencia == 3))
-                ContagemEquivalencia++;
-            }
         }
+        //Se não pertence, retorna falso
         return false;
     }
 
