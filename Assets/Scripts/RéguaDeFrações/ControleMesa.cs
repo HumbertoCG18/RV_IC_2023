@@ -19,7 +19,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
  * 
  * Bugs e defeitos:
  * - Frações são geradas apenas alinhadas ao eixo X global.
- * - Inputs pelos botões não estão funcionando com o VR.
+ * - Inputs pelos botões não estão funcionando com o VR. --> OnHoverEntered funciona, mas activated não
  * 
  * Possibilidades:
  * - Separar o sistema de questões do sistema de controle, se for mais conveniente
@@ -45,23 +45,24 @@ public class ControleMesa : MonoBehaviour
         //Aqui são adicionados Listeners aos botões, para pegar os inputs do usuário
         if (NumAdd != null)
         {
-            NumAdd.activated.AddListener(AddNumerador);
+            NumAdd.selectEntered.AddListener(AddNumerador);
         }
         if (NumDim != null)
         {
-            NumDim.activated.AddListener(DimNumerador);
+            NumDim.selectEntered.AddListener(DimNumerador);
         }
         if (DenAdd != null)
         {
-            DenAdd.activated.AddListener(AddDenominador);
+            DenAdd.selectEntered.AddListener(AddDenominador);
+            //NumAdd.selectEntered.AddListener(SelectDimDenominador);
         }
         if (DenDim != null)
         {
-            DenDim.activated.AddListener(DimDenominador);
+            DenDim.selectEntered.AddListener(DimDenominador);
         }
         if (FracConfirm != null)
         {
-            FracConfirm.activated.AddListener(FracaoConfirmar);
+            FracConfirm.selectEntered.AddListener(FracaoConfirmar);
         }
 
         //(Int) Variáveis que armazenam as frações inputs do usuário
@@ -111,6 +112,21 @@ public class ControleMesa : MonoBehaviour
 
         //Inicializa o display das frações
         ViewFracao();
+    }
+
+    void SelectDimDenominador(SelectEnterEventArgs args)
+    {
+        //O Denominador não pode ser nulo e deve ser maior que o numerador
+        if (Denominador - 1 > 0 && Denominador > Numerador)
+        {
+            Denominador--;
+        }
+        Debug.Log("DimDenominador pressionado");
+    }
+
+    private void OnHoverEntered(HoverEnterEventArgs args)
+    {
+        Debug.Log("Hover sobre o botão detectado");
     }
 
     // Update is called once per frame
@@ -177,55 +193,55 @@ public class ControleMesa : MonoBehaviour
     //=========================================================================================//=========================================================================================//
 
     //Método que acresce o numerador
-    void AddNumerador(ActivateEventArgs args)
+    void AddNumerador(SelectEnterEventArgs args)
     {
         //O numerador não deve ultrapassar o denominador, evitando frações impróprias
         if (Numerador < Denominador)
         {
             Numerador++;
-            Debug.Log("AddNumerador pressionado");
         }
+        Debug.Log("AddNumerador pressionado");
     }
     //Método que decresce o numerador
-    void DimNumerador(ActivateEventArgs args)
+    void DimNumerador(SelectEnterEventArgs args)
     {
         //O numerador não pode ser nulo --> não decresce, caso o (valor - 1) seja menor que 0
         if (Numerador - 1 > 0)
         {
             Numerador--;
-            Debug.Log("DimNumerador pressionado");
         }
+        Debug.Log("DimNumerador pressionado");
     }
     //Método que decresce o denominador
-    void DimDenominador(ActivateEventArgs args)
+    void DimDenominador(SelectEnterEventArgs args)
     {
         //O Denominador não pode ser nulo e deve ser maior que o numerador
         if (Denominador - 1 > 0 && Denominador > Numerador)
         {
             Denominador--;
-            Debug.Log("DimDenominador pressionado");
         }
+        Debug.Log("DimDenominador pressionado");
     }
     //Método que acresce o denominador
-    void AddDenominador(ActivateEventArgs args)
+    void AddDenominador(SelectEnterEventArgs args)
     {
         //O denominador deve ser maior que 0 e ter o valor máximo de 12
         if (Denominador > 0 && Denominador < 12)
         {
             Denominador++;
-            Debug.Log("AddDenominador pressionado");
         }
+        Debug.Log("AddDenominador pressionado");
     }
     //Método que confirma os valores pre-definidos
-    void FracaoConfirmar(ActivateEventArgs args)
+    void FracaoConfirmar(SelectEnterEventArgs args)
     {
-        //Define o Numerador e Denominador de Input com o valor do Numerador e Denominador "fluido"
+        //Define os valores de input como os valores fluidos (É como tirar um print do valores inseridos)
         DenominadorInput = Denominador;
         NumeradorInput = Numerador;
+        RazaoInput = Razao;
 
-        //Variável assume o valor booleano de checaResultado();
+        //Variável armazena o valor booleando de checaResultado(). Checa se o input do usuário está correto
         CertoInput = ChecaResultado();
-        Debug.Log("Fração Confirmada!" + CertoInput);//É retornado pelo terminal se a resposta está correta
 
         //Se a questao em execucao for a 4, e a sua resposta estiver correta
         if (QuestaoEmExecucao == 4 && CertoInput)
@@ -238,8 +254,7 @@ public class ControleMesa : MonoBehaviour
 
         }
 
-        //Ao fim, define CertoInput como falso
-        CertoInput = false;
+        Debug.Log("Fração Confirmada pelo Debug: " + CertoInput);   
     }
     //Método de confirmação para Debug (Sem o VR Conectado, ou em falha do sistema de input)
     void FracaoConfirmarDebug()
@@ -392,7 +407,7 @@ public class ControleMesa : MonoBehaviour
      * 
      * Defeitos e Bugs:
      * - checaQ1(), deve primeiro checar se o primeiro input é um meio e só depois armazenar as equivalências
-     * -
+     * - Bugs na checagem das equivalências (Razões retornando como diferentes)
      * -
      * 
      * Otimizações Possíveis:
