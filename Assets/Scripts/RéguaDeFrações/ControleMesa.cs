@@ -32,7 +32,7 @@ public class ControleMesa : MonoBehaviour
 {
     public XRBaseInteractable NumAdd, NumDim, DenAdd, DenDim, FracConfirm;
     public float Razao, RazaoInput, RazaoQuestao;
-    public int Numerador, Denominador, NumeradorInicial, NumeradorAnt, DenominadorAnt, NumeradorInput, DenominadorInput, Acertos, QuestaoEmExecucao, QuestaoAnt, ContagemEquivalencia, ReguaCont;
+    public int Numerador, Denominador, NumeradorInicial, NumeradorAnt, DenominadorAnt, NumeradorInput, DenominadorInput, AcertosAleatoria, QuestaoEmExecucao, QuestaoAnt, ContagemEquivalencia, ReguaCont;
     public bool Certo, CertoInput, confirmarDebug;
     public GameObject PartesFracao, PartesVazias, PecaReferencia, PecaReferenciaQuestao, PrefabReferencia;
     public TMP_Text ViewNumerador, ViewDenominador, Enunciado, Detalhamento;
@@ -101,8 +101,8 @@ public class ControleMesa : MonoBehaviour
         //(Int) Contador das réguas geradas
         int ReguaCont = 0;
 
-        //(Int) Contador dos acertos
-        Acertos = 0;
+        //(Int) Contador dos acertos das questoes aleatorias
+        AcertosAleatoria = 0;
 
         //(Float) Razao do Input
         RazaoInput = 1f;
@@ -247,7 +247,7 @@ public class ControleMesa : MonoBehaviour
         if (QuestaoEmExecucao == 4 && CertoInput)
         {
             //Aumentamos o número de acertos das questoes aleatorias
-            Acertos++;
+            AcertosAleatoria++;
 
             //Geramos uma nova "questão" aleatória
             Aleatoria(PecaReferenciaQuestao);
@@ -271,7 +271,7 @@ public class ControleMesa : MonoBehaviour
         if(QuestaoEmExecucao == 4 && CertoInput)
         {
             //Aumentamos o número de acertos das questoes aleatorias
-            Acertos++;
+            AcertosAleatoria++;
 
             //Geramos uma nova "questão" aleatória
             Aleatoria(PecaReferenciaQuestao);
@@ -378,12 +378,16 @@ public class ControleMesa : MonoBehaviour
         GeraFracao(pecaReferencia, pecasRegua, Numerador, Denominador);
     }
 
+    //Método auxiliar que apaga as peças presentes em um array de objetos
     void ResetaFracao(GameObject[] pecasGeradas)
     {
+        //Para cade peça presente no array
         foreach(GameObject peca in pecasGeradas)
         {
+            //Se existe
             if (peca != null) 
             {
+                //Deleta a peça do mundo
                 Destroy(peca);
             }
         }
@@ -419,6 +423,7 @@ public class ControleMesa : MonoBehaviour
     //Checa se todas as condições foram cumpridas
     bool ChecaResultado()
     {
+        //Com base no contador das questoes
         switch (QuestaoEmExecucao)
         {
             case 1:
@@ -440,6 +445,7 @@ public class ControleMesa : MonoBehaviour
         }
     }
 
+    //Questões de identificação aleatórias
     void Aleatoria(GameObject FracaoInteira)
     {
         //Reseta as pecas geradas
@@ -462,13 +468,13 @@ public class ControleMesa : MonoBehaviour
         int DenominadorBase;
 
         //Define o denominador máximo com base no número de acertos
-        if(Acertos == 0)
+        if(AcertosAleatoria == 0)
         {
             DenominadorBase = 4;
         }
-        else if(Acertos > 1 && Acertos < 4)
+        else if(AcertosAleatoria > 1 && AcertosAleatoria < 4)
         {
-            DenominadorBase = 4 * Acertos;
+            DenominadorBase = 4 * AcertosAleatoria;
         }
         else
         {
@@ -491,8 +497,10 @@ public class ControleMesa : MonoBehaviour
         
     }//Talvez fazer uma função só que limita o denominador atravéz de um contador;
 
+    //Condicoes de checagem da questao aleatoria
     bool ChecaAleatoria()
     {
+        //Se a razão e o numerador for igual, retorna verdadeiro
         if(RazaoInput == RazaoQuestao && NumeradorInput == NumeradorInicial)
         {
             return true;
@@ -501,6 +509,7 @@ public class ControleMesa : MonoBehaviour
         return false;
     }
 
+    //Metodo que seta o ambiente para a questao 1
     void Questao1()
     {
         //Limpa o vetor da regua (Caso esteja preenchido por algum motivo desconhecido)
@@ -514,7 +523,7 @@ public class ControleMesa : MonoBehaviour
         Detalhamento.text = ("Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade");
     }
 
-    //Método que seta o ambiente para a questão 2
+    //Metodo que seta o ambiente para a questao 2
     void Questao2()
     {
         //Reseta Numerador e Denominador
@@ -528,7 +537,7 @@ public class ControleMesa : MonoBehaviour
         Detalhamento.text = ("Utilizando os botões da interface, selecione todas frações que representam 1/3 da unidade");
     }
 
-    //Método que seta o ambiente para a questão 3
+    //Metodo que seta o ambiente para a questao 3
     void Questao3()
     {
         //Reseta Numerador e Denominador
@@ -542,15 +551,16 @@ public class ControleMesa : MonoBehaviour
         Detalhamento.text = ("Utilizando os botões da interface, identifique a fração do valor desconhecido gerado");
 
         //Gera a fração desconhecida na peca de referencia
-        GeraFracao(PecaReferenciaQuestao, pecasGeradasQuestao, 1, 4); //Por hora colocado 1/4 --> Ver com o João o valor da questão
+        GeraFracao(PecaReferenciaQuestao, pecasGeradasQuestao, 1, 4);
     }
 
+    //Checagem geral das questoes de equivalencia
     bool ChecaQuestaoEquivalencia(int NumeradorQuestao, int DenominadorQuestao, int NumeroDeEquivalencias)
     {
         //Calcula a razao da questao
         float RazaoDaQuestao = (float) NumeradorQuestao / DenominadorQuestao;
 
-        //E possivel fazer um metodo que automaticamente retorna o numero de equivalencias, mas é realmente interessante?
+        //E possivel fazer um metodo que automaticamente retorna o numero de equivalencias, mas e realmente interessante?
 
         if (ContagemEquivalencia < (NumeroDeEquivalencias - 1))
         {
@@ -578,7 +588,7 @@ public class ControleMesa : MonoBehaviour
                         QuestaoEmExecucao = 1;
                         break;
                 }
-                //O Denominador do Input do usuário eh armazenado no array de equivalencias descobertas
+                //O Denominador do Input do usuario eh armazenado no array de equivalencias descobertas
                 equivalencias[ContagemEquivalencia] = DenominadorInput;
                 ContagemEquivalencia++;
             }
@@ -591,13 +601,13 @@ public class ControleMesa : MonoBehaviour
                     //Retorna no console a contagem das equivalencias
                     Debug.Log("ContagemEquivalencia: " + ContagemEquivalencia);
 
-                    //Sinaliza no console que a questão está sendo checada
+                    //Sinaliza no console que a questao esta sendo checada
                     Debug.Log("Checando Questão " + QuestaoEmExecucao);
 
-                    //Armazena o denominador da fração definida pelo usuário no array
+                    //Armazena o denominador da fracao definida pelo usuario no array
                     equivalencias[ContagemEquivalencia] = DenominadorInput;
 
-                    //Passa para o próximo index do array
+                    //Passa para o proximo index do array
                     ContagemEquivalencia++;
 
                     //Seta o texto do enunciado e mostra quantas fracoes faltam, com base na questao que esta sendo executada
