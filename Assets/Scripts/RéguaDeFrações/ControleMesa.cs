@@ -13,13 +13,13 @@ using System.Runtime.InteropServices.WindowsRuntime;
 /* Arquivo dos controles da mesa fracionária e das questões de frações.
  * 
  * Otimizações a serem feitas (Por ordem prioritária):
- * 1. Otimizar o uso e o nome das variáveis, que estão confusos.
+ * 1. Trocar a lógica de checagem (Em vez de comparar razões, comparar por dois arrays --> NumeradoresTerco[i] e DenominadorTerco[i])
  * 2. 
  * 3. 
  * 
  * Bugs e defeitos:
- * - Frações são geradas apenas alinhadas ao eixo X global.
- * - Inputs pelos botões não estão funcionando com o VR. --> OnHoverEntered funciona, mas activated não
+ * - Frações são geradas corretamente apenas alinhadas ao eixo X global. (Rotação (0, 0, 0))
+ *
  * 
  * Possibilidades:
  * - Separar o sistema de questões do sistema de controle, se for mais conveniente
