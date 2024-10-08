@@ -54,7 +54,6 @@ public class ControleMesa : MonoBehaviour
         if (DenAdd != null)
         {
             DenAdd.selectEntered.AddListener(AddDenominador);
-            //NumAdd.selectEntered.AddListener(SelectDimDenominador);
         }
         if (DenDim != null)
         {
@@ -79,18 +78,19 @@ public class ControleMesa : MonoBehaviour
         Numerador = 1;
         Denominador = 1;
         RazaoQuestao = 1f;
+        Razao = 1f;
 
         //(Int) Contadores da questao que está sendo executada e a "anterior" --> Devem ser inicializadas diferentes e serão igualadas durante a execução de uma questão
-        QuestaoEmExecucao = 1;
-        QuestaoAnt = 0;
+        QuestaoEmExecucao = 0;
+        QuestaoAnt = -1;
 
         //(Arrays[]) Arrays que armazenam as equivalencias, as peças de cada fração gerada e cada regua gerada, respectivamente
-        equivalencias = new int[10];
-        zerado = new int[10];
-        pecasGeradasInput = new GameObject[12];
-        pecasGeradasQuestao = new GameObject[12];
-        reguasEquivalencia = new GameObject[12];
-        reguas = new GameObject[12];
+        equivalencias = new int[15];
+        zerado = new int[15];
+        pecasGeradasInput = new GameObject[15];
+        pecasGeradasQuestao = new GameObject[15];
+        reguasEquivalencia = new GameObject[15];
+        reguas = new GameObject[15];
         pecasRegua = new GameObject[100];
 
         //(Booleanos) Variáveis checadoras do input e variável usada para executar o FracaoConfirmarDebug();
@@ -160,6 +160,9 @@ public class ControleMesa : MonoBehaviour
             //Com base no contador QuestaoEmExecucao, irá setar o ambiente para uma questão diferente
             switch (QuestaoEmExecucao)
             {
+                case 0:
+                    MontagemRegua();
+                    break;
                 case 1:
                     Questao1();
                     break;
@@ -173,8 +176,7 @@ public class ControleMesa : MonoBehaviour
                     Aleatoria(PecaReferenciaQuestao);
                     break;
                 default:
-                    Debug.Log("Erro: Número de questão inválido");
-                    QuestaoEmExecucao = 1;
+                    ErroQuestaoInvalida();
                     break;
             }
         }
@@ -398,6 +400,7 @@ public class ControleMesa : MonoBehaviour
     //=========================================================================================//=========================================================================================//
     /*
      * Questões:
+     * 0. Antes de iniciar as questões é montada a régua fracionária (Denominador máximo de 12)
      * 1. Utilizando os botões da interface, selecione a fração que representa 1/2 da unidade. Após, selecione todas as outras frações equivalentes a 1/2.
      * 2. Utilizando os botões da interface, seleciona todas as frações equivalentes a 1/3.
      * 3. Observe o valor desconhecido gerado acima. Utilizando os botões da interface e testando outros valores, encontre todas as frações equivalentes a este valor desconhecido.
@@ -406,12 +409,10 @@ public class ControleMesa : MonoBehaviour
      * Pendências por ordem prioritária:
      * 1. Implementação das questões definidas (Atravez dos metodos checaQx(); --> Resolvido
      * 2. Implementar métodos que setam as questões (Falta ativar/desativar a renderizacao da peca de referencia da questao) --> Resolvido
-     * 3. Questão3 não possuí um valor definido no enunciado (Definir com o João)
-     * 
      * 
      * Defeitos e Bugs:
      * - checaQ1(), deve primeiro checar se o primeiro input é um meio e só depois armazenar as equivalências
-     * - Bugs na checagem das equivalências (Razões retornando como diferentes)
+     * - Bugs na checagem das equivalências de 1/3 (provavelmente na comparação das razões) --> Checar de outra forma
      * -
      * 
      * Otimizações Possíveis:
@@ -426,6 +427,8 @@ public class ControleMesa : MonoBehaviour
         //Com base no contador das questoes
         switch (QuestaoEmExecucao)
         {
+            case 0:
+                return ChecaQuestaoEquivalencia(1, 1, 12);
             case 1:
                 //Condições Q1
                 return ChecaQuestaoEquivalencia(1, 2, 6);
@@ -438,8 +441,7 @@ public class ControleMesa : MonoBehaviour
             case 4:
                 return ChecaAleatoria();
             default:
-                Debug.Log("Erro: Número de questão inválido");
-                QuestaoEmExecucao = 1;
+                ErroQuestaoInvalida();
                 return false;
 
         }
@@ -509,6 +511,13 @@ public class ControleMesa : MonoBehaviour
         return false;
     }
 
+    //Metodo para a montagem da regua fracionaria, antes de iniciar as questoes
+    void MontagemRegua()
+    {
+        Enunciado.text = ("Indentifique a unidade");
+        Detalhamento.text = ("Usando os botões confirme a peça que representa a unidade");
+    }
+
     //Metodo que seta o ambiente para a questao 1
     void Questao1()
     {
@@ -564,12 +573,16 @@ public class ControleMesa : MonoBehaviour
 
         if (ContagemEquivalencia < (NumeroDeEquivalencias - 1))
         {
-            //Se a fracao da questao ainda nao foi inserida e o input for a fracao da questao
+            //Se a fracao da questao ainda nao foi inserida e o input for a fracao inicial da questao
             if (RazaoInput == RazaoDaQuestao && PertenceAoArray(equivalencias, DenominadorQuestao) == false && DenominadorInput == DenominadorQuestao)
             {
                 //Seta o texto do enunciado e mostra quantas frações faltam
                 switch (QuestaoEmExecucao)
                 {
+                    case 0:
+                        GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
+                        Detalhamento.text = ("Agora descubra todas as frações que representam a unidade");
+                        break;
                     case 1:
                         GeraRegua((ContagemEquivalencia + 1), NumeradorInput, DenominadorInput);
                         Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + 1 + " de " + 6 + " Descobertas");
@@ -584,8 +597,7 @@ public class ControleMesa : MonoBehaviour
                     case 4:
                         break;
                     default:
-                        Debug.Log("Erro: Número de questão inválido");
-                        QuestaoEmExecucao = 1;
+                        ErroQuestaoInvalida();
                         break;
                 }
                 //O Denominador do Input do usuario eh armazenado no array de equivalencias descobertas
@@ -613,6 +625,9 @@ public class ControleMesa : MonoBehaviour
                     //Seta o texto do enunciado e mostra quantas fracoes faltam, com base na questao que esta sendo executada
                     switch (QuestaoEmExecucao)
                     {
+                        case 0:
+                            Detalhamento.text = ("Agora descubra todas as frações que representam um inteiro\n" + ContagemEquivalencia + " de " + 12 + " Descobertas");
+                            break;
                         case 1:
                             Detalhamento.text = ("Agora descubra todas as frações que equivalentes a 1/2\n" + ContagemEquivalencia + " de " + 6 + " Descobertas");
                             break;
@@ -625,8 +640,7 @@ public class ControleMesa : MonoBehaviour
                         case 4:
                             break;
                         default:
-                            Debug.Log("Erro: Número de questão inválido");
-                            QuestaoEmExecucao = 1;
+                            ErroQuestaoInvalida();
                             break;
                     }
                     //Gera a regua inserida
@@ -648,6 +662,8 @@ public class ControleMesa : MonoBehaviour
             //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
             QuestaoEmExecucao++;
 
+            Debug.Log("A régua e suas peças foram deletadas com sucesso, e o contador QuestaoEmExecucao foi resetado");
+
             //Retorna verdadeiro
             return true;
         }
@@ -659,6 +675,9 @@ public class ControleMesa : MonoBehaviour
             //Retorna ao usuário que a questão foi resolvida e aguarda seu input para continuar.
             switch (QuestaoEmExecucao)
             {
+                case 0:
+                    Detalhamento.text = ("Muito bem! Você gerou a régua fracionária. Usaremos ela como referência para questões futuras!");
+                    break;
                 case 1:
                     Detalhamento.text = ("Muito bem! Você gerou a régua fracionária das equivalências de 1/2. Aperte o botão de confirmação para avançar para a próxima questão");
                     break;
@@ -669,8 +688,7 @@ public class ControleMesa : MonoBehaviour
                     Detalhamento.text = ("Muito bem! Você identificou o valor desconhecido como 1/4 e gerou todas suas equivalências. Aperte o botão de confirmação para avançar para a próxima questão");
                     break;
                 default:
-                    Debug.Log("Erro: Número de questão inválido");
-                    QuestaoEmExecucao = 1;
+                    ErroQuestaoInvalida();
                     break;
             }
 
@@ -684,6 +702,15 @@ public class ControleMesa : MonoBehaviour
       //=========================================================================================//=========================================================================================//
      //  Aqui começam pequenos métodos auxiliares                                                                                                                                          //
     //=========================================================================================//=========================================================================================//
+
+    //Caso a questão em execução seja inválida, 
+    void ErroQuestaoInvalida()
+    {
+        ResetaFracao(pecasRegua);
+        equivalencias = zerado;
+        QuestaoEmExecucao = 0;
+        Debug.Log("Erro: Número de questão inválido");
+    }
 
     //Exibe a fração no painel da mesa.
     void ViewFracao()
