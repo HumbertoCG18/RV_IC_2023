@@ -1,5 +1,6 @@
 //Fazer de alguma maneira, que o prato e o suporte sempre fiquem a 90 graus, mesmo quando é aplicada uma angulação a haste, pois, caso isso não ocorra, o peso cairá do prato
-    // Pode se pensar na possibilidade do uso de attatchs points? (Não seria o ideal, mas funcionaria)
+ // Pode se pensar na possibilidade do uso de attatchs points? (Não seria o ideal, mas funcionaria)
+ // Fazer com que o Box Collider siga o objeto na cena; 
 
 using UnityEngine;
 
