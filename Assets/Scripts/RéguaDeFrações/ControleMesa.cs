@@ -132,6 +132,7 @@ public class ControleMesa : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Se houverem mudanças no numerador ou denominador o método é executado
         if (DenominadorAnt != Denominador || NumeradorAnt != Numerador)
         {
@@ -280,7 +281,7 @@ public class ControleMesa : MonoBehaviour
             
         }
 
-        Debug.Log("Fração Confirmada pelo Debug: " + CertoInput);
+        //Debug.Log("Fração Confirmada pelo Debug: " + CertoInput);
     }
 
       //=========================================================================================//=========================================================================================//
@@ -564,7 +565,7 @@ public class ControleMesa : MonoBehaviour
     }
 
     //Checagem geral das questoes de equivalencia
-    bool ChecaQuestaoEquivalencia(int NumeradorQuestao, int DenominadorQuestao, int NumeroDeEquivalencias)
+    bool ChecaQuestaoEquivalencia(int NumeradorQuestao, int DenominadorQuestao, int NumeroDeEquivalencias) //(1, 3, 4)
     {
         //Calcula a razao da questao
         float RazaoDaQuestao = (float) NumeradorQuestao / DenominadorQuestao;
@@ -607,6 +608,14 @@ public class ControleMesa : MonoBehaviour
             //Se a fracao da questao ja foi inserida
             if (PertenceAoArray(equivalencias, DenominadorQuestao) == true)
             {
+                Debug.Log("RazaoInput: " + RazaoInput + "\nRazaoDaQuestao: " + RazaoDaQuestao);
+                Debug.Log("RazaoInput = RazaoDaQuestao: " + (RazaoInput == RazaoDaQuestao));
+
+                for(int i = 0; i < equivalencias.Length - 1; i++)
+                {
+                    Debug.Log("Equivalências " + i + ": " +  equivalencias[i]);
+                }
+
                 //Se a RazaoInput for igual a RazaoDaQuestao e o input nao esta no vetor
                 if (RazaoInput == RazaoDaQuestao && PertenceAoArray(equivalencias, DenominadorInput) == false)
                 {
@@ -650,14 +659,8 @@ public class ControleMesa : MonoBehaviour
         }
         else if (ContagemEquivalencia == NumeroDeEquivalencias)
         {
-            //Deleta a régua fracionária gerada
-            ResetaFracao(pecasRegua);
-
-            //Reseta o array das equivalencias
-            equivalencias = zerado;
-
-            //Reseta a contagem das equivalencias
-            ContagemEquivalencia = 0;
+            //Deleta a regua gerada e reseta o array e a contagem das equivalencias
+            ResetaQuestao();
 
             //Incrementa o contador QuestaoEmExecucao (Passa para a próxima questão)
             QuestaoEmExecucao++;
@@ -706,10 +709,19 @@ public class ControleMesa : MonoBehaviour
     //Caso a questão em execução seja inválida, 
     void ErroQuestaoInvalida()
     {
-        ResetaFracao(pecasRegua);
-        equivalencias = zerado;
+        ResetaQuestao();
         QuestaoEmExecucao = 0;
         Debug.Log("Erro: Número de questão inválido");
+    }
+
+    void ResetaQuestao()
+    {
+        //int[] arrayZerado = new int[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        //int[] arrayZerado = new int[15];
+        ResetaFracao(pecasRegua);
+        equivalencias = new int[15];
+        ContagemEquivalencia = 0;
+        Debug.Log("Questão resetada!");
     }
 
     //Exibe a fração no painel da mesa.
