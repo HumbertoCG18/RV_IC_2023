@@ -1,13 +1,9 @@
-//Fazer de alguma maneira, que o prato e o suporte sempre fiquem a 90 graus, mesmo quando é aplicada uma angulação a haste, pois, caso isso não ocorra, o peso cairá do prato
- // Pode se pensar na possibilidade do uso de attatchs points? (Não seria o ideal, mas funcionaria)
- // Fazer com que o Box Collider siga o objeto na cena; 
-
 using UnityEngine;
 
 public class ControleBalanca : MonoBehaviour
 {
-    public Transform pontoEsquerdaPosition;
-    public Transform pontoDireitaPosition;
+    public Transform pontoEsquerda;
+    public Transform pontoDireita;
     public Transform meioHaste;
     public Transform meioBase;
     public Transform suporteEsquerda;
@@ -31,12 +27,12 @@ public class ControleBalanca : MonoBehaviour
 
     void Update()
     {
-
+        // Atualizar posições e rotações dos suportes e pratos
         AtualizarPosicaoSuportesEPratos();
 
         // Calcular a diferença de peso entre os pratos
-        float pesoEsquerda = pratoEsquerda.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda);
-        float pesoDireita = pratoDireita.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
+        float pesoEsquerda = pontoEsquerda.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Esquerda);
+        float pesoDireita = pontoDireita.GetComponent<PlacaBalanca>().GetPesoPrato(PlacaBalanca.PratoSelecionado.Direita);
         float diferencaPeso = pesoDireita - pesoEsquerda;
 
         // Ajustar o ângulo da haste com base na diferença de peso
@@ -101,16 +97,40 @@ public class ControleBalanca : MonoBehaviour
         hasteAB.xDrive = drive;
     }
 
-
     void AtualizarPosicaoSuportesEPratos()
     {
-        // Atualizar posição dos suportes para coincidir com os pontos virtuais
-        suporteEsquerda.SetPositionAndRotation(pontoEsquerdaPosition.position, Quaternion.identity);
-        suporteDireita.SetPositionAndRotation(pontoDireitaPosition.position, Quaternion.identity);
+        // Atualizar posições dos suportes com base na posição e rotação da haste
+        Vector3 esquerdaPosicao = haste.TransformPoint(haste.InverseTransformPoint(pontoEsquerda.position));
+        Vector3 direitaPosicao = haste.TransformPoint(haste.InverseTransformPoint(pontoDireita.position));
 
-        // Agora garantir que os pratos fiquem sempre alinhados horizontalmente
-        pratoEsquerda.SetPositionAndRotation(suporteEsquerda.position, Quaternion.LookRotation(Vector3.up, Vector3.forward));
-        pratoDireita.SetPositionAndRotation(suporteDireita.position, Quaternion.LookRotation(Vector3.up, Vector3.forward));
+        suporteEsquerda.position = esquerdaPosicao;
+        suporteDireita.position = direitaPosicao;
+
+        // Manter a rotação dos suportes em (0, 0, 0)
+        suporteEsquerda.rotation = Quaternion.Euler(0f, 0f, 0f);
+        suporteDireita.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        // Atualizar posições dos pratos para coincidir com os suportes
+        pratoEsquerda.position = suporteEsquerda.position;
+        pratoDireita.position = suporteDireita.position;
+
+        // Definir a rotação dos pratos em (-90, 0, 0)
+        pratoEsquerda.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        pratoDireita.rotation = Quaternion.Euler(-90f, 0f, 0f);
+
+        // Atualizar BoxColliders para seguir os pratos (se necessário)
+        AtualizarBoxColliders(pratoEsquerda);
+        AtualizarBoxColliders(pratoDireita);
     }
 
+    void AtualizarBoxColliders(Transform prato)
+    {
+        // Encontrar todos os BoxColliders no prato e atualizá-los
+        BoxCollider[] colliders = prato.GetComponentsInChildren<BoxCollider>();
+        foreach (BoxCollider collider in colliders)
+        {
+            collider.transform.position = prato.position;
+            collider.transform.rotation = prato.rotation;
+        }
+    }
 }
