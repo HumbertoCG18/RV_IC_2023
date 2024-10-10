@@ -152,6 +152,8 @@ public class ControleMesa : MonoBehaviour
         //Checa se a QuestaoEmExecucao é distinta da auxiliar QuestaoAnt (Se for, significa que o contador QuestaoEmExecucao foi incrementado)
         if (QuestaoAnt != QuestaoEmExecucao)
         {
+            ResetaQuestao();
+
             //Informa no console a questão que está sendo executada
             Debug.Log("Atualmente executando a questão " + QuestaoEmExecucao);
 
@@ -345,7 +347,7 @@ public class ControleMesa : MonoBehaviour
         }
 
         //Armazena o valor do numerador no fim da execução
-        NumeradorAnt = Numerador;
+        NumeradorAnt = Numerador; 
         //Armazena o valor do denominador no fim da execução
         DenominadorAnt = Denominador;
     }
@@ -412,8 +414,8 @@ public class ControleMesa : MonoBehaviour
      * 2. Implementar métodos que setam as questões (Falta ativar/desativar a renderizacao da peca de referencia da questao) --> Resolvido
      * 
      * Defeitos e Bugs:
-     * - checaQ1(), deve primeiro checar se o primeiro input é um meio e só depois armazenar as equivalências
-     * - Bugs na checagem das equivalências de 1/3 (provavelmente na comparação das razões) --> Checar de outra forma
+     * -
+     * -
      * -
      * 
      * Otimizações Possíveis:
@@ -608,14 +610,6 @@ public class ControleMesa : MonoBehaviour
             //Se a fracao da questao ja foi inserida
             if (PertenceAoArray(equivalencias, DenominadorQuestao) == true)
             {
-                Debug.Log("RazaoInput: " + RazaoInput + "\nRazaoDaQuestao: " + RazaoDaQuestao);
-                Debug.Log("RazaoInput = RazaoDaQuestao: " + (RazaoInput == RazaoDaQuestao));
-
-                for(int i = 0; i < equivalencias.Length - 1; i++)
-                {
-                    Debug.Log("Equivalências " + i + ": " +  equivalencias[i]);
-                }
-
                 //Se a RazaoInput for igual a RazaoDaQuestao e o input nao esta no vetor
                 if (RazaoInput == RazaoDaQuestao && PertenceAoArray(equivalencias, DenominadorInput) == false)
                 {
@@ -695,7 +689,7 @@ public class ControleMesa : MonoBehaviour
                     break;
             }
 
-            //Passa para o próximo passo da checagem (Else if(ContagemEquivalencia == 3))
+            //Passa para o próximo passo da checagem (Else if(ContagemEquivalencia == NumeroDeEquivalencias))
             ContagemEquivalencia++;
         }
 
@@ -709,18 +703,24 @@ public class ControleMesa : MonoBehaviour
     //Caso a questão em execução seja inválida, 
     void ErroQuestaoInvalida()
     {
+        //Executa o método que reseta as questões
         ResetaQuestao();
+        //Retorna para a primeira questão
         QuestaoEmExecucao = 0;
+        //Retorna o erro pelo console
         Debug.Log("Erro: Número de questão inválido");
     }
 
+    //Método que reseta as questões
     void ResetaQuestao()
     {
-        //int[] arrayZerado = new int[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        //int[] arrayZerado = new int[15];
+        //Deleta as réguas geradas
         ResetaFracao(pecasRegua);
+        //Gera um novo array para as equivalências
         equivalencias = new int[15];
+        //Zera a contegem das equivalências encontradas
         ContagemEquivalencia = 0;
+        //Retorna pelo console quando o método for executado
         Debug.Log("Questão resetada!");
     }
 
