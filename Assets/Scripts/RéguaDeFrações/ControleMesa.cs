@@ -74,15 +74,24 @@ public class ControleMesa : MonoBehaviour
         //(Int) Usado nas questões aleatórias (Não sei o quão necessário é)
         NumeradorInicial = 1;
 
+        //(Int) Contadores da questao que está sendo executada e a "anterior" --> Devem ser inicializadas diferentes e serão igualadas durante a execução de uma questão
+        QuestaoEmExecucao = 0;
+        QuestaoAnt = -1;
+
+        //(Int) Contador das réguas geradas
+        int ReguaCont = 0;
+
+        //(Int) Contador dos acertos das questoes aleatorias
+        AcertosAleatoria = 0;
+
         //(Int e Float) Variáveis que acompanham o valor do numerador, denominador e a razão na medida em que são alterados pelo usuário
         Numerador = 1;
         Denominador = 1;
         RazaoQuestao = 1f;
         Razao = 1f;
 
-        //(Int) Contadores da questao que está sendo executada e a "anterior" --> Devem ser inicializadas diferentes e serão igualadas durante a execução de uma questão
-        QuestaoEmExecucao = 0;
-        QuestaoAnt = -1;
+        //(Float) Razao do Input
+        RazaoInput = 1f;
 
         //(Arrays[]) Arrays que armazenam as equivalencias, as peças de cada fração gerada e cada regua gerada, respectivamente
         equivalencias = new int[15];
@@ -97,15 +106,6 @@ public class ControleMesa : MonoBehaviour
         Certo = false;
         CertoInput = false;
         confirmarDebug = false;
-
-        //(Int) Contador das réguas geradas
-        int ReguaCont = 0;
-
-        //(Int) Contador dos acertos das questoes aleatorias
-        AcertosAleatoria = 0;
-
-        //(Float) Razao do Input
-        RazaoInput = 1f;
 
         //Inicializa a geração das frações
         GeraFracao(PecaReferencia, pecasGeradasInput, Numerador, Denominador);
@@ -122,11 +122,6 @@ public class ControleMesa : MonoBehaviour
             Denominador--;
         }
         Debug.Log("DimDenominador pressionado");
-    }
-
-    private void OnHoverEntered(HoverEnterEventArgs args)
-    {
-        Debug.Log("Hover sobre o botão detectado");
     }
 
     // Update is called once per frame
