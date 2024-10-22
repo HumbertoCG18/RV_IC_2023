@@ -13,7 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 /* Arquivo dos controles da mesa fracionária e das questões de frações.
  * 
  * Otimizações a serem feitas (Por ordem prioritária):
- * 1. Trocar a lógica de checagem (Em vez de comparar razões, comparar por dois arrays --> NumeradoresTerco[i] e DenominadorTerco[i])
+ * 1.
  * 2. 
  * 3. 
  * 
@@ -79,7 +79,7 @@ public class ControleMesa : MonoBehaviour
         QuestaoAnt = -1;
 
         //(Int) Contador das réguas geradas
-        int ReguaCont = 0;
+        ReguaCont = 0;
 
         //(Int) Contador dos acertos das questoes aleatorias
         AcertosAleatoria = 0;
@@ -128,7 +128,7 @@ public class ControleMesa : MonoBehaviour
     void Update()
     {
 
-        //Se houverem mudanças no numerador ou denominador o método é executado
+        //Se houverem mudanças no numerador ou denominador os métodos são executados
         if (DenominadorAnt != Denominador || NumeradorAnt != Numerador)
         {
             //Atualiza a fração no display a cada frame
