@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Centena
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 45f79856a9c90bc48bfc71de68c4a9b0, type: 3}
+      propertyPath: m_TagString
+      value: Centena
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

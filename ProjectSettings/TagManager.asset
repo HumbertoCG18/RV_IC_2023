@@ -15,6 +15,9 @@ TagManager:
   - Cat
   - Dog
   - Hamster
+  - Unidade
+  - Dezena
+  - Centena
   layers:
   - Default
   - TransparentFX
