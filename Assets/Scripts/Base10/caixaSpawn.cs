@@ -13,7 +13,7 @@ public class caixaSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 Altura = new Vector3(0, 1.2f, 0);
+        Vector3 Altura = new Vector3(0, 0.4f, 0);
         centroCaixa = caixa.transform.position + Altura;
         rotacaoCaixa = caixa.transform.rotation;
         dentroDaCaixa = false;
