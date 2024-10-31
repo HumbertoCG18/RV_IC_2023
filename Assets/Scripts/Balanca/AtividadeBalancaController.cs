@@ -178,11 +178,6 @@ public class AtividadeBalancaController : AbstractAtividadeController
         _placaDireitaController.ResetarPesos();
     }
 
-    public void SetOnAtividadeConcluida(Action callback)
-    {
-        OnAtividadeConcluida += callback;
-    }
-
     public override void CarregaAtividade(ScriptableObject atividade)
     {
         var atividadeBalancaSO = atividade as AtividadeBalancaSO;

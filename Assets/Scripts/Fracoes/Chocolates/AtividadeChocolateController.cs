@@ -92,11 +92,6 @@ public class AtividadeChocolateController : AbstractAtividadeController
         _respostaExibida = false;
     }
 
-    public void SetOnAtividadeConcluida(Action callback)
-    {
-        OnAtividadeConcluida += callback;
-    }
-
     public override void CarregaAtividade(ScriptableObject atividade)
     {
         var atividadeChocolateSO = atividade as AtividadeChocolateSO;

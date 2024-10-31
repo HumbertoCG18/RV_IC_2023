@@ -25,6 +25,14 @@ public class ReguaBuilderController : MonoBehaviour
 
     public float Altura => _altura;
 
+    private void Update()
+    {
+        if (Keyboard.current[Key.P].wasReleasedThisFrame)
+        {
+            AtualizaVisual();
+        }
+    }
+
     public void AtualizaVisual()
     {
         transform.DestroyChildren();

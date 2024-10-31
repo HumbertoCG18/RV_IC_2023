@@ -20,16 +20,10 @@ public class AtividadeElevadorController : AbstractAtividadeController
     {
         if (_areaAlvo.QuantidadeDeObjetos == 3)
         {
-            AtividadeConcluida();
-
+            TrataSolucao(AcertoErroUIController.TipoResultado.Acertou);
             _uiTelaResultado2.SetActive(true);
             _elevadorController.SetPrecisaValidarAreas(false);
         }
-    }
-
-    public void AtividadeConcluida()
-    {
-        OnAtividadeConcluida?.Invoke();
     }
 
     public override void CarregaAtividade(ScriptableObject atividade)
@@ -37,10 +31,5 @@ public class AtividadeElevadorController : AbstractAtividadeController
         _atividadeView.SetActive(true);
         _uiTelaResultado2.SetActive(false);
         _elevadorController.SetPrecisaValidarAreas(true);
-    }
-
-    public void SetOnAtividadeConcluida(Action onAtividadeConcluida)
-    {
-        OnAtividadeConcluida += onAtividadeConcluida;
     }
 }

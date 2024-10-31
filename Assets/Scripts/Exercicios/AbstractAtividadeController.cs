@@ -18,8 +18,9 @@ public abstract class AbstractAtividadeController : MonoBehaviour
 
     public abstract void CarregaAtividade(ScriptableObject atividade);
 
-    public void SetOnAtividadeConcluida(Action onAtividadeConcluida, Action<bool> onValidaResposta=null)
+    public virtual void SetOnAtividadeConcluida(Action onAtividadeConcluida, Action<bool> onValidaResposta=null)
     {
+        Debug.Log($"[AbstractAtividadeController][SetOnAtividadeConcluida]", gameObject);
         OnAtividadeConcluida += onAtividadeConcluida;
         OnValidaResposta += onValidaResposta;
     }
@@ -28,6 +29,7 @@ public abstract class AbstractAtividadeController : MonoBehaviour
     {
         if (_atividadeConcluida) return;
 
+        Debug.Log("TrataSolucao");
         switch (resultado)
         {
             case TipoResultado.Acertou:
@@ -38,7 +40,9 @@ public abstract class AbstractAtividadeController : MonoBehaviour
                     _acertouErrouUIController.ExibeAcerto(() => {
                         _atividadeConcluida = false;
                         callback?.Invoke(); 
-                        OnAtividadeConcluida?.Invoke(); 
+                        OnAtividadeConcluida?.Invoke();
+                        Debug.Log($"Atividade concluida    {OnAtividadeConcluida}");
+
                     }, tocarSom, tempoDeAnimacao);
                 }
                 else

@@ -33,11 +33,8 @@ public class AtividadePitagorasController : AbstractAtividadeController
 
     private void OnNivelConcluido()
     {
-        Debug.Log($"Nivel concluido!   {_iteradorPerguntaERespostaSO.Count}");
-
         if (_iteradorPerguntaERespostaSO.Count != 0)
         {
-            Debug.Log($" --> !   {_iteradorPerguntaERespostaSO.Count}");
             TrataSolucao(AcertoErroUIController.TipoResultado.Acertou, () => IniciaPergunta(_iteradorPerguntaERespostaSO.Current), false);
         }
         else
@@ -48,7 +45,6 @@ public class AtividadePitagorasController : AbstractAtividadeController
 
     private void IniciaPergunta(PerguntaERespostaSO pergunta)
     {
-        Debug.Log("IniciaPergunta");
         _perguntaERespostaUIManager.SetVisibilidade(true);
         _perguntaERespostaUIManager.CarregaPergunta(pergunta);
     }
@@ -63,11 +59,6 @@ public class AtividadePitagorasController : AbstractAtividadeController
     {
         _pitagorasController.OnNivelConcluido -= OnNivelConcluido;
         _perguntaERespostaUIManager.OnRespostaDoUsuario -= OnRespostaDoUsuario;
-    }
-
-    public void SetOnAtividadeConcluida(Action callback)
-    {
-        OnAtividadeConcluida += callback;
     }
 
     public override void CarregaAtividade(ScriptableObject atividade)

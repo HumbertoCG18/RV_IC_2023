@@ -44,6 +44,7 @@ public class ExerciciosManager : MonoBehaviour
 
     public void IniciaExercicios()
     {
+        Debug.Log($"[ExerciciosManager][IniciaExercicios]");
         if (_telaExerciciosConcluidos != null) _telaExerciciosConcluidos.SetActive(false);
 
         _listaDeExerciciosController.Reset();
@@ -53,6 +54,8 @@ public class ExerciciosManager : MonoBehaviour
 
     public void CarregaExercicio(int index)
     {
+        Debug.Log($"[ExerciciosManager][CarregaExercicio]");
+
         _listaDeExerciciosController.SetIndex(index);
 
         var exercicioSO = _listaDeExerciciosController.Current;
@@ -71,6 +74,7 @@ public class ExerciciosManager : MonoBehaviour
 
     public void CarregaAtividades(int index)
     {
+        Debug.Log($"[ExerciciosManager][CarregaAtividade] Carrega Atividade {index}");
         _listaDeAtividadesController.SetIndex(index);
 
         _atividadeControllerInstance.CarregaAtividade(_listaDeAtividadesController.Current);
@@ -80,6 +84,8 @@ public class ExerciciosManager : MonoBehaviour
 
     public void AtualizaInterface(ExercicioSO exercicioSO)
     {
+        Debug.Log($"[ExerciciosManager][AtualizaInterface]");
+
         if (_txtDescricaoExercicio != null)
         {
             _txtDescricaoExercicio.text = exercicioSO._descricao;
@@ -137,15 +143,18 @@ public class ExerciciosManager : MonoBehaviour
 
     private void OnAtividadeConcluida()
     {
+        Debug.Log($"[ExerciciosManager][OnAtividadeConcluida] Atividade concluida");
         _historicoDeExerciciosCompletados[_listaDeExerciciosController.Index][_listaDeAtividadesController.Index] = true;
 
         if (_listaDeAtividadesController.IsLast)
         {
             ExercicioConcluido();
+            Debug.Log($"[ExerciciosManager]\tProximo exercicio");
         }
         else
         {
             _listaDeAtividadesController.Next();
+            Debug.Log($"[ExerciciosManager]\tProxima Atividade");
 
             CarregaAtividades(_listaDeAtividadesController.Index);
         }
@@ -153,15 +162,19 @@ public class ExerciciosManager : MonoBehaviour
 
     private void ExercicioConcluido()
     {
+        Debug.Log($"[ExerciciosManager][ExercicioConcluido]");
         if (_listaDeExerciciosController.IsLast && !_exerciciosFinalizados)
         {
             OnExerciciosFinalizados?.Invoke(this);
             _exerciciosFinalizados = true;
 
             _telaExerciciosConcluidos.SetActive(true);
+
+            Debug.Log($"[ExerciciosManager]\tTodos os exercicios concluidos");
         }
         else
         {
+            Debug.Log($"[ExerciciosManager]\tProximo Exercicio");
             ProximoExercicio();
         }
     }

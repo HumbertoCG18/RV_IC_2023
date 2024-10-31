@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4217930865788739567}
-  - component: {fileID: 3334054333531496570}
+  - component: {fileID: 6196339979877327932}
   m_Layer: 0
   m_Name: Regua
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &3334054333531496570
+--- !u!114 &6196339979877327932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,16 +41,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2646601517158382401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6aef479f19b3f42a775f6ab5f18271, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c956a11e61c2af478dc70f1b9d14615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _largura: 0.3
+  _largura: 0.4
   _altura: 0.07
   _profundidade: 0.07
   _grossuraBorda: 0.004
   _bordaPrefab: {fileID: 6986749709368805374, guid: f74760f16a99c3340bbeff9fb241b5ed, type: 3}
   _elementPrefab: {fileID: 6021889976436675072, guid: 823fc288378dbfa4f99fd81d3559e8f0, type: 3}
-  _cor: {r: 1, g: 0, b: 0, a: 1}
+  _cor: {r: 1, g: 1, b: 1, a: 1}
   _fracao:
     _numerador: 3
     _denominador: 7

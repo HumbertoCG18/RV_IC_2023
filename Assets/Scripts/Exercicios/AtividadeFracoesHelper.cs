@@ -40,8 +40,9 @@ public class AtividadeFracoesHelper : AbstractAtividadeController
         _atividadePizzaController.SetView(v3);
     }
 
-    public void SetOnAtividadeConcluida(Action callback)
+    public override void SetOnAtividadeConcluida(Action callback, Action<bool> OnValidaSolucao=null)
     {
+        Debug.Log($"[AtividadeFracoesHelper][SetOnAtividadeConcluida]");
         _atividadeChocolateController.SetOnAtividadeConcluida(callback);
         _atividadeReguaFracionariaController.SetOnAtividadeConcluida(callback);
         _atividadePizzaController.SetOnAtividadeConcluida(callback);
