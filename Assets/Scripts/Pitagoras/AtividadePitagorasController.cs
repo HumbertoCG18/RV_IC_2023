@@ -7,12 +7,13 @@ using UnityEngine;
 public class AtividadePitagorasController : AbstractAtividadeController
 {
     [SerializeField] private TextMeshProUGUI _txtDescricaoAtividade;
-    [SerializeField] private PitagorasController _pitagorasController;
     [SerializeField] private PerguntaERespostaUIManager _perguntaERespostaUIManager;
 
     [SerializeField] private AcertoErroUIController _certoErroUIController;
 
+    [SerializeField] private Transform _nivelControllerParent;
     private IteratorController<PerguntaERespostaSO> _iteradorPerguntaERespostaSO;
+    private PitagorasNivelController _nivelAtualController;
 
     private void OnRespostaDoUsuario(bool acertou)
     {
@@ -51,13 +52,11 @@ public class AtividadePitagorasController : AbstractAtividadeController
 
     private void OnEnable()
     {
-        _pitagorasController.OnNivelConcluido += OnNivelConcluido;
         _perguntaERespostaUIManager.OnRespostaDoUsuario += OnRespostaDoUsuario;
     }
 
     private void OnDisable()
     {
-        _pitagorasController.OnNivelConcluido -= OnNivelConcluido;
         _perguntaERespostaUIManager.OnRespostaDoUsuario -= OnRespostaDoUsuario;
     }
 
@@ -68,6 +67,23 @@ public class AtividadePitagorasController : AbstractAtividadeController
         _iteradorPerguntaERespostaSO = new IteratorController<PerguntaERespostaSO>(atividadePitagoras._perguntas);
 
         _txtDescricaoAtividade.text = atividadePitagoras._descricao;
-        _pitagorasController.CarregaNivel(atividadePitagoras._nivelControllerPrefab);
+
+        StartCoroutine(IniciaNivelCoroutine(atividadePitagoras._nivelControllerPrefab));
+    }
+
+    private IEnumerator IniciaNivelCoroutine(PitagorasNivelController controller)
+    {
+        if (_nivelAtualController != null)
+        {
+            _nivelAtualController.DesativaEncaixes();
+
+            yield return null;
+
+            Destroy(_nivelAtualController.gameObject);
+        }
+
+        _nivelAtualController = Instantiate(controller, _nivelControllerParent);
+        _nivelAtualController.transform.ResetTransformation();
+        _nivelAtualController.OnNivelConcluido += OnNivelConcluido;
     }
 }

@@ -10,7 +10,8 @@ public class PitagorasNivelController : MonoBehaviour
     [SerializeField] private List<PontoReferenciaManager> _gruposDosEncaixes;
  
     private List<PontoDeReferencia> _pontosDeReferencia;
-    private PitagorasController _pitagorasController;
+
+    public Action OnNivelConcluido;
 
     private void Awake()
     {
@@ -34,17 +35,19 @@ public class PitagorasNivelController : MonoBehaviour
 
     public void GrupoCompleto()
     {
-        bool todosGruposCompletos = _gruposDosEncaixes.All(g => g.GrupoCompleto);
-
-        if (todosGruposCompletos)
-        {
-            _pitagorasController.NivelConcluido();
-        }
+        OnNivelConcluido?.Invoke();
     }
 
-    public void SetInfo(PitagorasController pitagorasController)
+    public void OnPontoSelecionado(PontoReferenciaManager mananger)
     {
-        _pitagorasController = pitagorasController;
+        if (mananger.QtdPontosSelecionados == 1)
+        {
+            _gruposDosEncaixes.ForEach(g => { if (g != mananger) g.gameObject.SetActive(false); });
+        }
+        else if (mananger.QtdPontosSelecionados == 0)
+        {
+            _gruposDosEncaixes.ForEach(g => g.gameObject.SetActive(true));
+        }
     }
 
     public void DesativaEncaixes()

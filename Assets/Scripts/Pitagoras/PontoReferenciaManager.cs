@@ -12,14 +12,18 @@ public class PontoReferenciaManager : MonoBehaviour
     private List<PontoReferenciaController> _pontoDeReferenciaControllers;
 
     public UnityEvent OnGrupoCompleto;
+    public UnityEvent<PontoReferenciaManager> OnPontoSelecionado;
 
     private void Awake()
     {
         _pontoDeReferenciaControllers = _pontosDeReferencia.GetComponentsInChildren<PontoReferenciaController>().ToList();
+        _pontoDeReferenciaControllers.ForEach(p => p.SetManager(this));
     }
 
     public void AtualizaEstado()
     {
+        OnPontoSelecionado?.Invoke(this);
+
         if (GrupoCompleto)
         {
             OnGrupoCompleto?.Invoke();
@@ -33,8 +37,9 @@ public class PontoReferenciaManager : MonoBehaviour
 
     public void DesativaEncaixes()
     {
-        _pontoDeReferenciaControllers.ForEach(p => p.DesativaEncaixce());
+        _pontoDeReferenciaControllers.ForEach(p => p.DesativaSocket());
     }
 
+    public int QtdPontosSelecionados => _pontoDeReferenciaControllers.Count(p => p.EstaPreenchido);
     public bool GrupoCompleto => _pontoDeReferenciaControllers.All(pdr => pdr.EstaPreenchido);
 }

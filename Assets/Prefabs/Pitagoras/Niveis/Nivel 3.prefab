@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3753374746054215622}
   - component: {fileID: 1439620506908888361}
   - component: {fileID: 2046873886215381820}
+  - component: {fileID: 5258281542815464218}
   m_Layer: 0
   m_Name: Cateto_2_4_4
   m_TagString: Untagged
@@ -129,6 +130,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 3150525957030825991}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &5258281542815464218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341008824671214952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2046873886215381820}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2046873886215381820}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1200834810250698232
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +191,7 @@ GameObject:
   - component: {fileID: 2108563997802766776}
   m_Layer: 0
   m_Name: Cateto_1_1_5
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +287,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &5650380194732021241
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -428,6 +474,7 @@ GameObject:
   - component: {fileID: 8741920177702035055}
   - component: {fileID: 390407887285005924}
   - component: {fileID: 7597084464192624748}
+  - component: {fileID: 7414681504294848292}
   m_Layer: 0
   m_Name: Cateto_2_1_1
   m_TagString: Untagged
@@ -545,6 +592,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 4057857581459496162}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &7414681504294848292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629291033445032482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7597084464192624748}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7597084464192624748}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2526635531721078469
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +649,7 @@ GameObject:
   - component: {fileID: 134096621930388874}
   - component: {fileID: 5604913036453492850}
   - component: {fileID: 2002692492534124891}
+  - component: {fileID: 710362119754604269}
   m_Layer: 0
   m_Name: Cateto_1_2_3
   m_TagString: Untagged
@@ -674,6 +767,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 6537987617275859166}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &710362119754604269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526635531721078469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2002692492534124891}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2002692492534124891}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2934138903580601579
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,7 +906,7 @@ GameObject:
   - component: {fileID: 4448381219241240741}
   m_Layer: 0
   m_Name: Cateto_2_2_2
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -864,7 +1002,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &2316997616820509761
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1051,6 +1189,7 @@ GameObject:
   - component: {fileID: 6668789122392908561}
   - component: {fileID: 8423302149958993802}
   - component: {fileID: 3390031797473572075}
+  - component: {fileID: 742520608619120183}
   m_Layer: 0
   m_Name: Cateto_2_5_6
   m_TagString: Untagged
@@ -1168,6 +1307,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 5692272239953145716}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &742520608619120183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053913828152271310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3390031797473572075}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3390031797473572075}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4388878573193975907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1364,7 @@ GameObject:
   - component: {fileID: 8658460181079623439}
   - component: {fileID: 1851627882125059804}
   - component: {fileID: 3139953113883495128}
+  - component: {fileID: 8410840095248931917}
   m_Layer: 0
   m_Name: Cateto_1_1_5
   m_TagString: Untagged
@@ -1297,6 +1482,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 6505484485462627465}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &8410840095248931917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388878573193975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3139953113883495128}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3139953113883495128}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4668905079845651877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1576,7 @@ GameObject:
   - component: {fileID: 3699564913721362974}
   m_Layer: 0
   m_Name: Cateto_1_2_3
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1442,7 +1672,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &5368479767335632786
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1669,7 +1899,7 @@ GameObject:
   - component: {fileID: 5451792390616836171}
   m_Layer: 0
   m_Name: Cateto_2_5_6
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1765,7 +1995,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &7592260288041542040
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1952,6 +2182,7 @@ GameObject:
   - component: {fileID: 1438156819106862210}
   - component: {fileID: 337768087010683811}
   - component: {fileID: 2229908038970473720}
+  - component: {fileID: 3147552664754504363}
   m_Layer: 0
   m_Name: Cateto_2_2_2
   m_TagString: Untagged
@@ -2069,6 +2300,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 5180168310516150327}
+  _matchRotacao: 1
+  _erroMaximoRotacao: 0.1
+--- !u!114 &3147552664754504363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6545446283138234660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2229908038970473720}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2229908038970473720}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6898830865291817424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,7 +2370,7 @@ Transform:
   m_GameObject: {fileID: 6898830865291817424}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0}
+  m_LocalPosition: {x: 0, y: 0.0172, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2123,7 +2399,7 @@ GameObject:
   - component: {fileID: 5429591637196366518}
   m_Layer: 0
   m_Name: Cateto_2_3_7
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2219,7 +2495,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &3507915742882966393
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2419,7 +2695,7 @@ Transform:
   m_GameObject: {fileID: 7491240983726974941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0037, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2443,7 +2719,7 @@ GameObject:
   - component: {fileID: 7100178297187094832}
   m_Layer: 0
   m_Name: Cateto_2_4_4
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2539,7 +2815,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &7554868281552930819
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2730,7 +3006,7 @@ GameObject:
   - component: {fileID: 6153449692669937157}
   m_Layer: 0
   m_Name: Cateto_2_1_1
-  m_TagString: Untagged
+  m_TagString: Peca
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2826,7 +3102,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &2063385908432731938
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3013,6 +3289,7 @@ GameObject:
   - component: {fileID: 7165900506542280114}
   - component: {fileID: 9120537897065771740}
   - component: {fileID: 6361094776212130469}
+  - component: {fileID: 384436084109893831}
   m_Layer: 0
   m_Name: Cateto_2_3_7
   m_TagString: Untagged
@@ -3130,3 +3407,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pontoReferenciaManager: {fileID: 4924357878349839628}
+  _transformReferencia: {fileID: 6885337949850490190}
+  _matchRotacao: 0
+  _erroMaximoRotacao: 0.1
+--- !u!114 &384436084109893831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811105631685906129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a053055f7b5e9be418c071a6b2d38cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6361094776212130469}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6361094776212130469}
+        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
+        m_MethodName: CustomTriggerExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
