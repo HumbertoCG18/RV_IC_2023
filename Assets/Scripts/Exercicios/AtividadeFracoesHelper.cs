@@ -1,0 +1,49 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AtividadeFracoesHelper : AbstractAtividadeController
+{
+    [SerializeField] private AtividadeChocolateController _atividadeChocolateController;
+    [SerializeField] private AtividadeReguaFracionariaController _atividadeReguaFracionariaController;
+    [SerializeField] private AtividadePizzaController _atividadePizzaController;
+
+    [SerializeField] private GameObject _historicoDeReguasView;
+
+    public override void CarregaAtividade(ScriptableObject atividade)
+    {
+        if (atividade is AtividadeChocolateSO)
+        {
+            SetViews(true, false, false);
+            _historicoDeReguasView.SetActive(false);
+            _atividadeChocolateController.CarregaAtividade(atividade);
+        }
+        else if (atividade is AtividaderReguaFracionariaSO)
+        {
+            SetViews(false, true, false);
+            _historicoDeReguasView.SetActive(true);
+            _atividadeReguaFracionariaController.CarregaAtividade(atividade);
+        }
+        else if (atividade is AtividadePizzaSO)
+        {
+            SetViews(false, false, true);
+            _historicoDeReguasView.SetActive(true);
+            _atividadePizzaController.CarregaAtividade(atividade);
+        }
+    }
+
+    public void SetViews(bool v1, bool v2, bool v3)
+    {
+        _atividadeChocolateController.SetView(v1);
+        _atividadeReguaFracionariaController.SetView(v2);
+        _atividadePizzaController.SetView(v3);
+    }
+
+    public void SetOnAtividadeConcluida(Action callback)
+    {
+        _atividadeChocolateController.SetOnAtividadeConcluida(callback);
+        _atividadeReguaFracionariaController.SetOnAtividadeConcluida(callback);
+        _atividadePizzaController.SetOnAtividadeConcluida(callback);
+    }
+}

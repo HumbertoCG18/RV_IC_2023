@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff15a004dcef91b41a483c85964ec67e, type: 3}
+  m_Name: Exercicio_Balanca_Nivel2
+  m_EditorClassIdentifier: 
+  _descricao: 
+  _descricoesEmAudios: []
+  _atividades:
+  - {fileID: 11400000, guid: 983b02cfac7555a4c9e5217da7a89bba, type: 2}
+  - {fileID: 11400000, guid: 22b90e8a319612c48aa5acfbfd701550, type: 2}
+  - {fileID: 11400000, guid: 577c231d8d3561043853cbbdf2003f4c, type: 2}
+  - {fileID: 11400000, guid: 9ca9dd0c2d818b34983b41913677491d, type: 2}
+  - {fileID: 11400000, guid: e14d67dbb1094354d9eb8b5242ebb33b, type: 2}
+  - {fileID: 11400000, guid: 942378827f34bd643a3b6113c76e062c, type: 2}
+  - {fileID: 11400000, guid: 47ab715807f17544ca31b1acf3bdd075, type: 2}
+  - {fileID: 11400000, guid: 919978d96b4a2ee4288d8571ea19ffca, type: 2}
+  - {fileID: 11400000, guid: 0ff3e7ffe97b8724fa46f6f3795b31d3, type: 2}

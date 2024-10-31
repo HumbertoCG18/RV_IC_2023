@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5317764892255877720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5910962169911746671}
+  - component: {fileID: 598135787986455743}
+  m_Layer: 0
+  m_Name: GeradorDeNumeros3D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5910962169911746671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317764892255877720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.049968395, y: 0.084023595, z: -1.3831468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598135787986455743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317764892255877720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76de211af81331f43a1a3c0ce1287e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerNumeros: {fileID: 5910962169911746671}
+  _numerosPrefabs:
+  - _prefab: {fileID: 6227302649181802453, guid: d06e497a2191a7b428c454c592903471, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 8502794726150634614, guid: c3dca8d498feeda41a6c4f7441ac565c, type: 3}
+    _largura: 0.2
+  - _prefab: {fileID: 2197048890400834764, guid: 399ee717c5b9f944da4263585b114dd9, type: 3}
+    _largura: 0.6
+  - _prefab: {fileID: 1251406287778550351, guid: dcb4d7cedc6f9d749aa84810dec39b8d, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 926495484512336444, guid: 5050a34d0b998ec4faaa3e17d7a95eff, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 7374543808412716439, guid: 7abfbfec7f100f344a6f578dc18d08ed, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 8382596912299942344, guid: 1bc7c63f7cb7e3b478af46a802c48c95, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 6793850320922696337, guid: cb85ab51fba115d4b9543a5627aed042, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 2108752501581815720, guid: 44bc6c1646bd3f643a937ec00bde7d6e, type: 3}
+    _largura: 0.45
+  - _prefab: {fileID: 2267909933165448300, guid: f3c01adab7801764690564241559bd0e, type: 3}
+    _largura: 0.45
+  _espacoEntreNumeros: 0.15
+  _numero: 1234567890

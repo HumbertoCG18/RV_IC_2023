@@ -3,16 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TrackingObject
+  - Anchor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ObjetoBloqueado
   - Water
   - UI
-  - 
-  - 
+  - PesoBloqueado
+  - Peso
   - 
   - 
   - 

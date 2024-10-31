@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa74fda88d9cca840a186c4ba4d6942c, type: 3}
+  m_Name: Atividade_Chocolates_1_3
+  m_EditorClassIdentifier: 
+  _descricao: "Observe o peda\xE7o de chocolate e as tr\xEAs crian\xE7as. Se dividirmos
+    igualmente o peda\xE7o para as tr\xEAs crian\xE7as, quantos peda\xE7os cada uma
+    recebe?"
+  _descricaoEmAudio:
+    _descricaoVozMasculina: {fileID: 8300000, guid: 6b5302b4ef635564ab5ad94603132d16, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: e018b190a9701f14491566793ca2abc6, type: 3}
+  _quantidadeChocolates: 1
+  _quantidadeCriancas: 3

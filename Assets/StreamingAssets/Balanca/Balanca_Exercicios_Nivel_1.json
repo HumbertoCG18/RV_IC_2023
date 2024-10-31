@@ -1,0 +1,62 @@
+{
+	"_nivel": 1,
+	"_exercicios": [
+		{
+			"_descricao": "Observe que um dos pratos da balança tem 5 cubos de uma unidade. Faça combinações entre os diferentes cubos para que a balanca se mantenha em equilíbrio. (Pelo meno 4 - Acertos 1)",
+			"_pesosLadoEsquerdo": [
+				{
+					"_peso": 1,
+					"_isOculto": false
+				},
+				{
+					"_peso": 1,
+					"_isOculto": false
+				},
+				{
+					"_peso": 1,
+					"_isOculto": false
+				},
+				{
+					"_peso": 1,
+					"_isOculto": false
+				},
+				{
+					"_peso": 1,
+					"_isOculto": false
+				}
+			],
+			"_pesosLadoDireito": [],
+			"_combinacoesMinimas": 4
+		},
+		{
+			"_descricao": "Observe que um dos pratos da balança tem 5 cubos de uma unidade. Faça combinações entre os diferentes cubos para que a balanca se mantenha em equilíbrio. (Pelo meno 4 - Acertos 1)",
+			"_pesosLadoEsquerdo": [
+				{
+					"_peso": 5,
+					"_isOculto": false
+				},
+				{
+					"_peso": 5,
+					"_isOculto": false
+				}
+			],
+			"_pesosLadoDireito": [],
+			"_combinacoesMinimas": 4
+		},
+		{
+			"_descricao": "Observe que um dos pratos da balança tem 5 cubos de uma unidade. Faça combinações entre os diferentes cubos para que a balanca se mantenha em equilíbrio. (Pelo meno 4 - Acertos 1)",
+			"_pesosLadoEsquerdo": [
+				{
+					"_peso": 20,
+					"_isOculto": false
+				},
+				{
+					"_peso": 10,
+					"_isOculto": false
+				}
+			],
+			"_pesosLadoDireito": [],
+			"_combinacoesMinimas": 4
+		}
+	]
+}

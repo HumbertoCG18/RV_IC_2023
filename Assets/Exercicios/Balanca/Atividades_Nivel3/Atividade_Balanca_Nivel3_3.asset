@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd937884b1a6bb4aa4b6ec3be8e5f2f, type: 3}
+  m_Name: Atividade_Balanca_Nivel3_3
+  m_EditorClassIdentifier: 
+  _descricao: "Observe a balan\xE7a e crie uma estrat\xE9gia para descobrir o valor
+    do peso desconhecido:"
+  _descricaoEmAudio:
+    _descricaoVozMasculina: {fileID: 8300000, guid: bd884e46ad7f44740b18fb1d87e5686b, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 4ead7f50a4b9ef6459b1b19b65975a1d, type: 3}
+  _nivel: 3
+  _minimoTentativas: 1
+  _pesosLadoEsquerdo:
+  - _valorPeso: 4
+    _isOculto: 1
+  - _valorPeso: 4
+    _isOculto: 1
+  - _valorPeso: 4
+    _isOculto: 1
+  - _valorPeso: 2
+    _isOculto: 0
+  - _valorPeso: 6
+    _isOculto: 0
+  _pesosLadoDireito:
+  - _valorPeso: 2
+    _isOculto: 0
+  - _valorPeso: 4
+    _isOculto: 1
+  - _valorPeso: 3
+    _isOculto: 0
+  - _valorPeso: 7
+    _isOculto: 0
+  - _valorPeso: 4
+    _isOculto: 1

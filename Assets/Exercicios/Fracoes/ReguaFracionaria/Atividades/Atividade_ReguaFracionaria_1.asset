@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d02a1e508a33ab4097960457c88139e, type: 3}
+  m_Name: Atividade_ReguaFracionaria_1
+  m_EditorClassIdentifier: 
+  _descricao: "Crie varia\xE7\xF5es da r\xE9gua fracion\xE1ria equivalentes a 1/1"
+  _descricaoEmAudio:
+    _descricaoVozMasculina: {fileID: 8300000, guid: 96565b002ba0d3649987d263b6073f99, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 8d82ac16e6c01fe4f82caaa556c849c1, type: 3}
+  _fracaoEquivalenteDesejada:
+    _numerador: 1
+    _denominador: 1
+  _quantidadeDeVariacoesNecessarias: 10

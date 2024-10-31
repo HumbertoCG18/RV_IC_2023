@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: 3b5d7834d4e52a54789a52830ad398e2
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh10_FrontLowerBays1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 5caaa7a0c16f63643b9c7e6e86b644fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh11_FrontLowerBays1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 15e7ab7566aca0c43bbd82d1a8278a45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh12_EscHatch1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 3caf70202963e3e4aaf5dfa03a4bcd6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh13_EscHatch2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 59ac8e8c969468e40ac4926d0dd5a0c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh14_MandiblesLower1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: b34a9bcb81bd9c04fa8ff7f841c9d7e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh15_MandiblesLower1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: edcdc53bfe468754290643a274fc27e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh16_Engine1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 604f61fa1336c07459e9d32331c9db0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh17_EngineGlow1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: f83752bb811a3384693db5c42070e6ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh18_EngineVent1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: d144bd8ebb92bbb42a5f2b9fbf5d6dcb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh19_EngineVent2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 99343a77477e3f54b892d44e2772e074, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh1_UpperFrontPod1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 4e91c688f280a8d4e8e76177d4be7b85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh20_EngineVent3_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 828f3c2c50d2b374e8558aa97037f5da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh21_EngineVent4_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: fbdb07021af646b4b9e49ee6f2c46fdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh22_EngineVent5_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 3e533fdecfa49a446ab9793e4476980f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh23_EngineVent6_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: b9c9ff055ef2bee4a9cac48d7f266c4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh24_DishBase1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 4d5d902ef9039214799a48cd2e5c9a65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh25_Cockpit_Temp1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 74e6fe38f24772741941c8e787c3644c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh26_DishMount1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: f2110b62543f92040a204c47dbb8ba1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh27_DishMount1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: b0f41928ea39d094c929eee19a9a4eba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh28_DishMount1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: badcab2e12b5ab747852192483a6661a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh29_DishMount1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 8c2c35e6179707f4bb4f565f64c204fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh2_HullUpper1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 52828337ef5aefc4daf3dc887779b034, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh30_DishMount1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 3e5cb0325c588464eb3bd409d4bbb678, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh31_SensorDish1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 63cc52dc56afc5746a03b11400699c7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh32_FrontLandingPod1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: b29d8176b90daf847801558eee438005, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh33_UpperTurret1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 2663af11bc5e4294887ae95b65ed5e85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh34_LowerTurret1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: f8fdf77899743ae4c970099826d75917, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh35_MandiblesUpper1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: e9de349b7f34c4b4face48113aab265d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh36_MandiblesUpper1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 2ac89fdd35bb639448361bb0f64c1d47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh37_Guns1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: a529e146bffdc774bb31b01582da0eec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh38_Guns1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 0d2d39eb81b5d0740b12ecc84fbcbaf8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh39_Guns1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: c2ae3a0398823194da08ea6877dd7a83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh3_Deflector1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 7a581ca2cb37ead489235489bb29259b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh40_Guns2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 5386f7cceb80936499fe2d3f3a9a3fa6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh41_Guns2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 2bc220f0910032244b04bb577617ab3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh42_Guns2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 43e0e9b7c23f6a74582426943f23ce60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh43_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 134cfcf671e121043af0cb69d0464ba9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh4_Deflector2_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: d3d5cf2971f49a84f86ea032f25f789f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh5_DriveUpper1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: a02c6dfbdc43eb748889587d3a2918b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh6_FrontPodLower1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 2d35374a7a34c19408964e430c3a6279, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh7_HullLower1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 4c9746f34524e0c44894c7b378e8bfb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh8_RearUnderBay1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: 6ce8ab58d10a1a2468b35e93b443e4a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh9_DriveLower1_Group1_Millennium_Falcon1_ModelMat
+    second: {fileID: 2100000, guid: e74ad7a13154a994097d3a4e22b7b809, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

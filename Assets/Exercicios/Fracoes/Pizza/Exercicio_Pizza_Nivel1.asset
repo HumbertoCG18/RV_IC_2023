@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff15a004dcef91b41a483c85964ec67e, type: 3}
+  m_Name: Exercicio_Pizza_Nivel1
+  m_EditorClassIdentifier: 
+  _descricao: 
+  _descricoesEmAudios: []
+  _atividades:
+  - {fileID: 11400000, guid: 0b131498e7717804abc269b0fb3349ea, type: 2}
+  - {fileID: 11400000, guid: 05a6c391858d97d44a0e60a1f4dda2fd, type: 2}
+  - {fileID: 11400000, guid: cfe529b34d9cdef4f992e388ca524608, type: 2}
+  - {fileID: 11400000, guid: 95cf3571b4d9e9245ad16dfe81934cf1, type: 2}

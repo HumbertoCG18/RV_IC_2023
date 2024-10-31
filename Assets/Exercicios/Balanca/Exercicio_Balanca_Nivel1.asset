@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff15a004dcef91b41a483c85964ec67e, type: 3}
+  m_Name: Exercicio_Balanca_Nivel1
+  m_EditorClassIdentifier: 
+  _descricao: 
+  _descricoesEmAudios: []
+  _atividades:
+  - {fileID: 11400000, guid: db506731487b29847b0f7ef6fc386950, type: 2}
+  - {fileID: 11400000, guid: d41526e52f44d7a40a192f33e987b306, type: 2}
+  - {fileID: 11400000, guid: df33469601547e54596a9094e46a8773, type: 2}
