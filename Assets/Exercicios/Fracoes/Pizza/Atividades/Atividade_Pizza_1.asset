@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
   m_Name: Atividade_Pizza_1
   m_EditorClassIdentifier: 
-  _descricao: "Dona Maria preparou uma pizza e a dividiu em quatro partes. Dona Ana
-    tem tr\xEAs filhos e cada um deles comeu um peda\xE7o da pizza. Que fra\xE7\xE3o
-    da pizza os filhos da Dona Ana comeram ao todo? "
-  _descricaoEmAudio:
+  _audioDescricao:
+    _descricao: "Dona Maria preparou uma pizza e a dividiu em quatro partes. Dona
+      Ana tem tr\xEAs filhos e cada um deles comeu um peda\xE7o da pizza. Que fra\xE7\xE3o
+      da pizza os filhos da Dona Ana comeram ao todo?"
     _descricaoVozMasculina: {fileID: 8300000, guid: ec40d87f982b3aa4998151c60bfedefc, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 6c89193b60371434482894cfeb9ca888, type: 3}
   _fracoesDesejadasLadoEsquerdo:

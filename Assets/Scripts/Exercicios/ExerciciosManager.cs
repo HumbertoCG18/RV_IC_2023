@@ -10,6 +10,9 @@ public class ExerciciosManager : MonoBehaviour
     [SerializeField] private IteratorController<ExercicioSO> _listaDeExerciciosController;
     [SerializeField] private AbstractAtividadeController _atividadeControllerInstance;
 
+    [Header("Parametros")]
+    [SerializeField] private bool _passarAtividadesAutomaticamente = false;
+
     [Header("UI Exercicios")]
     [SerializeField] private TextMeshProUGUI _txtDescricaoExercicio;
     [SerializeField] private UIContainerController _containerExercicios;
@@ -19,6 +22,8 @@ public class ExerciciosManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _txtDescricaoAtividade;
     [SerializeField] private UIContainerController _containerAtividades;
     [SerializeField] private GameObject _audioDescricaoView;
+    [SerializeField] private GameObject _btnProximaAtividade;
+    [SerializeField] private GameObject _btnProximoExercicio;
 
     public Action<ExerciciosManager> OnExerciciosFinalizados;
     [SerializeField] private bool _exerciciosFinalizados = false;
@@ -88,12 +93,12 @@ public class ExerciciosManager : MonoBehaviour
 
         if (_txtDescricaoExercicio != null)
         {
-            _txtDescricaoExercicio.text = exercicioSO._descricao;
+            _txtDescricaoExercicio.text = exercicioSO._audioDescricao.Descricao;
         }
 
         if (_txtDescricaoAtividade != null)
         {
-            _txtDescricaoAtividade.text = _listaDeAtividadesController.Current._descricao;
+            _txtDescricaoAtividade.text = _listaDeAtividadesController.Current._audioDescricao.Descricao;
         }
 
         if (_containerExercicios != null)
@@ -106,7 +111,7 @@ public class ExerciciosManager : MonoBehaviour
             _containerAtividades.UpdateContainer(_listaDeAtividadesController.Values, PreprocessamentoAtividades, CarregaAtividades);
         }
 
-        if (_listaDeAtividadesController.Current._descricaoEmAudio != null && _audioDescricaoView != null)
+        if (_listaDeAtividadesController.Current._audioDescricao.Descricao != null && _audioDescricaoView != null)
         {
             _audioDescricaoView.SetActive(true);
             PlayDescricaoEmAudio();
@@ -115,6 +120,9 @@ public class ExerciciosManager : MonoBehaviour
         {
             _audioDescricaoView.SetActive(false);
         }
+
+        if (_btnProximaAtividade != null) _btnProximaAtividade.SetActive(false);
+        if (_btnProximoExercicio != null) _btnProximoExercicio.SetActive(false);
     }
 
     private void PreprocessamentoExercicios(GameObject obj, int indexExercicio)
@@ -153,11 +161,24 @@ public class ExerciciosManager : MonoBehaviour
         }
         else
         {
-            _listaDeAtividadesController.Next();
-            Debug.Log($"[ExerciciosManager]\tProxima Atividade");
+            if (_passarAtividadesAutomaticamente)
+            {
+                ProximaAtividade();
+            }
 
-            CarregaAtividades(_listaDeAtividadesController.Index);
+
+            if (_btnProximaAtividade != null) _btnProximaAtividade.SetActive(!_passarAtividadesAutomaticamente);
+            if (_btnProximoExercicio != null) _btnProximoExercicio.SetActive(false);
         }
+
+    }
+
+    public void ProximaAtividade()
+    {
+        _listaDeAtividadesController.Next();
+        Debug.Log($"[ExerciciosManager][ProximaAtividade]");
+
+        CarregaAtividades(_listaDeAtividadesController.Index);
     }
 
     private void ExercicioConcluido()
@@ -174,16 +195,27 @@ public class ExerciciosManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"[ExerciciosManager]\tProximo Exercicio");
-            ProximoExercicio();
+            if (_passarAtividadesAutomaticamente)
+            {
+                Debug.Log($"[ExerciciosManager]\tProximo Exercicio");
+                ProximoExercicio();
+            }
+            else
+            {
+                Debug.Log($"[ExerciciosManager]\tEspera usuario passar Exercicio");
+            }
+
+
+            if (_btnProximaAtividade != null) _btnProximaAtividade.SetActive(false);
+            if (_btnProximoExercicio != null) _btnProximoExercicio.SetActive(!_passarAtividadesAutomaticamente);
         }
     }
 
     public void PlayDescricaoEmAudio()
     {
-        if (_listaDeAtividadesController.Current._descricaoEmAudio != null)
+        if (_listaDeAtividadesController.Current._audioDescricao.Descricao != null)
         {
-            AudioManager.Instance.PlayDescricao(_listaDeAtividadesController.Current._descricaoEmAudio);
+            AudioManager.Instance.PlayDescricao(_listaDeAtividadesController.Current._audioDescricao);
         }
     }
 

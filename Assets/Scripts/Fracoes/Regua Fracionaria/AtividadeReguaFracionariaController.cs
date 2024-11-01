@@ -54,7 +54,7 @@ public class AtividadeReguaFracionariaController : AbstractAtividadeController
         return _historicoDeVariacoes.Any(f => f._numerador == fracao._numerador && f._denominador == fracao._denominador);
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         var atividadeReguaSO = atividade as AtividaderReguaFracionariaSO;
 

@@ -29,7 +29,7 @@ public class BalancaPlacaController : MonoBehaviour
     }
     */
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         BalancaPesoController pesoController = other.gameObject.GetComponent<BalancaPesoController>();
 
@@ -40,7 +40,7 @@ public class BalancaPlacaController : MonoBehaviour
         _balancaController.AtualizaPesos();
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         BalancaPesoController pesoController = other.gameObject.GetComponent<BalancaPesoController>();
 

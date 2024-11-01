@@ -16,9 +16,21 @@ public class RegistradorDeTentativasManager : MonoBehaviour
         _tentativas = new List<string>();
     }
 
-    public bool AtualizaTentativas(List<BalancaPesoController> pesos)
+    public bool AtualizaTentativas(List<BalancaPesoController> pesosEsquerdos, List<BalancaPesoController> pesosDireitos, bool somarValores)
     {
-        string tentativa = GeraStringDaTentativa(pesos);
+        string tentativa = "";
+
+        if (pesosDireitos.Count > 0)
+        {
+            string ladoEsquerdo = GeraStringDaTentativa(pesosEsquerdos, somarValores);
+            string ladoDireito = GeraStringDaTentativa(pesosDireitos, somarValores);
+
+            tentativa = $"{ladoEsquerdo} = {ladoDireito}";
+        }
+        else
+        {
+            tentativa = GeraStringDaTentativa(pesosEsquerdos, somarValores);
+        }
 
         if (_tentativas.Contains(tentativa))
         {
@@ -33,18 +45,30 @@ public class RegistradorDeTentativasManager : MonoBehaviour
         return true;
     }
 
-    public string GeraStringDaTentativa(List<BalancaPesoController> pesos)
+    public string GeraStringDaTentativa(List<BalancaPesoController> pesos, bool somarValores)
     {
         var variaveis = pesos.FindAll(p => p.IsOculto).ToList();
         var valores = pesos.FindAll(p => !p.IsOculto).OrderBy(p => p.Peso).ToList();
 
         string resultado = "";
 
-        foreach (var variavel in variaveis) resultado += "X + ";
+        for (int i = 0; i < variaveis.Count; i++)
+        {
+            resultado += "X";
 
-        for (var i = 0; i < valores.Count - 1; i++) resultado += valores[i].Peso.ToString() + " + ";
+            if (i < variaveis.Count - 1) resultado += " + ";
+        }
 
-        resultado += valores[valores.Count - 1].Peso.ToString();
+        if (somarValores)
+        {
+            if (valores.Count > 0) resultado += valores.Sum(v => v.Peso).ToString();
+        }
+        else
+        {
+            for (var i = 0; i < valores.Count - 1; i++) resultado += valores[i].Peso.ToString() + " + ";
+
+            resultado += valores[valores.Count - 1].Peso.ToString();
+        }
 
         return resultado;
     }

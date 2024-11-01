@@ -92,7 +92,7 @@ public class AtividadeChocolateController : AbstractAtividadeController
         _respostaExibida = false;
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         var atividadeChocolateSO = atividade as AtividadeChocolateSO;
 

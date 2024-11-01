@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455ceae292e9f7a46b8f0d53b3afa01b, type: 3}
   m_Name: Atvidade_Balanca_Nivel1_1
   m_EditorClassIdentifier: 
-  _descricao: "Observe que um dos pratos da balan\xE7a tem 5 cubos de uma unidade.
-    Fa\xE7a combina\xE7\xF5es entre os diferentes cubos para que a balanca se mantenha
-    em equil\xEDbrio. Voc\xEA precisa acertar pelo menos 4 combina\xE7\xF5es diferentes."
-  _descricaoEmAudio:
-    _descricaoVozMasculina: {fileID: 8300000, guid: a607f86680e36704c9d074b5e461f23e, type: 3}
-    _descricaoVozFeminina: {fileID: 8300000, guid: 87246800d781ca94cbc0bb54a029da9c, type: 3}
+  _audioDescricao:
+    _descricao: "Observe que um dos pratos da balan\xE7a tem 5 cubos de uma unidade.
+      Fa\xE7a combina\xE7\xF5es entre os diferentes cubos para que a balanca se mantenha
+      em equil\xEDbrio. Voc\xEA precisa acertar pelo menos 4 combina\xE7\xF5es diferentes."
+    _descricaoVozMasculina: {fileID: 8300000, guid: 6ecb2ac7eb7741a4280d48454d08b5b9, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: abd9e3e4826ae5f41873e541d960c1e4, type: 3}
   _nivel: 1
   _minimoTentativas: 4
   _pesosLadoEsquerdo:
@@ -31,6 +31,6 @@ MonoBehaviour:
     _isOculto: 0
   - _valorPeso: 1
     _isOculto: 0
-  _podeAlterarLadoEsquerdo: 1
+  _podeAlterarLadoEsquerdo: 0
   _pesosLadoDireito: []
   _podeAlterarLadoDireito: 1

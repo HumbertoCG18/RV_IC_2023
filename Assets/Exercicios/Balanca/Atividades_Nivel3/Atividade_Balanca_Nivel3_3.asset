@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455ceae292e9f7a46b8f0d53b3afa01b, type: 3}
   m_Name: Atividade_Balanca_Nivel3_3
   m_EditorClassIdentifier: 
-  _descricao: "Observe a balan\xE7a e crie uma estrat\xE9gia para descobrir o valor
-    do peso desconhecido:"
-  _descricaoEmAudio:
-    _descricaoVozMasculina: {fileID: 8300000, guid: bd884e46ad7f44740b18fb1d87e5686b, type: 3}
-    _descricaoVozFeminina: {fileID: 8300000, guid: 4ead7f50a4b9ef6459b1b19b65975a1d, type: 3}
+  _audioDescricao:
+    _descricao: "Observe a balan\xE7a e crie uma estrat\xE9gia para descobrir o valor
+      do peso desconhecido:"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 8c49bb32b687e7543ba7b9e95d650097, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 798cf515cee66fe4cb2da73873adf4de, type: 3}
   _nivel: 3
   _minimoTentativas: 1
   _pesosLadoEsquerdo:

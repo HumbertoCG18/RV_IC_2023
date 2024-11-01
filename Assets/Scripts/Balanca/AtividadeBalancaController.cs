@@ -75,6 +75,8 @@ public class AtividadeBalancaController : AbstractAtividadeController
 
     public void AplicaCorrecao()
     {
+        if (_atividadeConcluida) return;
+
         bool acertou = false;
         bool tentativaJaUsada = false;
 
@@ -100,6 +102,7 @@ public class AtividadeBalancaController : AbstractAtividadeController
 
         if (acertou)
         {
+            /*
             if (_placaDireitaController.ContemPesoOculto)
             {
                 tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaEsquerdaController.Pesos);
@@ -108,7 +111,9 @@ public class AtividadeBalancaController : AbstractAtividadeController
             {
 
                 tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaDireitaController.Pesos);
-            }
+            }*/
+
+            tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaEsquerdaController.Pesos, _placaDireitaController.Pesos, _nivelExercicio != 1);
 
             if (!tentativaJaUsada)
             {
@@ -178,7 +183,7 @@ public class AtividadeBalancaController : AbstractAtividadeController
         _placaDireitaController.ResetarPesos();
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         var atividadeBalancaSO = atividade as AtividadeBalancaSO;
 

@@ -14,9 +14,15 @@ public abstract class AbstractAtividadeController : MonoBehaviour
     public Action OnAtividadeConcluida;
     public Action<bool> OnValidaResposta;
 
-    private bool _atividadeConcluida = false;
+    protected bool _atividadeConcluida = false;
 
-    public abstract void CarregaAtividade(ScriptableObject atividade);
+    public void CarregaAtividade(ScriptableObject atividade)
+    {
+        _atividadeConcluida = false;
+        IniciaAtividadeController(atividade);
+    }
+
+    public abstract void IniciaAtividadeController(ScriptableObject atividade);
 
     public virtual void SetOnAtividadeConcluida(Action onAtividadeConcluida, Action<bool> onValidaResposta=null)
     {
@@ -37,13 +43,7 @@ public abstract class AbstractAtividadeController : MonoBehaviour
 
                 if (_atividadeConcluida)
                 {
-                    _acertouErrouUIController.ExibeAcerto(() => {
-                        _atividadeConcluida = false;
-                        callback?.Invoke(); 
-                        OnAtividadeConcluida?.Invoke();
-                        Debug.Log($"Atividade concluida    {OnAtividadeConcluida}");
-
-                    }, tocarSom, tempoDeAnimacao);
+                    _acertouErrouUIController.ExibeAcerto(() => { callback?.Invoke(); OnAtividadeConcluida?.Invoke(); }, tocarSom, tempoDeAnimacao);
                 }
                 else
                 {

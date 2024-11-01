@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d02a1e508a33ab4097960457c88139e, type: 3}
   m_Name: Atividade_ReguaFracionaria_2
   m_EditorClassIdentifier: 
-  _descricao: "Crie varia\xE7\xF5es da r\xE9gua fracion\xE1ria equivalentes a 1/2"
-  _descricaoEmAudio:
+  _audioDescricao:
+    _descricao: "Crie varia\xE7\xF5es da r\xE9gua fracion\xE1ria equivalentes a 1
+      sobre 2"
     _descricaoVozMasculina: {fileID: 8300000, guid: 31c75e9e51bf87148a6749fa473c7267, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 4753e25b28a39bc449d6cb0a7f3d318a, type: 3}
   _fracaoEquivalenteDesejada:

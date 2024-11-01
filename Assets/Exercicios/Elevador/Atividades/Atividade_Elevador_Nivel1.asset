@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a46dedc0e44234db077f0c32f26030, type: 3}
   m_Name: Atividade_Elevador_Nivel1
   m_EditorClassIdentifier: 
-  _descricao: 
-  _descricaoEmAudio:
+  _audioDescricao:
+    _descricao: "Esta \xE9 a atividade Subindo o Elevador. Voc\xEA precisa levar
+      todos os animais para o segundo andar. Voc\xEA n\xE3o pode deixar sozinhos
+      ou levar no elevador as seguintes combina\xE7\xF5es de animais"
     _descricaoVozMasculina: {fileID: 8300000, guid: 54569a0a1299bef4789884da1b3c6e0f, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: ef9d68c90d830fd4b8c3c5255bf9e260, type: 3}

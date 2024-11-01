@@ -43,7 +43,7 @@ public class BalancaPesoController : MonoBehaviour
         _color = color;
 
         if (_grabController != null) _grabController.enabled = podeAlterarPesos;
-        if (!podeAlterarPesos) gameObject.layer = LayerMask.NameToLayer("PesoBloqueado");
+        if (!podeAlterarPesos) _rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
         AtualizaValor();
     }

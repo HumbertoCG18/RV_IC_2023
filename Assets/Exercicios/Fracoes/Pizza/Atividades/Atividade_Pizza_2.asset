@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
   m_Name: Atividade_Pizza_2
   m_EditorClassIdentifier: 
-  _descricao: "Para o jantar temos uma pizza de calabresa e uma pizza de mussarela.
-    As pizzas foram divididas em 5 partes iguais. Se comermos 2 peda\xE7os da pizza
-    de calabresa e 1 peda\xE7o da pizza de mussarela, qual fra\xE7\xE3o das pizzas
-    comeremos?  "
-  _descricaoEmAudio:
+  _audioDescricao:
+    _descricao: "Para o jantar temos uma pizza de calabresa e uma pizza de mussarela.
+      As pizzas foram divididas em 5 partes iguais. Se comermos 2 peda\xE7os da pizza
+      de calabresa e 1 peda\xE7o da pizza de mussarela, qual fra\xE7\xE3o das pizzas
+      comeremos?"
     _descricaoVozMasculina: {fileID: 8300000, guid: cadc6bb46c8f2bf47afa317db881e8d6, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 48093aee3e607ea4dbf30a4c0c70fa91, type: 3}
   _fracoesDesejadasLadoEsquerdo:

@@ -104,7 +104,7 @@ public class AtividadePizzaController : AbstractAtividadeController
         }
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         var ativiadePizzaSO = atividade as AtividadePizzaSO;
 

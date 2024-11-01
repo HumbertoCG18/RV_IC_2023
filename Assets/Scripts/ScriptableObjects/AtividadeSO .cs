@@ -6,6 +6,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Exercicio", menuName = "ScriptableObjects/Atividade", order=2)]
 public class AtividadeSO : ScriptableObject
 {
-    public string _descricao;
-    public AudioDescricao _descricaoEmAudio;
+    public AudioDescricao _audioDescricao;
 }

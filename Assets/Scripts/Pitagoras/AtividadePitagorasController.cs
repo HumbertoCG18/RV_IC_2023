@@ -60,13 +60,13 @@ public class AtividadePitagorasController : AbstractAtividadeController
         _perguntaERespostaUIManager.OnRespostaDoUsuario -= OnRespostaDoUsuario;
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         var atividadePitagoras = atividade as AtividadePitagorasSO;
 
         _iteradorPerguntaERespostaSO = new IteratorController<PerguntaERespostaSO>(atividadePitagoras._perguntas);
 
-        _txtDescricaoAtividade.text = atividadePitagoras._descricao;
+        _txtDescricaoAtividade.text = atividadePitagoras._audioDescricao.Descricao;
 
         StartCoroutine(IniciaNivelCoroutine(atividadePitagoras._nivelControllerPrefab));
     }

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455ceae292e9f7a46b8f0d53b3afa01b, type: 3}
   m_Name: Atvidade_Balanca_Nivel1_3
   m_EditorClassIdentifier: 
-  _descricao: "Observe que um dos pratos da balan\xE7a possui 10 cubos de uma unidade
-    de volume. Fa\xE7a combina\xE7\xF5es entre os grupos de cubos dispon\xEDveis
-    nas estantes de modo que a balan\xE7a se mantenha em equil\xEDbrio. Voc\xEA precisa
-    acertar pelo menos 6 combina\xE7\xF5es diferentes."
-  _descricaoEmAudio:
-    _descricaoVozMasculina: {fileID: 8300000, guid: 8c221c138a7360c4485969f086fc486c, type: 3}
-    _descricaoVozFeminina: {fileID: 8300000, guid: 8c221c138a7360c4485969f086fc486c, type: 3}
+  _audioDescricao:
+    _descricao: "Observe que um dos pratos da balan\xE7a possui 10 cubos de uma unidade
+      de volume. Fa\xE7a combina\xE7\xF5es entre os grupos de cubos dispon\xEDveis
+      nas estantes de modo que a balan\xE7a se mantenha em equil\xEDbrio. Voc\xEA
+      precisa acertar pelo menos 6 combina\xE7\xF5es diferentes."
+    _descricaoVozMasculina: {fileID: 8300000, guid: e2d6d965ddfba2f49bc901ed8e949c56, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: a5c19cffa85e19344b34805c29e6978a, type: 3}
   _nivel: 1
   _minimoTentativas: 6
   _pesosLadoEsquerdo:
@@ -42,6 +42,6 @@ MonoBehaviour:
     _isOculto: 0
   - _valorPeso: 1
     _isOculto: 0
-  _podeAlterarLadoEsquerdo: 1
+  _podeAlterarLadoEsquerdo: 0
   _pesosLadoDireito: []
   _podeAlterarLadoDireito: 1

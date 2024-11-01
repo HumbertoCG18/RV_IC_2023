@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -14,6 +15,8 @@ public class PontoReferenciaController : MonoBehaviour
     [SerializeField] private Transform _transformReferencia;
     [SerializeField] private bool _matchRotacao;
     [SerializeField] private float _erroMaximoRotacao = 0.1f;
+    [SerializeField] private bool _matchPosicao;
+    [SerializeField] private float _distanciaMinimaPosicao = 0.3f;
 
     private XRSocketInteractor _socketInteractor;
     private Transform _objetoDentroDaArea;
@@ -27,6 +30,12 @@ public class PontoReferenciaController : MonoBehaviour
         if (_transformReferencia != null)
         {
             DesativaSocket();
+        }
+
+        foreach (CustomCollisionController customCollision in GetComponentsInChildren<CustomCollisionController>())
+        {
+            customCollision.OnTriggerEnterEvent.AddListener(CustomTriggerEnter);
+            customCollision.OnTriggerExitEvent.AddListener(CustomTriggerExit);
         }
     }
 
@@ -47,12 +56,23 @@ public class PontoReferenciaController : MonoBehaviour
 
     private bool ValidaEncaixeDoObjeto()
     {
-        if (!_matchRotacao) return true;
+        List<bool> requisitos = new List<bool>() { true };
 
-        //Vector3 diferencaRotacao = (_transformReferencia.eulerAngles.normalized - _objetoDentroDaArea.eulerAngles.normalized).Abs();
-        Vector3 diferencaRotacao = GetRotationDiff(_transformReferencia.rotation, _objetoDentroDaArea.rotation);
+        if (_matchPosicao)
+        {
+            float distancia = Vector3.Distance(_objetoDentroDaArea.position, _transformReferencia.position);
 
-        return diferencaRotacao.x <= _erroMaximoRotacao && diferencaRotacao.y <= _erroMaximoRotacao && diferencaRotacao.z <= _erroMaximoRotacao;
+            requisitos.Add(distancia <= _distanciaMinimaPosicao);
+        }
+
+        if (_matchRotacao)
+        {
+            Vector3 diferencaRotacao = GetRotationDiff(_transformReferencia.rotation, _objetoDentroDaArea.rotation);
+
+            requisitos.Add(diferencaRotacao.x <= _erroMaximoRotacao && diferencaRotacao.y <= _erroMaximoRotacao && diferencaRotacao.z <= _erroMaximoRotacao);
+        }
+
+        return requisitos.All(r => r);
     }
 
     private Vector3 GetRotationDiff(Quaternion r1, Quaternion r2)
@@ -104,14 +124,14 @@ public class PontoReferenciaController : MonoBehaviour
 
     public void CustomTriggerEnter(Collider objeto)
     {
-        if (!objeto.CompareTag("Peca")) return;
+        if (!VerificaSeObjetoEDoSocket(objeto.gameObject)) return;
 
         _objetoDentroDaArea = objeto.transform;
     }
 
     public void CustomTriggerExit(Collider objeto)
     {
-        if (!objeto.CompareTag("Peca")) return;
+        if (!VerificaSeObjetoEDoSocket(objeto.gameObject)) return;
 
         _objetoDentroDaArea = null;
 
@@ -119,6 +139,15 @@ public class PontoReferenciaController : MonoBehaviour
         {
             DesativaSocket();
         }
+    }
+
+    private bool VerificaSeObjetoEDoSocket(GameObject objeto)
+    {
+        if (!objeto.CompareTag("Peca")) return false;
+
+        var grabInteractor = objeto.GetComponentInChildren<XRGrabInteractable>();
+
+        return grabInteractor.interactionLayers.Equals(grabInteractor.interactionLayers);
     }
 
     public bool EstaPreenchido => _socketInteractor.hasSelection;

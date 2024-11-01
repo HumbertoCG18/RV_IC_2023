@@ -26,7 +26,7 @@ public class AtividadeElevadorController : AbstractAtividadeController
         }
     }
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         _atividadeView.SetActive(true);
         _uiTelaResultado2.SetActive(false);

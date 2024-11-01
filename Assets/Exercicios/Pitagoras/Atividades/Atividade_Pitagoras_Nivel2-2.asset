@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591d574a46a56ba41a0822b0b65d2867, type: 3}
+  m_Name: Atividade_Pitagoras_Nivel2-2
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Agora, desloque as pe\xE7as dos quadrados menores de modo que elas
+      cubram perfeitamente o quadrado maior."
+    _descricaoVozMasculina: {fileID: 8300000, guid: 33f7d3afa88cca547a154ef438120586, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 13cfe744122437945bdda5a9dfcfcb93, type: 3}
+  _nivelControllerPrefab: {fileID: 3415793881481432494, guid: 10610c9ac38082e4c9e0de212806ff81, type: 3}
+  _perguntas: []

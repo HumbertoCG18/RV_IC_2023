@@ -47,34 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnTriggerEnterEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4643165659167179508}
-        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
-        m_MethodName: CustomTriggerEnter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnTriggerExitEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4643165659167179508}
-        m_TargetAssemblyTypeName: PontoReferenciaController, Assembly-CSharp
-        m_MethodName: CustomTriggerExit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!65 &3955683399417766818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -280,3 +256,5 @@ MonoBehaviour:
   _transformReferencia: {fileID: 4653769375185139020}
   _matchRotacao: 0
   _erroMaximoRotacao: 20
+  _matchPosicao: 0
+  _distanciaMinimaPosicao: 0.3

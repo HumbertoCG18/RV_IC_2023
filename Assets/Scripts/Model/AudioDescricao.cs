@@ -8,9 +8,12 @@ public class AudioDescricao
 {
     public enum TIPO_VOZ { Masculina, Feminina }
 
+    [SerializeField] private string _descricao;
     [SerializeField] private AudioClip _descricaoVozMasculina;
     [SerializeField] private AudioClip _descricaoVozFeminina;
 
     public AudioClip AudioMasculino => _descricaoVozMasculina;
     public AudioClip AudioFeminino => _descricaoVozFeminina;
+
+    public string Descricao => _descricao;
 }

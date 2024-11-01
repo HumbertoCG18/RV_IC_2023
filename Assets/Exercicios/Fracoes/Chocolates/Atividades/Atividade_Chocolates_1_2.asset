@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa74fda88d9cca840a186c4ba4d6942c, type: 3}
   m_Name: Atividade_Chocolates_1_2
   m_EditorClassIdentifier: 
-  _descricao: "Observe os tr\xEAs peda\xE7os de chocolate e as tr\xEAs crian\xE7as.
-    Se dividirmos igualmente os dois peda\xE7os para as duas crian\xE7as, quantos
-    peda\xE7os cada uma recebe? Arraste os peda\xE7os at\xE9 as crian\xE7as."
-  _descricaoEmAudio:
+  _audioDescricao:
+    _descricao: "Observe os tr\xEAs peda\xE7os de chocolate e as tr\xEAs crian\xE7as.
+      Se dividirmos igualmente os dois peda\xE7os para as duas crian\xE7as, quantos
+      peda\xE7os cada uma recebe? Arraste os peda\xE7os at\xE9 as crian\xE7as."
     _descricaoVozMasculina: {fileID: 8300000, guid: 55a2985b69c05854c9932bdde0a06adf, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 410a9adf334da364f97b6a499d7d55d0, type: 3}
   _quantidadeChocolates: 3

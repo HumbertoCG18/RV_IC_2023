@@ -47,4 +47,10 @@ public static class ClassToExtendExtensions
     }
 
     public static void ToggleIsOn(this Toggle toggle) => toggle.isOn = !toggle.isOn;
+
+    // Fonte: https://discussions.unity.com/t/check-if-layer-is-in-layermask/16007/3
+    public static bool Contains(this LayerMask mask, int layer)
+    {
+        return mask == (mask | (1 << layer));
+    }
 }

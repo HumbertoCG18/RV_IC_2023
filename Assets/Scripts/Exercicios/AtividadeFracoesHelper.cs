@@ -11,7 +11,7 @@ public class AtividadeFracoesHelper : AbstractAtividadeController
 
     [SerializeField] private GameObject _historicoDeReguasView;
 
-    public override void CarregaAtividade(ScriptableObject atividade)
+    public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         if (atividade is AtividadeChocolateSO)
         {
