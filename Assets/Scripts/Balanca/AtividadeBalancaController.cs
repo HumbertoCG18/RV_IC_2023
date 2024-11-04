@@ -126,23 +126,23 @@ public class AtividadeBalancaController : AbstractAtividadeController
                 }
                 else
                 {
-                    TrataSolucao(AcertoErroUIController.TipoResultado.Acertou, () =>
+                    TrataSolucao(AcertoErroUIController.TipoResultado.Acertou, _tempoDeAnimacaoSFX, () =>
                     {
                         AtualizaCombinacoes();
                         ResetaPesosPreDefinidos();
-                    }, false, _tempoDeAnimacaoSFX, false);
+                    }, false, false);
                 }
             }
             else
             {
                 PlayEffeitoSonoro(_sfxAviso);
-                TrataSolucao(AcertoErroUIController.TipoResultado.Aviso, null, false, _tempoDeAnimacaoSFX);
+                TrataSolucao(AcertoErroUIController.TipoResultado.Aviso, _tempoDeAnimacaoSFX, null, false);
             }
         }
         else
         {
             PlayEffeitoSonoro(_sfxErrou);
-            TrataSolucao(AcertoErroUIController.TipoResultado.Errou, null, false, _tempoDeAnimacaoSFX, false);
+            TrataSolucao(AcertoErroUIController.TipoResultado.Errou, _tempoDeAnimacaoSFX, null, false, false);
         }
     }
 

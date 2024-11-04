@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Pizza_Fracoes_Heterogeneas_Com_Adicao_Com_Subtracao_1
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: " Joana comeu 1/2  de uma pizza e, depois, comeu mais 1/4  de outra
+      pizza. Qual a fra\xE7\xE3o total que  Joana comeu?"
+    _descricaoVozMasculina: {fileID: 0}
+    _descricaoVozFeminina: {fileID: 0}
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 1
+      _denominador: 2
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 1
+  - _fracao:
+      _numerador: 1
+      _denominador: 4
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 3
+      _denominador: 4
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

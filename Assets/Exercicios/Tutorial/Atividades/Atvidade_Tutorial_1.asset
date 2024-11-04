@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efff4c07f4e47e488cff04ede2c1af5, type: 3}
+  m_Name: Atvidade_Tutorial_1
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Seja bem-vindo ao Tutorial da Aplica\xE7\xE3o. Aqui, voc\xEA aprender\xE1
+      a usar os controles para interagir com o ambiente. Primeiro, vamos aprender
+      a interagir com os bot\xF5es. Para isso, aponte o raio do controle direito
+      para o bot\xE3o verde e clique com o gatilho de cima, sinalizado com a seta
+      vermelha."
+    _descricaoVozMasculina: {fileID: 8300000, guid: 97876a1ddcbe6af4da968f65ca147b14, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 6226525a694f06449a1d534965273189, type: 3}
+  _nivelController: {fileID: 3758704878227127824, guid: a051d557e9588ed4893d497feba51a14, type: 3}

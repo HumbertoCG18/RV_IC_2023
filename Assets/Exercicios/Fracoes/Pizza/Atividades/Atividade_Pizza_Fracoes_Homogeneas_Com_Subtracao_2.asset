@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Pizza_Fracoes_Homogeneas_Com_Subtracao_2
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Miguel comprou uma pizza e comeu 3/6  dela no almo\xE7o. \xC0 noite,
+      ele comeu mais 1/6 . Qual  fra\xE7\xE3o da pizza ainda resta?"
+    _descricaoVozMasculina: {fileID: 0}
+    _descricaoVozFeminina: {fileID: 0}
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 6
+      _denominador: 6
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 1
+    _adicionarProximo: 0
+  - _fracao:
+      _numerador: 3
+      _denominador: 6
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 1
+    _adicionarProximo: 0
+  - _fracao:
+      _numerador: 1
+      _denominador: 6
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 2
+      _denominador: 6
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

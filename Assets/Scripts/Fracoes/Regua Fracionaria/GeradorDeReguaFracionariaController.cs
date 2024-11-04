@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class GeradorDeReguaFracionariaController : MonoBehaviour, IFracao
 {
-    private static int NUMERADOR_MAXIMO = 30;
     private static int DENOMINADOR_MAXIMO = 30;
 
     //[SerializeField] private ReguaFracionariaController _reguaFracionariaPrefab;

@@ -8,40 +8,38 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class PizzaController : MonoBehaviour, IFracao
+public class GeradorFracaoController : MonoBehaviour, IFracao
 {
     private static int DENOMINADOR_MAXIMO = 20;
 
-    [SerializeField] private Image _imgPizza;
-    [SerializeField] private RectTransform _containerLinhas;
-    [SerializeField] private GameObject _linhaPrefab;
+    [SerializeField] protected Image _imgPizza;
+    [SerializeField] protected RectTransform _containerLinhas;
+    [SerializeField] protected GameObject _linhaPrefab;
+                     
+    [SerializeField] protected FracaoUIController _fracaoUIController;
+                     
+    [SerializeField] protected GameObject _viewFormato1;
+    [SerializeField] protected GameObject _viewFormato2;
+    [SerializeField] protected Image _imgPizzaFormato1;
+    [SerializeField] protected Image _imgPizzaFormato2;
+                     
+    [Header("UI")]   
+    [SerializeField] protected Button _btnAumentaNumerador;
+    [SerializeField] protected Button _btnDiminuiNumerador;
+    [SerializeField] protected Button _btnAumentaDenominador;
+    [SerializeField] protected Button _btnDiminuiDenominador;
 
-    [SerializeField] private FracaoUIController _fracaoUIController;
-
-    [SerializeField] private GameObject _viewFormato1;
-    [SerializeField] private GameObject _viewFormato2;
-    [SerializeField] private Image _imgPizzaFormato1;
-    [SerializeField] private Image _imgPizzaFormato2;
-
-    [Header("UI")]
-    [SerializeField] private Button _btnAumentaNumerador;
-    [SerializeField] private Button _btnDiminuiNumerador;
-    [SerializeField] private Button _btnAumentaDenominador;
-    [SerializeField] private Button _btnDiminuiDenominador;
-
-
-
-    private Fracao _fracao;
+    [SerializeField] protected Fracao _fracao;
     public Action<Fracao> OnValorMudou;
 
-    private void Awake()
+    protected void Awake()
     {
         _fracao = new Fracao(0, 1);
         _fracaoUIController.SetFracao(this);
         SetFormatoDeExibicao(false);
     }
 
-    public void AtualizaPizza()
+    public virtual void AtualizaFracaoUI()
     {
         CustomUtils.ClearChilds(_containerLinhas);
 
@@ -74,7 +72,7 @@ public class PizzaController : MonoBehaviour, IFracao
         _viewFormato2.SetActive(pedacaoComidos);
 
         _imgPizza = pedacaoComidos ? _imgPizzaFormato2 : _imgPizzaFormato1;
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
     public void AtualizaFracao()
@@ -91,21 +89,21 @@ public class PizzaController : MonoBehaviour, IFracao
     {
         _fracao._numerador = Mathf.Min(_fracao._denominador, _fracao._numerador + 1);
 
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
     public void DiminuiNumerador()
     {
         _fracao._numerador = Mathf.Max(0, _fracao._numerador - 1);
 
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
     public void AumentarDenominador()
     {
         _fracao._denominador = Mathf.Min(_fracao._denominador + 1, DENOMINADOR_MAXIMO);
 
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
 
@@ -114,7 +112,7 @@ public class PizzaController : MonoBehaviour, IFracao
         _fracao._denominador = Mathf.Max(1, _fracao._denominador - 1);
         _fracao._numerador = Mathf.Min(_fracao._numerador, _fracao._denominador);
 
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
     public int Numerador()
@@ -135,7 +133,7 @@ public class PizzaController : MonoBehaviour, IFracao
     public void Reseta()
     {
         _fracao = new Fracao(1, 1);
-        AtualizaPizza();
+        AtualizaFracaoUI();
     }
 
     public Fracao Fracao => _fracao;

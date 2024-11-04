@@ -6,7 +6,7 @@ using static AcertoErroUIController;
 
 public abstract class AbstractAtividadeController : MonoBehaviour
 {
-    private const float TEMPO_DE_ANIMACAO = 3f;
+    [SerializeField] protected float TEMPO_DE_ANIMACAO = 3f;
 
     [Header("Parametros Resultado UI")]
     [SerializeField] protected AcertoErroUIController _acertouErrouUIController;
@@ -31,11 +31,15 @@ public abstract class AbstractAtividadeController : MonoBehaviour
         OnValidaResposta += onValidaResposta;
     }
 
-    public void TrataSolucao(TipoResultado resultado, Action callback = null, bool confirmarAtividade = true, float tempoDeAnimacao=TEMPO_DE_ANIMACAO, bool tocarSom=true)
+    public void TrataSolucao(TipoResultado resultado, Action callback = null, bool confirmarAtividade = true)
+    {
+        TrataSolucao(resultado, TEMPO_DE_ANIMACAO, callback, confirmarAtividade);
+    }
+
+    public void TrataSolucao(TipoResultado resultado, float tempoDeAnimacao, Action callback = null, bool confirmarAtividade = true, bool tocarSom=true)
     {
         if (_atividadeConcluida) return;
 
-        Debug.Log("TrataSolucao");
         switch (resultado)
         {
             case TipoResultado.Acertou:

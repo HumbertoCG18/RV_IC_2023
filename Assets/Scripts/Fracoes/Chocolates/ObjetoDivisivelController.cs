@@ -9,7 +9,6 @@ public class ObjetoDivisivelController : MonoBehaviour, IFracao
     [SerializeField] private Transform _modelo3D;
 
     private static float ESPACO_ENTRE_DIVISOES = 0.05f;
-    private static float TAMANHO_MINIMO_FILHO = 0.1f;
 
     private int _numerador = 1;
     private int _denominador = 1;

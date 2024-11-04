@@ -5,15 +5,26 @@ using static AudioDescricao;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _descricaoAudioSource;
+    [SerializeField] private AudioSource _sfxAudioSource;
 
     [SerializeField] private TIPO_VOZ _tipoVoz;
 
-    public void PlayAudio(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volume = 1f)
     {
-        _audioSource.Stop();
-        _audioSource.clip = clip;
-        _audioSource.Play();
+        PlayAudio(_sfxAudioSource, clip, volume);
+    }
+
+    public void PlayAudio(AudioClip clip, float volume=1f)
+    {
+        PlayAudio(_descricaoAudioSource, clip, volume);
+    }
+
+    private void PlayAudio(AudioSource audioSource, AudioClip clip, float volume)
+    {
+        audioSource.volume = volume;
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     public void PlayDescricao(AudioDescricao audioDescricao)

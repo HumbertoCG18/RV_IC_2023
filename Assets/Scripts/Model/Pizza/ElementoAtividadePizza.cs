@@ -8,4 +8,6 @@ public class ElementoAtividadePizza
 {
     public Fracao _fracao;
     public bool _mostrarPedacosComidos;
+    public bool _subtrairProximo;
+    public bool _adicionarProximo;
 }

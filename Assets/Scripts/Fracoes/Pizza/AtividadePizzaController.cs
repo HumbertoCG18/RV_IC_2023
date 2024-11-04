@@ -9,7 +9,7 @@ public class AtividadePizzaController : AbstractAtividadeController
 {
     [SerializeField] private GameObject _view;
     [SerializeField] private Transform _containerPizzas;
-    [SerializeField] private PizzaController _pizzaControllerPrefab;
+    [SerializeField] private GeradorFracaoController _pizzaControllerPrefab;
     [SerializeField] private float _espacoEntreObjetos = 0.01f;
 
     [SerializeField] private AcertoErroUIController _acertoErroUIController;
@@ -17,8 +17,8 @@ public class AtividadePizzaController : AbstractAtividadeController
     [Header("Parametros")]
     [SerializeField] private float _larguraPizzaController = 0.6f;
 
-    [SerializeField] private List<PizzaController> _pizzaControllersLadoEsquerdo = new List<PizzaController>();
-    [SerializeField] private List<PizzaController> _pizzaControllersLadoDireito = new List<PizzaController>();
+    [SerializeField] private List<GeradorFracaoController> _pizzaControllersLadoEsquerdo = new List<GeradorFracaoController>();
+    [SerializeField] private List<GeradorFracaoController> _pizzaControllersLadoDireito = new List<GeradorFracaoController>();
 
     [SerializeField] private List<Fracao> _fracoesEsperadasLadoEsquerdo;
     [SerializeField] private List<Fracao> _fracoesEsperadasLadoDireito;

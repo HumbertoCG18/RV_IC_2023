@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efff4c07f4e47e488cff04ede2c1af5, type: 3}
+  m_Name: Atvidade_Tutorial_2
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Muito bem, agora vamos aprender a se mover pelo ambiente. Para isso,
+      voc\xEA pode se mover usando o anal\xF3gico do controle esquerdo, sinalizado
+      pela seta vermelha. Voc\xEA tamb\xE9m pode usar o anal\xF3gico do controle
+      direito para rotacionar para esquerda e direita. Tente se mover at\xE9 os c\xEDrculos
+      apontados pelas setas vermelhas."
+    _descricaoVozMasculina: {fileID: 8300000, guid: 9fe5ac279b8973648a91dc8a774a600f, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: b97e9ecac8484824ab47b178093d5b40, type: 3}
+  _nivelController: {fileID: 4739945533967310958, guid: a6d209f3ebe2aae4fba1e2746a4ff6a6, type: 3}
