@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class ExerciciosManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class ExerciciosManager : MonoBehaviour
     [SerializeField] private GameObject _btnProximaAtividade;
     [SerializeField] private GameObject _btnProximoExercicio;
 
-    public Action<ExerciciosManager> OnExerciciosFinalizados;
+    public UnityEvent<ExerciciosManager> OnExerciciosFinalizados;
     [SerializeField] private bool _exerciciosFinalizados = false;
     private IteratorController<AtividadeSO> _listaDeAtividadesController;
 
@@ -184,7 +185,7 @@ public class ExerciciosManager : MonoBehaviour
     private void ExercicioConcluido()
     {
         Debug.Log($"[ExerciciosManager][ExercicioConcluido]");
-        if (_listaDeExerciciosController.IsLast && !_exerciciosFinalizados)
+        if (_listaDeExerciciosController.IsLast)
         {
             OnExerciciosFinalizados?.Invoke(this);
             _exerciciosFinalizados = true;

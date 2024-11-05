@@ -31,6 +31,10 @@ public class AtividadeFracoesHelper : AbstractAtividadeController
             _historicoDeReguasView.SetActive(true);
             _atividadePizzaController.CarregaAtividade(atividade);
         }
+        else
+        {
+            TrataSolucao(AcertoErroUIController.TipoResultado.Acertou);
+        }
     }
 
     public void SetViews(bool v1, bool v2, bool v3)

@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class AtividadeBalancaController : AbstractAtividadeController
 {
@@ -47,7 +42,7 @@ public class AtividadeBalancaController : AbstractAtividadeController
     private int _combinacoesMinimas;
     private GameObject _instanciaDosPesosPreDefinidos;
 
-    private void InstanciaPesos(List<AtividadeBalancaSO.PesoBalanca> pesos, GameObject prefab, List<Transform> pivos, Color cor, bool podeAlterarPesos)
+    private void InstanciaPesos(BalancaPlacaController placaController, List<AtividadeBalancaSO.PesoBalanca> pesos, GameObject prefab, List<Transform> pivos, Color cor, bool podeAlterarPesos)
     {
         int i = 0;
         foreach (var peso in pesos)
@@ -60,6 +55,8 @@ public class AtividadeBalancaController : AbstractAtividadeController
 
             i = (i + 1) % pivos.Count;
         }
+
+        placaController.SetPlacaBloqueada(!podeAlterarPesos);
     }
 
     private void AtualizaCombinacoes()
@@ -102,17 +99,6 @@ public class AtividadeBalancaController : AbstractAtividadeController
 
         if (acertou)
         {
-            /*
-            if (_placaDireitaController.ContemPesoOculto)
-            {
-                tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaEsquerdaController.Pesos);
-            }
-            else
-            {
-
-                tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaDireitaController.Pesos);
-            }*/
-
             tentativaJaUsada = !_registradorDeTentativasManager.AtualizaTentativas(_placaEsquerdaController.Pesos, _placaDireitaController.Pesos, _nivelExercicio != 1);
 
             if (!tentativaJaUsada)
@@ -120,6 +106,8 @@ public class AtividadeBalancaController : AbstractAtividadeController
                 _combinacoesCorretas += 1;
 
                 PlayEffeitoSonoro(_sfxAcertou);
+                AtualizaCombinacoes();
+
                 if (_combinacoesCorretas == _combinacoesMinimas)
                 {
                     TrataSolucao(AcertoErroUIController.TipoResultado.Acertou);
@@ -128,7 +116,6 @@ public class AtividadeBalancaController : AbstractAtividadeController
                 {
                     TrataSolucao(AcertoErroUIController.TipoResultado.Acertou, _tempoDeAnimacaoSFX, () =>
                     {
-                        AtualizaCombinacoes();
                         ResetaPesosPreDefinidos();
                     }, false, false);
                 }
@@ -193,24 +180,24 @@ public class AtividadeBalancaController : AbstractAtividadeController
         // Reseta posicao dos pesos pre definidos
         ResetaPesosPreDefinidos();
 
-        // Zera contador de combinacoes corretas
-        _combinacoesCorretas = 0;
-
-        // Atualiza combinacoes
-        AtualizaCombinacoes();
-
         // Reseta Pesos da placa esquerda
         _placaEsquerdaController.ResetarPesos();
 
         // Instancia pesos nas placas da balanca
-        InstanciaPesos(atividadeBalancaSO._pesosLadoEsquerdo, _pesoEsquerdoPrefab, _pivosLadoEsquerdo, _corPesosDaEsquerda, atividadeBalancaSO._podeAlterarLadoEsquerdo);
-        InstanciaPesos(atividadeBalancaSO._pesosLadoDireito, _pesoDireitoPrefab, _pivosLadoDireito, _corPesosDaDireita, atividadeBalancaSO._podeAlterarLadoDireito);
+        InstanciaPesos(_placaEsquerdaController, atividadeBalancaSO._pesosLadoEsquerdo, _pesoEsquerdoPrefab, _pivosLadoEsquerdo, _corPesosDaEsquerda, atividadeBalancaSO._podeAlterarLadoEsquerdo);
+        InstanciaPesos(_placaDireitaController, atividadeBalancaSO._pesosLadoDireito, _pesoDireitoPrefab, _pivosLadoDireito, _corPesosDaDireita, atividadeBalancaSO._podeAlterarLadoDireito);
 
         // Seta nivel da atividade
         _nivelExercicio = atividadeBalancaSO._nivel;
 
         // Seta combinacoes minimas
         _combinacoesMinimas = atividadeBalancaSO._minimoTentativas;
+
+        // Zera contador de combinacoes corretas
+        _combinacoesCorretas = 0;
+
+        // Atualiza combinacoes
+        AtualizaCombinacoes();
 
         // Limpa registro de tentativas
         _registradorDeTentativasManager.LimpaTentativas();

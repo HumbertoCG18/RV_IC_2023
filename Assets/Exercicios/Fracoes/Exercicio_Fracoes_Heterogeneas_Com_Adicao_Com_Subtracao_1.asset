@@ -17,9 +17,6 @@ MonoBehaviour:
     _descricaoVozMasculina: {fileID: 0}
     _descricaoVozFeminina: {fileID: 0}
   _atividades:
-  - {fileID: 11400000, guid: 826aa431b98bffc46ac849f9ee924fc9, type: 2}
-  - {fileID: 11400000, guid: 11520a875ae9b3047b1827058ece5e73, type: 2}
-  - {fileID: 11400000, guid: 3d72ba6a7b40fbc45a9abc6cc276b620, type: 2}
   - {fileID: 11400000, guid: b35d17b6960e2ff4db3862c9cdf57eca, type: 2}
   - {fileID: 11400000, guid: e4f0a207cd6e23e428068533a9766707, type: 2}
   - {fileID: 11400000, guid: 973a2fee1529b374d8bd14028972e9f9, type: 2}

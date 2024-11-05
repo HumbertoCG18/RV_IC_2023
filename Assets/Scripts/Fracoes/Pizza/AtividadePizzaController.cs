@@ -24,7 +24,8 @@ public class AtividadePizzaController : AbstractAtividadeController
     [SerializeField] private List<Fracao> _fracoesEsperadasLadoDireito;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject _sinalMaisPrefab; 
+    [SerializeField] private GameObject _sinalMaisPrefab;
+    [SerializeField] private GameObject _sinalMenosPrefab;
     [SerializeField] private GameObject _sinalIgualPrefab; 
 
     public void ValidaSolucao()
@@ -82,25 +83,55 @@ public class AtividadePizzaController : AbstractAtividadeController
             {
                 _pizzaControllersLadoEsquerdo.Add(controller);
                 controller.SetFormatoDeExibicao(ladoEsquerdo[i]._mostrarPedacosComidos);
-
+                /*
                 if (i < ladoEsquerdo.Count - 1)
                 {
                     var sinalMais = Instantiate(_sinalMaisPrefab, _containerPizzas);
                     sinalMais.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
+                }*/
+
+                GameObject sinal = null;
+
+                if (ladoEsquerdo[i]._subtrairProximo)
+                {
+                    sinal = Instantiate(_sinalMenosPrefab, _containerPizzas);
                 }
+                else if (ladoEsquerdo[i]._adicionarProximo)
+                {
+                    sinal = Instantiate(_sinalMaisPrefab, _containerPizzas);
+                }
+                else if (ladoDireito.Count != 0)
+                {
+                    sinal = Instantiate(_sinalIgualPrefab, _containerPizzas);
+                }
+
+                if (sinal != null) sinal.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
             }
             else
             {
                 _pizzaControllersLadoDireito.Add(controller);
                 controller.SetFormatoDeExibicao(ladoDireito[i - ladoEsquerdo.Count]._mostrarPedacosComidos);
 
-            }
 
+                GameObject sinal = null;
+
+                if (ladoDireito[i - ladoEsquerdo.Count]._subtrairProximo)
+                {
+                    sinal = Instantiate(_sinalMenosPrefab, _containerPizzas);
+                }
+                else if (ladoDireito[i - ladoEsquerdo.Count]._adicionarProximo)
+                {
+                    sinal = Instantiate(_sinalMaisPrefab, _containerPizzas);
+                }
+
+                if (sinal != null) sinal.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
+            }
+            /*
             if (i == ladoEsquerdo.Count - 1 && ladoDireito.Count != 0)
             {
                 var sinalIgual = Instantiate(_sinalIgualPrefab, _containerPizzas);
                 sinalIgual.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
-            }
+            }*/
         }
     }
 

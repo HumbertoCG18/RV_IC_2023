@@ -6,13 +6,17 @@ using static AudioDescricao;
 public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] private AudioSource _descricaoAudioSource;
-    [SerializeField] private AudioSource _sfxAudioSource;
+    [SerializeField] private List<AudioSource> _audioSources;
 
     [SerializeField] private TIPO_VOZ _tipoVoz;
 
+    private int _indexAudioSourceSFX = 0;
+
     public void PlaySFX(AudioClip clip, float volume = 1f)
     {
-        PlayAudio(_sfxAudioSource, clip, volume);
+        PlayAudio(_audioSources[_indexAudioSourceSFX], clip, volume);
+
+        _indexAudioSourceSFX = (_indexAudioSourceSFX + 1) % _audioSources.Count;
     }
 
     public void PlayAudio(AudioClip clip, float volume=1f)

@@ -15,19 +15,19 @@ MonoBehaviour:
   _audioDescricao:
     _descricao: " Joana comeu 1/2  de uma pizza e, depois, comeu mais 1/4  de outra
       pizza. Qual a fra\xE7\xE3o total que  Joana comeu?"
-    _descricaoVozMasculina: {fileID: 0}
-    _descricaoVozFeminina: {fileID: 0}
+    _descricaoVozMasculina: {fileID: 8300000, guid: 0fb04ad7fd0b97d4aa4320c6d27fba54, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 82269dc73b7d0b9468e0c19d0a257671, type: 3}
   _fracoesDesejadasLadoEsquerdo:
   - _fracao:
       _numerador: 1
       _denominador: 2
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 1
   - _fracao:
       _numerador: 1
       _denominador: 4
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0
   _fracoesDesejadasLadoDireito:

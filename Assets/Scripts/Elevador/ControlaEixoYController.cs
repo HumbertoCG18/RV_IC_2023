@@ -34,16 +34,16 @@ public class ControlaEixoYController : MonoBehaviour
 
     private void AtivaEventos()
     {
-        _elevadorController.OnIniciaMovimentoElevador += OnIniciaMovimentoElevador;
-        _elevadorController.OnElevadorEmMovimento += OnElevadorEmMovimento;
-        _elevadorController.OnFinalizaMovimentoElevador += OnFinalizaMovimentoElevador;
+        _elevadorController.OnIniciaMovimentoElevador.AddListener(OnIniciaMovimentoElevador);
+        _elevadorController.OnElevadorEmMovimento.AddListener(OnElevadorEmMovimento);
+        _elevadorController.OnFinalizaMovimentoElevador.AddListener(OnFinalizaMovimentoElevador);
     }
 
     private void DesativaEventos()
     {
-        _elevadorController.OnIniciaMovimentoElevador -= OnIniciaMovimentoElevador;
-        _elevadorController.OnElevadorEmMovimento -= OnElevadorEmMovimento;
-        _elevadorController.OnFinalizaMovimentoElevador -= OnFinalizaMovimentoElevador;
+        _elevadorController.OnIniciaMovimentoElevador.AddListener(OnIniciaMovimentoElevador);
+        _elevadorController.OnElevadorEmMovimento.AddListener(OnElevadorEmMovimento);
+        _elevadorController.OnFinalizaMovimentoElevador.AddListener(OnFinalizaMovimentoElevador);
     }
 
     public void CustomTriggerEnter(Collider objeto)

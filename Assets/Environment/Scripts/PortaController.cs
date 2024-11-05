@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PortaController : MonoBehaviour
@@ -14,6 +15,8 @@ public class PortaController : MonoBehaviour
     [SerializeField] private bool _alteraEixoZ = true;
 
     [SerializeField] private bool _estaAberta = false;
+
+    public UnityEvent OnPortaSelecionada;
 
     private void Update()
     {
@@ -67,6 +70,8 @@ public class PortaController : MonoBehaviour
 
     private IEnumerator AnimaPorta(float tempoDeAnimacao, Vector3 escalaAlvo, Action callback)
     {
+        OnPortaSelecionada?.Invoke();
+
         float t = 0f;
 
         List<Vector3> _escalasOriginais = new List<Vector3>();

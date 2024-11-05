@@ -12,6 +12,8 @@ public class ColetorController : MonoBehaviour
     [SerializeField] private float _espacoEntreObjetos = 0.1f;
     [SerializeField] private Transform _containerDeObjetos;
     [SerializeField] private GameObject _colisorDeExibicao;
+    [SerializeField] private GameObject _sinalMaisPrefab;
+    [SerializeField] private Transform _sinalParent;
 
     [Header("UI")]
     [SerializeField] private Image _imgResultado;
@@ -49,6 +51,7 @@ public class ColetorController : MonoBehaviour
         Vector3 passo = Vector3.forward * (width + _espacoEntreObjetos);
 
         AtualizaTamanhoColisorDeExibicao(larguraTotal * 1.1f);
+        _sinalParent.DestroyChildren();
 
         int i = 0;
         foreach (var objeto in _fracoes)
@@ -60,6 +63,12 @@ public class ColetorController : MonoBehaviour
             instancia.transform.localPosition = (posicaoInicial + passo * i);
             instancia.transform.localRotation = Quaternion.identity;
             instancia.transform.parent = paiInstancia;
+
+            if (i < _fracoes.Count - 1)
+            {
+                var sinal = Instantiate(_sinalMaisPrefab, _sinalParent);
+                sinal.transform.localPosition = posicaoInicial + passo * i + Vector3.forward * ((width + _espacoEntreObjetos) / 2f);
+            }
 
             i++;
         }
@@ -79,7 +88,7 @@ public class ColetorController : MonoBehaviour
     {
         var grabController = fracao.Instancia().GetComponentInChildren<XRGrabInteractable>();
 
-        yield return InteractionManager.Instance.DropObject(grabController);
+        yield return InteractionManager.Instance.DropObjectCoroutine(grabController);
 
         fracao.Instancia().layer = LayerMask.NameToLayer("ObjetoBloqueado");
         _fracoes.Add(fracao);

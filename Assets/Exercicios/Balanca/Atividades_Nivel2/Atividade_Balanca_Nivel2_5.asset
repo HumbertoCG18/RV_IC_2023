@@ -22,7 +22,7 @@ MonoBehaviour:
   _pesosLadoEsquerdo:
   - _valorPeso: 6
     _isOculto: 1
-  - _valorPeso: 7
+  - _valorPeso: 6
     _isOculto: 0
   - _valorPeso: 7
     _isOculto: 0

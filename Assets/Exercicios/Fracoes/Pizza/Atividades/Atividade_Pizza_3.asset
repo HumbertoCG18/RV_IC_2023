@@ -21,15 +21,21 @@ MonoBehaviour:
     _descricaoVozFeminina: {fileID: 8300000, guid: db35e2fafcaa92848aae8529f98f7b0e, type: 3}
   _fracoesDesejadasLadoEsquerdo:
   - _fracao:
-      _numerador: 2
-      _denominador: 4
+      _numerador: 7
+      _denominador: 10
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0
   - _fracao:
       _numerador: 3
       _denominador: 6
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0
   _fracoesDesejadasLadoDireito:
   - _fracao:
       _numerador: 1
       _denominador: 1
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

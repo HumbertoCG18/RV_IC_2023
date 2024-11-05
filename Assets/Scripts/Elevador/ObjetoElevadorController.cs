@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ObjetoElevadorController : MonoBehaviour
 {
@@ -59,6 +61,16 @@ public class ObjetoElevadorController : MonoBehaviour
     {
         _estaEmUmaArea = false;
     }
+
+    public void SoltaObjeto()
+    {
+        var xrGrabInteraction = GetComponentInChildren<XRGrabInteractable>();
+
+        if (xrGrabInteraction == null) return;
+
+        InteractionManager.Instance.DropObject(xrGrabInteraction, true);
+    }
+
 
     public bool EstaEmUmaArea { get => _estaEmUmaArea; }
     public TipoObjetoElevador TipoObjeto => _tipoObjetoElevador;

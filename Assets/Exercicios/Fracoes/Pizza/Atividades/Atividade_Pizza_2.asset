@@ -24,12 +24,18 @@ MonoBehaviour:
       _numerador: 2
       _denominador: 5
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 1
   - _fracao:
       _numerador: 1
       _denominador: 5
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0
   _fracoesDesejadasLadoDireito:
   - _fracao:
       _numerador: 3
       _denominador: 5
     _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

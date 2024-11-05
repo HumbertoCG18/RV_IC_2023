@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static ObjetoElevadorController;
 
@@ -24,9 +25,9 @@ public class ElevadorController : MonoBehaviour
     private List<ObjetoElevadorController> _objetoNoElevador = new List<ObjetoElevadorController>();
     private bool _emMovimento = false;
 
-    public Action<Vector3> OnIniciaMovimentoElevador;
-    public Action<Vector3> OnElevadorEmMovimento;
-    public Action<Vector3> OnFinalizaMovimentoElevador;
+    public UnityEvent<Vector3> OnIniciaMovimentoElevador;
+    public UnityEvent<Vector3> OnElevadorEmMovimento;
+    public UnityEvent<Vector3> OnFinalizaMovimentoElevador;
 
     private bool _precisaValidarAreas = false;
 

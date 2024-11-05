@@ -20,17 +20,17 @@ MonoBehaviour:
   _nivel: 3
   _minimoTentativas: 1
   _pesosLadoEsquerdo:
-  - _valorPeso: 2
+  - _valorPeso: 4
     _isOculto: 1
-  - _valorPeso: 2
+  - _valorPeso: 4
     _isOculto: 1
-  - _valorPeso: 2
+  - _valorPeso: 4
     _isOculto: 1
   - _valorPeso: 3
     _isOculto: 0
   _podeAlterarLadoEsquerdo: 1
   _pesosLadoDireito:
-  - _valorPeso: 2
+  - _valorPeso: 4
     _isOculto: 1
   - _valorPeso: 2
     _isOculto: 0

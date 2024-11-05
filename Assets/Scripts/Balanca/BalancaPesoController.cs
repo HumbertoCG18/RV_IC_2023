@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -41,8 +42,12 @@ public class BalancaPesoController : MonoBehaviour
         _isOculto = isOculto;
         _color = color;
 
-        if (_grabController != null) _grabController.enabled = podeAlterarPesos;
-        if (!podeAlterarPesos) _rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        if (!podeAlterarPesos)
+        {
+            _grabController.enabled = false;
+            _rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            gameObject.SetLayerRecursively(LayerMask.NameToLayer("PesoBloqueado"));
+        }
 
         AtualizaValor();
     }

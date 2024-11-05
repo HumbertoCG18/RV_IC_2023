@@ -15,19 +15,19 @@ MonoBehaviour:
   _audioDescricao:
     _descricao: "Lucas comeu 2/3  de uma pizza e depois comeu mais 1/5  de outra
       pizza. Qual a fra\xE7\xE3o total de  pizza que ele comeu?"
-    _descricaoVozMasculina: {fileID: 0}
-    _descricaoVozFeminina: {fileID: 0}
+    _descricaoVozMasculina: {fileID: 8300000, guid: de143a4861984674ea37e4f4d7087d23, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: fb20f8fb0c27cfc4685ee6796a3120cc, type: 3}
   _fracoesDesejadasLadoEsquerdo:
   - _fracao:
       _numerador: 2
       _denominador: 3
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 1
   - _fracao:
       _numerador: 1
       _denominador: 5
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0
   _fracoesDesejadasLadoDireito:

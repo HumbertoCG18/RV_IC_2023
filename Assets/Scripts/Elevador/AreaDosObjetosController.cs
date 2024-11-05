@@ -75,6 +75,7 @@ public class AreaDosObjetosController : MonoBehaviour
 
         AtualizaPosicoes();
         AtualizaUI();
+        objetoElevadorController.SoltaObjeto();
 
         OnMudancaDeEstado?.Invoke();
     }

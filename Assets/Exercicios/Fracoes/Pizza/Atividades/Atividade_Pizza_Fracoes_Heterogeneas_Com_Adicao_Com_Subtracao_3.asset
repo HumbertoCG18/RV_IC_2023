@@ -15,25 +15,25 @@ MonoBehaviour:
   _audioDescricao:
     _descricao: "Paula tinha 4/5 de uma pizza, mas comeu apenas 1/3  dela. Qual a
       fra\xE7\xE3o da pizza que ainda  resta?"
-    _descricaoVozMasculina: {fileID: 0}
-    _descricaoVozFeminina: {fileID: 0}
+    _descricaoVozMasculina: {fileID: 8300000, guid: ae1025d4d4cd65642b90779728d0e590, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 0826ff6ef2df65844b103feb141ac5fa, type: 3}
   _fracoesDesejadasLadoEsquerdo:
   - _fracao:
       _numerador: 4
       _denominador: 5
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 1
     _adicionarProximo: 0
   - _fracao:
       _numerador: 1
       _denominador: 3
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0
   _fracoesDesejadasLadoDireito:
   - _fracao:
       _numerador: 11
       _denominador: 15
-    _mostrarPedacosComidos: 0
+    _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0

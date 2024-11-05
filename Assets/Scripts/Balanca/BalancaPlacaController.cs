@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class BalancaPlacaController : MonoBehaviour
@@ -69,6 +70,11 @@ public class BalancaPlacaController : MonoBehaviour
         _balancaController.TrataPesoNaPlaca(this);
     }
     */
+
+    public void SetPlacaBloqueada(bool bloquearPlaca)
+    {
+        gameObject.SetLayerRecursively(bloquearPlaca ? LayerMask.NameToLayer("PlacaBloqueada") : 0);
+    }
 
     public List<BalancaPesoController> Pesos { get => _pesosNaPlaca; }
     public int TotalPeso => _pesosNaPlaca.Sum(p => p.Peso);
