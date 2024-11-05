@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4801080966979260002
+--- !u!1001 &7771493811010646474
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalScale.y
@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.406633
+      value: -1.0666327
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.242699
+      value: -2.001699
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,11 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_Name
-      value: CaixaUnidade
+      value: CaixaCentena
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       propertyPath: m_Name
-      value: CaixaAbertaUnidade
+      value: CaixaAbertaCentena
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -76,20 +76,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6256627499071622328}
+      addedObject: {fileID: 5090628273256942906}
   m_SourcePrefab: {fileID: 100100000, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
---- !u!1 &5272798444811074566 stripped
+--- !u!1 &6941603926440248238 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 3e264af12fa98fa449c6dce0912aa112, type: 3}
-  m_PrefabInstance: {fileID: 4801080966979260002}
+  m_PrefabInstance: {fileID: 7771493811010646474}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &6256627499071622328
+--- !u!65 &5090628273256942906
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5272798444811074566}
+  m_GameObject: {fileID: 6941603926440248238}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -103,4 +103,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.0128, y: 0.0128, z: 0.014999997}
-  m_Center: {x: 0, y: 0.0000000037252903, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.0000000018626451}

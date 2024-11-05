@@ -31,9 +31,7 @@ public class caixaSpawn : MonoBehaviour
     }
 
     bool foraDaCaixa()
-    {
-        
-
+    {   
         if (1 == 1)//Fora da caixa
         {
             //return true;
