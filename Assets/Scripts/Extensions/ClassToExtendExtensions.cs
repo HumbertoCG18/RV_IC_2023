@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Switch;
 using UnityEngine.UI;
 
 public static class ClassToExtendExtensions
@@ -52,5 +53,15 @@ public static class ClassToExtendExtensions
     public static bool Contains(this LayerMask mask, int layer)
     {
         return mask == (mask | (1 << layer));
+    }
+
+    public static GameObject GetChildByName(this GameObject gameObject, string name)
+    {
+        foreach (Transform child in gameObject.transform)
+        {
+            if (child.name.Equals(name)) return child.gameObject;
+        }
+
+        return null;
     }
 }
