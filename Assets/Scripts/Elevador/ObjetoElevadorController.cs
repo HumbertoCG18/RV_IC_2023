@@ -10,10 +10,12 @@ public class ObjetoElevadorController : MonoBehaviour
     [SerializeField] private TipoObjetoElevador _tipoObjetoElevador;
     [SerializeField] private List<TipoObjetoElevador> _restricoes;
     [SerializeField] private AreaDosObjetosController _areaController;
+    [SerializeField] private Rigidbody _rigibody;
 
     public enum TipoObjetoElevador { Cachorro, Gato, Rato }
 
     private bool _estaEmUmaArea = false;
+
 
     public List<TipoObjetoElevador> ContemRestricao(List<TipoObjetoElevador> objetos)
     {
@@ -43,12 +45,6 @@ public class ObjetoElevadorController : MonoBehaviour
         {
             _areaController.AdicionaObjeto(this);
         }
-        Debug.Log($"Objeto solto {name} {_estaEmUmaArea}");
-    }
-
-    public void Temp(int i)
-    {
-        Debug.Log(i.ToString());
     }
 
     public void AdicionaEmArea(AreaDosObjetosController areaController)
@@ -69,6 +65,18 @@ public class ObjetoElevadorController : MonoBehaviour
         if (xrGrabInteraction == null) return;
 
         InteractionManager.Instance.DropObject(xrGrabInteraction, true);
+
+        _rigibody.velocity = Vector3.zero;
+    }
+
+    public void DesabilitaColisoes()
+    {
+        _rigibody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void AbilitaColisoes()
+    {
+        _rigibody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AreaDosObjetosController : MonoBehaviour
 {
@@ -13,9 +14,10 @@ public class AreaDosObjetosController : MonoBehaviour
     [SerializeField] private bool _usaPosicoesPreDefinidas = true;
 
     [SerializeField] private List<ObjetoElevadorController> _objetosNaArea = new List<ObjetoElevadorController>();
+    [SerializeField] private int _objetosNecessarios = 3;
 
-
-    public Action OnMudancaDeEstado;
+    public UnityEvent OnMudancaDeEstado;
+    public UnityEvent OnTodosObjetosNaArea;
 
     public void CustomOnTriggerEnter(Collider objeto)
     {
@@ -78,6 +80,11 @@ public class AreaDosObjetosController : MonoBehaviour
         objetoElevadorController.SoltaObjeto();
 
         OnMudancaDeEstado?.Invoke();
+
+        if (_objetosNaArea.Count == _objetosNecessarios)
+        {
+            OnTodosObjetosNaArea?.Invoke();
+        }
     }
 
     public void RemoveObjeto(ObjetoElevadorController objetoElevadorController)
@@ -92,6 +99,11 @@ public class AreaDosObjetosController : MonoBehaviour
     {
         objeto.position = posicao.position;
         objeto.rotation = posicao.rotation;
+    }
+
+    public void ResetArea()
+    {
+        _objetosNaArea.Clear();
     }
 
     public bool AreaValida => _objetosNaArea.All(o => o.ContemRestricao(_objetosNaArea).Count == 0) && _objetosNaArea.Count <= _quantidadeObjetosPermitidos;

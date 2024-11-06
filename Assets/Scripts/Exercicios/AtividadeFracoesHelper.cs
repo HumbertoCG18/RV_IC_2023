@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AtividadeFracoesHelper : AbstractAtividadeController
 {
@@ -11,6 +12,10 @@ public class AtividadeFracoesHelper : AbstractAtividadeController
 
     [SerializeField] private GameObject _historicoDeReguasView;
 
+    public UnityEvent OnAtividadeChocolateInicia;
+    public UnityEvent OnAtividadeReguaFracionariaInicia;
+    public UnityEvent OnAtividadeFracoesInicia;
+
     public override void IniciaAtividadeController(ScriptableObject atividade)
     {
         if (atividade is AtividadeChocolateSO)
@@ -18,18 +23,24 @@ public class AtividadeFracoesHelper : AbstractAtividadeController
             SetViews(true, false, false);
             _historicoDeReguasView.SetActive(false);
             _atividadeChocolateController.CarregaAtividade(atividade);
+
+            OnAtividadeChocolateInicia?.Invoke();
         }
         else if (atividade is AtividaderReguaFracionariaSO)
         {
             SetViews(false, true, false);
             _historicoDeReguasView.SetActive(true);
             _atividadeReguaFracionariaController.CarregaAtividade(atividade);
+
+            OnAtividadeReguaFracionariaInicia?.Invoke();
         }
         else if (atividade is AtividadePizzaSO)
         {
             SetViews(false, false, true);
             _historicoDeReguasView.SetActive(true);
             _atividadePizzaController.CarregaAtividade(atividade);
+
+            OnAtividadeFracoesInicia?.Invoke();
         }
         else
         {

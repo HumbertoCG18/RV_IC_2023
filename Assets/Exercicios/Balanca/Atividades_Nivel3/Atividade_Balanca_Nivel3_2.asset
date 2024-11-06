@@ -36,6 +36,6 @@ MonoBehaviour:
     _isOculto: 0
   - _valorPeso: 5
     _isOculto: 0
-  - _valorPeso: 2
+  - _valorPeso: 4
     _isOculto: 1
   _podeAlterarLadoDireito: 1

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Fracoes_Heterogeneas_Com_Adicao_Com_Subtracao_6
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Paula tinha 4/5 de uma pizza, mas comeu apenas 1/3 dela. Qual a
+      fra\xE7\xE3o da pizza que ainda resta?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 325c5b9df739bb6419491b54e6592f45, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: fbf3a97d504bc914bb5f0aa259195bd2, type: 3}
+  _formatoDeExibicao: 0
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 4
+      _denominador: 5
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 1
+    _adicionarProximo: 0
+  - _fracao:
+      _numerador: 1
+      _denominador: 3
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 7
+      _denominador: 15
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

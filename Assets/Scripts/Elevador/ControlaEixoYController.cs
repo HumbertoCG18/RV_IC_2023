@@ -5,14 +5,23 @@ using UnityEngine;
 
 public class ControlaEixoYController : MonoBehaviour
 {
-    [SerializeField] private ElevadorController _elevadorController;
     [SerializeField] private Transform _cameraRig;
 
     private Vector3 _offset;
     private Vector3 _cameraRigPosicaoInicial;
 
+    private ElevadorController _elevadorController;
+
+    private void Start()
+    {
+        _elevadorController = ElevadorController.Instance;
+
+        _elevadorController.AdicionaListenerNoElevador(this);
+    }
+
     public void OnIniciaMovimentoElevador(Vector3 _posicaoInicial)
     {
+        Debug.Log($"{name} Inicia elevador", gameObject);
         _offset = _posicaoInicial;
         _cameraRigPosicaoInicial = _cameraRig.position;
     }
@@ -32,37 +41,36 @@ public class ControlaEixoYController : MonoBehaviour
         OnElevadorEmMovimento(_posicaoFinal);
     }
 
-    private void AtivaEventos()
+    public void AtivaEventos()
     {
         _elevadorController.OnIniciaMovimentoElevador.AddListener(OnIniciaMovimentoElevador);
         _elevadorController.OnElevadorEmMovimento.AddListener(OnElevadorEmMovimento);
         _elevadorController.OnFinalizaMovimentoElevador.AddListener(OnFinalizaMovimentoElevador);
     }
 
-    private void DesativaEventos()
+    public void DesativaEventos()
     {
-        _elevadorController.OnIniciaMovimentoElevador.AddListener(OnIniciaMovimentoElevador);
-        _elevadorController.OnElevadorEmMovimento.AddListener(OnElevadorEmMovimento);
-        _elevadorController.OnFinalizaMovimentoElevador.AddListener(OnFinalizaMovimentoElevador);
+        _elevadorController.OnIniciaMovimentoElevador.RemoveListener(OnIniciaMovimentoElevador);
+        _elevadorController.OnElevadorEmMovimento.RemoveListener(OnElevadorEmMovimento);
+        _elevadorController.OnFinalizaMovimentoElevador.RemoveListener(OnFinalizaMovimentoElevador);
     }
 
     public void CustomTriggerEnter(Collider objeto)
     {
-        var xrOrigin = objeto.GetComponentInChildren<XROrigin>();
+        if (objeto.transform != _cameraRig) return;
 
-        if (xrOrigin == null) return;
-
-        Debug.Log("Adiciona evento");
         AtivaEventos();
     }
 
     public void CustomTriggerExit(Collider objeto)
     {
-        var xrOrigin = objeto.GetComponentInChildren<XROrigin>();
-
-        if (xrOrigin == null) return;
-
-        Debug.Log("Remove evento");
+        if (objeto.transform != _cameraRig) return;
+        
         DesativaEventos();
+    }
+
+    private void OnDestroy()
+    {
+        _elevadorController.RemoveListenerDoElevador(this);
     }
 }

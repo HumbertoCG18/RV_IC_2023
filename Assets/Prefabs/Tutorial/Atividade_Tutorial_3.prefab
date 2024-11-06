@@ -137,6 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9da7976122664f42870dcd15325e844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnFinalizaProcesso:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5516098433337561960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +367,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31, y: 1, z: 0.4}
-  m_Center: {x: 0, y: 0.57, z: 0}
+  m_Size: {x: 0.75, y: 1.81, z: 0.75}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &3055938123299349510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,8 +532,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31, y: 1, z: 0.4}
-  m_Center: {x: 0, y: 0.57, z: 0}
+  m_Size: {x: 0.75, y: 1.81, z: 0.75}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &2418583662309729538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,8 +706,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31, y: 1, z: 0.4}
-  m_Center: {x: 0, y: 0.57, z: 0}
+  m_Size: {x: 0.75, y: 1.81, z: 0.75}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &2338668543612586533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,8 +925,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.31, y: 1, z: 0.4}
-  m_Center: {x: 0, y: 0.57, z: 0}
+  m_Size: {x: 0.75, y: 1.81, z: 0.75}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &6829426606173332117
 MonoBehaviour:
   m_ObjectHideFlags: 0

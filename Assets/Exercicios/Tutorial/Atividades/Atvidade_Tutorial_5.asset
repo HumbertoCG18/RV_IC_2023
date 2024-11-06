@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Atvidade_Tutorial_5
   m_EditorClassIdentifier: 
   _audioDescricao:
-    _descricao: "Perfeito! Parab\xE9ns. Agora voc\xEA pode come\xE7ar a realizar
-      as atividades. V\xE1 at\xE9 o fim da sala e aperte o bot\xE3o apontado com
-      a seta vermelha para abrir a porta."
+    _descricao: "Muito bem, agora iremos aprender a aproximar e afastar os objetos
+      com o controle. Para aproximar, selecione o objeto e pressione o anal\xF3gico
+      para traz, assim como mostrado pela seta vermelha. Isso far\xE1 que o objeto
+      se aproxime. Para afastar o objeto, pressione o anal\xF3gico para frente. Mova
+      os objetos para as posi\xE7\xF5es correspondentes com suas cores."
     _descricaoVozMasculina: {fileID: 8300000, guid: abf600b386347bb4c86312b52fbccad8, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 13899d59422b23745991ef664cd663fe, type: 3}
-  _nivelController: {fileID: 3727335027102045251, guid: 1904514e6c9091c42877dd6541753ce9, type: 3}
+  _nivelController: {fileID: 7056704969301449453, guid: 1904514e6c9091c42877dd6541753ce9, type: 3}

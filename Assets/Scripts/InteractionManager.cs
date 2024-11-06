@@ -5,6 +5,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class InteractionManager : Singleton<InteractionManager>
 {
+    [Header("Ray Interaction Parameters")]
+    [SerializeField] private XRRayInteractor _xrRayInteractorLeft;
+    [SerializeField] private XRRayInteractor _xrRayInteractorRight;
+
     [Header("Teleport parameters")]
     [SerializeField] private GameObject _teleportParent;
     [SerializeField] private GameObject _teleportScriptParent;
@@ -19,12 +23,17 @@ public class InteractionManager : Singleton<InteractionManager>
     {
         if (disableTeleport) DisableTeleport();
 
-        var mask = controller.interactionLayers;
-        controller.interactionLayers = 0;
+        //var mask = controller.interactionLayers;
+        //controller.interactionLayers = 0;
+
+        var interactor = _xrRayInteractorLeft.interactablesSelected.Contains(controller) ? _xrRayInteractorLeft : _xrRayInteractorRight;
+
+        interactor.allowSelect = false;
 
         yield return null;
 
-        controller.interactionLayers = mask;
+        interactor.allowSelect = true;
+        //controller.interactionLayers = mask;
 
         if (disableTeleport)
         {

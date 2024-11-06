@@ -42,7 +42,7 @@ public class ReguaBuilderController : MonoBehaviour
 
         elemento.transform.ResetTransformation();
         elemento.transform.localScale = new Vector3(_profundidade - _offset/2f, _altura - _offset/2f, _largura * (_fracao.ValorReal) - _offset/2f);
-        elemento.transform.localPosition = Vector3.forward * (_largura/2f - elemento.transform.localScale.z/2f);
+        elemento.transform.localPosition = Vector3.forward * (_largura/2f - elemento.transform.localScale.z/2f + _offset);
         elemento.GetComponentInChildren<MeshRenderer>().material.color = _cor;
 
         elemento = Instantiate(_elementPrefab, transform);

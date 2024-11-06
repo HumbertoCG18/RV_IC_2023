@@ -9,7 +9,6 @@ public class AtividadePizzaController : AbstractAtividadeController
 {
     [SerializeField] private GameObject _view;
     [SerializeField] private Transform _containerPizzas;
-    [SerializeField] private GeradorFracaoController _pizzaControllerPrefab;
     [SerializeField] private float _espacoEntreObjetos = 0.01f;
 
     [SerializeField] private AcertoErroUIController _acertoErroUIController;
@@ -24,23 +23,29 @@ public class AtividadePizzaController : AbstractAtividadeController
     [SerializeField] private List<Fracao> _fracoesEsperadasLadoDireito;
 
     [Header("Prefabs")]
+    [SerializeField] private GeradorFracaoController _pizzaControllerPrefab;
+    [SerializeField] private GeradorFracaoController _barraChocolateControllerPrefab;
     [SerializeField] private GameObject _sinalMaisPrefab;
     [SerializeField] private GameObject _sinalMenosPrefab;
     [SerializeField] private GameObject _sinalIgualPrefab; 
 
     public void ValidaSolucao()
     {
-        bool ladoEsquerdoOk = ValidaResposta(_fracoesEsperadasLadoEsquerdo, _pizzaControllersLadoEsquerdo.Select(c => c.Fracao).ToList());
-        bool ladoDireitoOk = ValidaResposta(_fracoesEsperadasLadoDireito, _pizzaControllersLadoDireito.Select(c => c.Fracao).ToList());
+        var todasFracoesEsperadas = (new List<Fracao>()).Concat(_fracoesEsperadasLadoEsquerdo).Concat(_fracoesEsperadasLadoDireito).ToList();
+        var todasFracoesInformadas = (new List<Fracao>()).Concat(_pizzaControllersLadoEsquerdo.Select(g => g.Fracao)).Concat(_pizzaControllersLadoDireito.Select(g => g.Fracao)).ToList();
 
-        if (ladoEsquerdoOk && ladoEsquerdoOk)
+        if (todasFracoesEsperadas.Count != todasFracoesInformadas.Count) return; // ERRO
+
+        for (var i = 0; i < todasFracoesEsperadas.Count; i++)
         {
-            TrataSolucao(AcertoErroUIController.TipoResultado.Acertou);
+            if (!todasFracoesEsperadas[i].SaoEquivalentes(todasFracoesInformadas[i]))
+            {
+                TrataSolucao(AcertoErroUIController.TipoResultado.Errou);
+                return;
+            }
         }
-        else
-        {
-            TrataSolucao(AcertoErroUIController.TipoResultado.Errou);
-        }
+
+        TrataSolucao(AcertoErroUIController.TipoResultado.Acertou);
     }
 
     private bool ValidaResposta(List<Fracao> fracoesInformadas, List<Fracao> fracoesEsperadas)
@@ -58,7 +63,7 @@ public class AtividadePizzaController : AbstractAtividadeController
         OnAtividadeConcluida += callback;
     }
 
-    private void InstanciaPizzas(List<ElementoAtividadePizza> ladoEsquerdo, List<ElementoAtividadePizza> ladoDireito)
+    private void InstanciaPizzas(GeradorFracaoController prefab, List<ElementoAtividadePizza> ladoEsquerdo, List<ElementoAtividadePizza> ladoDireito)
     {
         _containerPizzas.DestroyChildren();
 
@@ -73,7 +78,7 @@ public class AtividadePizzaController : AbstractAtividadeController
 
         for (int i = 0; i < total; i++)
         {
-            var controller = Instantiate(_pizzaControllerPrefab, _containerPizzas);
+            var controller = Instantiate(prefab, _containerPizzas);
             controller.transform.localPosition = posicaoInicial + passo * i;
             controller.transform.localRotation = Quaternion.identity;
 
@@ -142,7 +147,9 @@ public class AtividadePizzaController : AbstractAtividadeController
         _fracoesEsperadasLadoEsquerdo = ativiadePizzaSO._fracoesDesejadasLadoEsquerdo.Select(f => f._fracao).ToList();
         _fracoesEsperadasLadoDireito = ativiadePizzaSO._fracoesDesejadasLadoDireito.Select(f => f._fracao).ToList();
 
-        InstanciaPizzas(ativiadePizzaSO._fracoesDesejadasLadoEsquerdo, ativiadePizzaSO._fracoesDesejadasLadoDireito);
+        var prefab = ativiadePizzaSO._formatoDeExibicao == AtividadePizzaSO.FormatoDeExibicao.Pizza ? _pizzaControllerPrefab : _barraChocolateControllerPrefab;
+
+        InstanciaPizzas(prefab, ativiadePizzaSO._fracoesDesejadasLadoEsquerdo, ativiadePizzaSO._fracoesDesejadasLadoDireito);
     }
 
     internal void SetView(bool v3)

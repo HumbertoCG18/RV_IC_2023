@@ -31,10 +31,11 @@ public class GeradorFracaoController : MonoBehaviour, IFracao
 
     [SerializeField] protected Fracao _fracao;
     public Action<Fracao> OnValorMudou;
+    protected bool _inverterExibicaoDeUnidades = false;
 
     protected void Awake()
     {
-        _fracao = new Fracao(0, 1);
+        _fracao = new Fracao(1, 1);
         _fracaoUIController.SetFracao(this);
         SetFormatoDeExibicao(false);
     }
@@ -68,10 +69,16 @@ public class GeradorFracaoController : MonoBehaviour, IFracao
 
     public void SetFormatoDeExibicao(bool pedacaoComidos)
     {
-        _viewFormato1.SetActive(!pedacaoComidos);
-        _viewFormato2.SetActive(pedacaoComidos);
+        _inverterExibicaoDeUnidades = pedacaoComidos;
 
-        _imgPizza = pedacaoComidos ? _imgPizzaFormato2 : _imgPizzaFormato1;
+        if (_imgPizzaFormato1 != null)
+        {
+            _viewFormato1.SetActive(!pedacaoComidos);
+            _viewFormato2.SetActive(pedacaoComidos);
+
+            _imgPizza = pedacaoComidos ? _imgPizzaFormato2 : _imgPizzaFormato1;
+        }
+
         AtualizaFracaoUI();
     }
 
@@ -87,7 +94,8 @@ public class GeradorFracaoController : MonoBehaviour, IFracao
 
     public void AumentaNumerador()
     {
-        _fracao._numerador = Mathf.Min(_fracao._denominador, _fracao._numerador + 1);
+        //_fracao._numerador = Mathf.Min(_fracao._denominador, _fracao._numerador + 1);
+        _fracao._numerador = Mathf.Min(DENOMINADOR_MAXIMO, _fracao._numerador + 1);
 
         AtualizaFracaoUI();
     }

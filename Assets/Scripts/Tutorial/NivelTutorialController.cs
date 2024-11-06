@@ -15,4 +15,9 @@ public class NivelTutorialController : MonoBehaviour
     {
         OnFinalizaProcesso?.Invoke();
     }
+
+    public virtual void ConfiguraNivel()
+    {
+
+    }
 }

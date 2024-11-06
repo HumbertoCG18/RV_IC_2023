@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Fracoes_Heterogeneas_Com_Adicao_Com_Subtracao_2
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: Clara comeu 3/4 de uma barra de chocolate, e depois comeu mais 1/3
+      de outra barra. Quanto ela comeu ao todo?
+    _descricaoVozMasculina: {fileID: 8300000, guid: 1c35ba0f889460443b48c51371ea4bfa, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 2b68d104e04d87448a2a7364c0f6a1b7, type: 3}
+  _formatoDeExibicao: 1
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 3
+      _denominador: 4
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 1
+  - _fracao:
+      _numerador: 1
+      _denominador: 3
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 13
+      _denominador: 12
+    _mostrarPedacosComidos: 1
+    _subtrairProximo: 0
+    _adicionarProximo: 0

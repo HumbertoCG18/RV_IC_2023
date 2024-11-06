@@ -2,20 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using static ObjetoElevadorController;
 
-public class ElevadorController : MonoBehaviour
+public class ElevadorController : Singleton<ElevadorController>
 {
     [SerializeField] private Transform _platadoraElevador;
     [SerializeField] private Transform _referenciaAndarDeBaixo;
     [SerializeField] private Transform _referenciaAndarDeCima;
     [SerializeField] private float _tempoDeAnimacao;
-    [SerializeField] private List<AreaDosObjetosController> _areasDeObjetosControllers;
+    [SerializeField] private List<AreaDosObjetosController> _areasDeObjetosDinamicasControllers;
+    [SerializeField] private List<AreaDosObjetosController> _areasDeObjetosFixasControllers;
+    [SerializeField] private CustomCollisionController _customCollisionController;
 
     [Header("Portas")]
     [SerializeField] private PortaController _portaAndarDeBaixo; 
@@ -33,6 +31,9 @@ public class ElevadorController : MonoBehaviour
 
     public void SubirElevador()
     {
+
+        Debug.Log($"Subir elevador {_emMovimento} {_platadoraElevador.position == _referenciaAndarDeCima.position} {_precisaValidarAreas} {AreasValidas()}");
+
         if (_emMovimento || _platadoraElevador.position == _referenciaAndarDeCima.position) return;
 
         if (_precisaValidarAreas && !AreasValidas()) return;
@@ -96,6 +97,20 @@ public class ElevadorController : MonoBehaviour
 
     public bool AreasValidas()
     {
-        return _areasDeObjetosControllers.All(a => a.AreaValida);
+        return _areasDeObjetosDinamicasControllers.All(a => a.AreaValida) && _areasDeObjetosFixasControllers.All(a => a.AreaValida);
     }
+
+    public void AdicionaListenerNoElevador(ControlaEixoYController listener)
+    {
+        _customCollisionController.OnTriggerEnterEvent.AddListener(listener.CustomTriggerEnter);
+        _customCollisionController.OnTriggerExitEvent.AddListener(listener.CustomTriggerExit);
+    }
+
+    public void RemoveListenerDoElevador(ControlaEixoYController listener)
+    {
+        _customCollisionController.OnTriggerEnterEvent.RemoveListener(listener.CustomTriggerEnter);
+        _customCollisionController.OnTriggerExitEvent.RemoveListener(listener.CustomTriggerExit);
+    }
+
+    public void SetAreasDosObjetosDinamicas(List<AreaDosObjetosController> areas) => _areasDeObjetosDinamicasControllers = areas;
 }

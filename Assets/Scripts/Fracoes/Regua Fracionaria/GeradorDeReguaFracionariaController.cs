@@ -24,9 +24,8 @@ public class GeradorDeReguaFracionariaController : MonoBehaviour, IFracao
 
     public void IniciaGerador()
     {
-
-        CustomUtils.ClearChilds(_localParaArmazenarReguas);
-        CustomUtils.ClearChilds(_reguaContainer);
+        _localParaArmazenarReguas.DestroyChildren();
+        _reguaContainer.DestroyChildren();
 
         _fracao = null;
 

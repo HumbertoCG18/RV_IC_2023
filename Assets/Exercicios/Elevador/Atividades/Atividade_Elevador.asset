@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c40c5099f63ba4190897c143438b97, type: 3}
+  m_Name: Atividade_Elevador
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Esta \xE9 a atividade Subindo o Elevador. Voc\xEA precisa levar
+      todos os animais para o segundo andar. Voc\xEA n\xE3o pode deixar sozinhos
+      ou levar no elevador as seguintes combina\xE7\xF5es de animais"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 54569a0a1299bef4789884da1b3c6e0f, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: ef9d68c90d830fd4b8c3c5255bf9e260, type: 3}
+  _nivelPrefab: {fileID: 6529427429387665547, guid: 10edaf5e55084c643bba9de4c94bfe24, type: 3}

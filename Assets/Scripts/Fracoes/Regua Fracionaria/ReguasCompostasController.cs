@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ReguasCompostasController : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _posicoesPreDefinidas;
-    [SerializeField] private Transform _instanciasParent;
+    [SerializeField] private List<Transform> _posicoesPreDefinidasVertical;
+    [SerializeField] private List<Transform> _posicoesPreDefinidasHorizontal;
+    [SerializeField] private Transform _instanciasVerticalParent;
+    [SerializeField] private Transform _instanciasHorizontalParent;
     [SerializeField] private float _alturaRegua = 0.07f;
+    [SerializeField] private float _escalaRegua = 0.5f;
 
     private List<GameObject> _reguasArmazenadas = new List<GameObject>();
 
@@ -27,12 +30,19 @@ public class ReguasCompostasController : MonoBehaviour
 
         int indexPosicao = _reguasArmazenadas.Count;
 
-        reguaComposta.transform.position = _posicoesPreDefinidas[indexPosicao % _posicoesPreDefinidas.Count].position;
-        reguaComposta.transform.rotation = _posicoesPreDefinidas[indexPosicao % _posicoesPreDefinidas.Count].rotation;
-        reguaComposta.transform.localScale = Vector3.one * 0.6f;
+        reguaComposta.transform.position = _posicoesPreDefinidasVertical[indexPosicao % _posicoesPreDefinidasVertical.Count].position;
+        reguaComposta.transform.rotation = _posicoesPreDefinidasVertical[indexPosicao % _posicoesPreDefinidasVertical.Count].rotation;
+        reguaComposta.transform.localScale = Vector3.one * _escalaRegua;
 
-        reguaComposta.transform.SetParent(_instanciasParent);
+        reguaComposta.transform.SetParent(_instanciasVerticalParent);
+
+        var copia = Instantiate(reguaComposta, _instanciasHorizontalParent);
+        copia.transform.position = _posicoesPreDefinidasHorizontal[indexPosicao % _posicoesPreDefinidasHorizontal.Count].position;
+        copia.transform.rotation = _posicoesPreDefinidasHorizontal[indexPosicao % _posicoesPreDefinidasHorizontal.Count].rotation;
+        copia.transform.localScale = Vector3.one * _escalaRegua;
 
         _reguasArmazenadas.Add(reguaComposta);
     }
+
+
 }
