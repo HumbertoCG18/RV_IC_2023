@@ -16,6 +16,7 @@ public class GeradorDePesosController : MonoBehaviour
     [SerializeField] private Color _corDoPeso = Color.green;
 
     private BalancaPesoController _instanciaAtual;
+    private bool _podeCriarOutro = false;
 
     private void Awake()
     {
@@ -49,6 +50,17 @@ public class GeradorDePesosController : MonoBehaviour
 
         var grabInteractor = _instanciaAtual.GetComponent<XRGrabInteractable>();
         grabInteractor.selectExited.AddListener(args => AjustaParametrosNoNovoPeso(grabInteractor));
+
+        StartCoroutine(DesabilitaCriacao(0.8f));
+    }
+
+    private IEnumerator DesabilitaCriacao(float tempoDesabilitado)
+    {
+        _podeCriarOutro = false;
+
+        yield return new WaitForSeconds(tempoDesabilitado);
+
+        _podeCriarOutro = true;
     }
 
     private void AjustaParametrosNoNovoPeso(XRGrabInteractable interactor)
@@ -58,11 +70,11 @@ public class GeradorDePesosController : MonoBehaviour
         interactor.GetComponent<Rigidbody>().isKinematic = false;
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         var controller = other.GetComponent<BalancaPesoController>();
 
-        if (controller == null) return;
+        if (controller == null || !_podeCriarOutro) return;
 
         CriaPeso();
     }

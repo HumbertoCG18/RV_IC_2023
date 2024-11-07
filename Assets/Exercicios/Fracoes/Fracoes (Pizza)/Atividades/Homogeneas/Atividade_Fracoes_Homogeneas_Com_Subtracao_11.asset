@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Fracoes_Homogeneas_Com_Subtracao_11
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: Carlos tinha 6/8 de uma pizza, mas comeu 4/8  dela. Quanto ainda
+      resta?
+    _descricaoVozMasculina: {fileID: 8300000, guid: 4fdcad244df7bee4f967ff89f6cc4d81, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: f596dbfa3954d5242b03b8274b27bdf7, type: 3}
+  _formatoDeExibicao: 0
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 6
+      _denominador: 8
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 1
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  - _fracao:
+      _numerador: 4
+      _denominador: 8
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 2
+      _denominador: 8
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0

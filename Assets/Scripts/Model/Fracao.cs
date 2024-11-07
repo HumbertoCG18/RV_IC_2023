@@ -15,6 +15,6 @@ public class Fracao
         _denominador = denominador;
     }
 
-    public bool SaoEquivalentes(Fracao fracao) => (_numerador * fracao._denominador - fracao._numerador * _denominador) / (float)(_denominador * fracao._denominador) == 0f;
+    public bool SaoEquivalentes(Fracao fracao) => (_numerador * fracao._denominador - fracao._numerador * _denominador) == 0;
     public float ValorReal => _numerador / (float)_denominador;
 }

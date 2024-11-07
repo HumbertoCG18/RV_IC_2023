@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Fracoes_Heterogeneas_Com_Adicao_Com_Subtracao_10
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Fernanda comeu 1/2  de uma barra de chocolate e depois comeu mais
+      1/5 . Qual a fra\xE7\xE3o total que ela comeu?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 29e79f267bbbf5442b4410f8ae76d847, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 17bdc9316068bd84d8321f9dd83c945f, type: 3}
+  _formatoDeExibicao: 1
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 1
+      _denominador: 2
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 1
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  - _fracao:
+      _numerador: 1
+      _denominador: 5
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 7
+      _denominador: 10
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0

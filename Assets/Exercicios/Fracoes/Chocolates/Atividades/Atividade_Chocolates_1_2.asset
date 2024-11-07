@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Atividade_Chocolates_1_2
   m_EditorClassIdentifier: 
   _audioDescricao:
-    _descricao: "Observe os tr\xEAs chocolate e as tr\xEAs crian\xE7as. Se dividirmos
+    _descricao: "Observe os tr\xEAs chocolates e as tr\xEAs crian\xE7as. Se dividirmos
       igualmente os dois peda\xE7os para as duas crian\xE7as, quantos peda\xE7os
       cada uma recebe? Arraste os peda\xE7os at\xE9 as crian\xE7as."
     _descricaoVozMasculina: {fileID: 8300000, guid: 55a2985b69c05854c9932bdde0a06adf, type: 3}

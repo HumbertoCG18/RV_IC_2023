@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb8c5733534683459aa924dd29cd27b, type: 3}
+  m_Name: Atividade_Fracoes_Heterogeneas_Com_Adicao_Com_Subtracao_11
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Lucas tinha 5/6  de uma barra de chocolate e deu 1/4  para sua irm\xE3.
+      Qual fra\xE7\xE3o ainda resta?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: f541bf40648020e448abf7545b46f5ba, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: a445230f71424df40b6ce664327a56f1, type: 3}
+  _formatoDeExibicao: 1
+  _fracoesDesejadasLadoEsquerdo:
+  - _fracao:
+      _numerador: 5
+      _denominador: 6
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 1
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  - _fracao:
+      _numerador: 1
+      _denominador: 4
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
+  _fracoesDesejadasLadoDireito:
+  - _fracao:
+      _numerador: 7
+      _denominador: 12
+    _mostrarPedacosComidos: 0
+    _subtrairProximo: 0
+    _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
