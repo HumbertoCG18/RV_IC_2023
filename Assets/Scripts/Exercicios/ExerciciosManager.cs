@@ -112,14 +112,9 @@ public class ExerciciosManager : MonoBehaviour
             _containerAtividades.UpdateContainer(_listaDeAtividadesController.Values, PreprocessamentoAtividades, CarregaAtividades);
         }
 
-        if (_listaDeAtividadesController.Current._audioDescricao.Descricao != null && _audioDescricaoView != null)
+        if (_listaDeAtividadesController.Current._audioDescricao.Descricao != null)
         {
-            _audioDescricaoView.SetActive(true);
             PlayDescricaoEmAudio();
-        }
-        else
-        {
-            _audioDescricaoView.SetActive(false);
         }
 
         if (_btnProximaAtividade != null) _btnProximaAtividade.SetActive(false);
