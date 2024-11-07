@@ -53,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 45f79856a9c90bc48bfc71de68c4a9b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.17
+      value: -12.067714
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 45f79856a9c90bc48bfc71de68c4a9b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.911
+      value: 0.803
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 45f79856a9c90bc48bfc71de68c4a9b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.41
+      value: -1.005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 45f79856a9c90bc48bfc71de68c4a9b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 6557364822924131685}
+  m_AttachTransform: {fileID: 7945540094036485277}
   m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
@@ -319,7 +319,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &6557364822924131685 stripped
 Transform:
