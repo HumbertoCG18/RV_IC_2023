@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class caixaSpawn : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class caixaSpawn : MonoBehaviour
     public Vector3 centroCaixa;
     public Quaternion rotacaoCaixa;
     public bool dentroDaCaixa;
-    public Collider caixaCollider, pecaCollider;
+    public XRSocketInteractor interactor;
 
     // Start is called before the first frame update
     void Start()
@@ -17,33 +18,45 @@ public class caixaSpawn : MonoBehaviour
         centroCaixa = caixa.transform.position + Altura;
         rotacaoCaixa = caixa.transform.rotation;
         dentroDaCaixa = false;
-        spawnPeca();
+
     }
+    /*
+     * 
+     * 
+     * 
+     * 
+     */
 
     // Update is called once per frame
     void Update()
     {
-        if (!dentroDaCaixa)
-        {
-            spawnPeca();
-            dentroDaCaixa = true;
-        }
+
     }
 
-    bool foraDaCaixa()
-    {   
-        if (1 == 1)//Fora da caixa
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag(caixa.tag)) 
         {
-            //return true;
+            dentroDaCaixa = true;
         }
-        //Se dentro da caixa, false
-        return false;
+    }*/
+
+    /*private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(caixa.tag))
+        {
+            dentroDaCaixa = false;
+        }
+    }*/
+
+    //REMOVER o método auxiliar (Foi colocado só por questão de tempo)
+    void spawnPecaAux()
+    {
+        Instantiate(peca, centroCaixa, rotacaoCaixa);
     }
 
     void spawnPeca()
     {
-        //Instantiate(Prefab, Position, Rotation, Parenting)
-        Instantiate(peca, centroCaixa, rotacaoCaixa);
-
+        Invoke("spawnPecaAux", 0.5f);
     }
 }
