@@ -10,4 +10,6 @@ public class ElementoAtividadePizza
     public bool _mostrarPedacosComidos;
     public bool _subtrairProximo;
     public bool _adicionarProximo;
+    public bool _permitirNumeradorMaiorDenominador;
+    public bool _atualizarPosicao;
 }

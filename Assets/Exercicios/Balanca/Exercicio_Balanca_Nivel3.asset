@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff15a004dcef91b41a483c85964ec67e, type: 3}
   m_Name: Exercicio_Balanca_Nivel3
   m_EditorClassIdentifier: 
-  _descricao: 
-  _descricoesEmAudios: []
+  _audioDescricao:
+    _descricao: 
+    _descricaoVozMasculina: {fileID: 0}
+    _descricaoVozFeminina: {fileID: 0}
   _atividades:
   - {fileID: 11400000, guid: 3a2107338e328804f8035132b13e38f4, type: 2}
   - {fileID: 11400000, guid: 9e9689cd50c7f1c4697a73d3abaaf7a4, type: 2}
   - {fileID: 11400000, guid: 09b1c32268d6fab46b6bdf87f79cf0ac, type: 2}
+  - {fileID: 11400000, guid: 673b7390453fbc44b98ca7b40dfa55d8, type: 2}
+  - {fileID: 11400000, guid: 7c578d30b01a23243a252f8ccb266833, type: 2}
+  - {fileID: 11400000, guid: dfc18915055c6784e9379625da75e9d1, type: 2}
+  - {fileID: 11400000, guid: 1c714ebe1ce24064c85a8de8e8d5ea32, type: 2}
+  - {fileID: 11400000, guid: 63de76ea03c02fa4c88c2afe5e83c6dd, type: 2}
+  - {fileID: 11400000, guid: 275985f74dd9d9b469f99ffff6ebcd1f, type: 2}

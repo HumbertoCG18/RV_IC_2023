@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class BarraChocolateController : GeradorFracaoController
+public class BarraChocolateController: GeradorFracaoController
 {
     [Header("Referencias Barra Chocolate Controller")]
     [SerializeField] private RectTransform _barraRectTransform;
@@ -31,13 +31,8 @@ public class BarraChocolateController : GeradorFracaoController
 
     public override void AtualizaFracaoUI()
     {
-        CustomUtils.ClearChilds(_gridLayout.transform);
-
         GameObject prefabBase = _mostrarPedacosComidos ? _imagemPrefab : _basePrefab;
         GameObject prefabImage = _mostrarPedacosComidos ? _basePrefab : _imagemPrefab;
-
-        float larguraBarra = _barraRectTransform.rect.width;
-        float alturaBarra = _barraRectTransform.rect.height;
 
         // Chat-GPT
         int linhas = 1;
@@ -53,52 +48,107 @@ public class BarraChocolateController : GeradorFracaoController
             }
         }
 
+
+        float larguraBarra = _barraRectTransform.rect.width;
+        float alturaBarra = _barraRectTransform.rect.height;
         Vector2 tamanhoPedaco = new Vector2(larguraBarra / colunas, alturaBarra / linhas);
 
         _gridLayout.cellSize = tamanhoPedaco;
         _gridLayout.constraint = GridLayoutGroup.Constraint.FixedRowCount;
         _gridLayout.constraintCount = linhas;
 
+        // Altera tamanho do canvas original
+        float valorRealFracao = _fracao.ValorReal;
+        int novoTamanhoCanvas = Mathf.Max(1, Mathf.CeilToInt(valorRealFracao)) * _larguraCanvas;
 
-
-
-        for (int i = 0; i < _fracao._denominador; i++)
+        if (_atualizarPosicaoQuandoCanvasMudar && novoTamanhoCanvas != _mainCanvasRectTransform.rect.width)
         {
-            var instancia = Instantiate(i < _fracao._numerador ? prefabImage : prefabBase, _gridLayout.transform);
-            instancia.SetActive(true);
+            float diferencaLargura = (novoTamanhoCanvas - _mainCanvasRectTransform.rect.width) / 2f;
 
-            try
+            transform.localPosition += Vector3.back * diferencaLargura * _mainCanvasRectTransform.lossyScale.x;
+        }
+
+        _mainCanvasRectTransform.sizeDelta = new Vector2(novoTamanhoCanvas, _mainCanvasRectTransform.sizeDelta.y);
+        OnCanvasMudouDeTamanho?.Invoke(_mainCanvasRectTransform.sizeDelta);
+        _itensContainerRectTransform.DestroyChildren();
+
+        // Preenche grid pai com instancia equivalente ao excesso da fracao
+
+        int numerador = _fracao._numerador;
+
+        do
+        {
+            var instanciaParent = Instantiate(_gridLayout, _itensContainerRectTransform).GetComponent<RectTransform>();
+
+            for (int i = 0; i < _fracao._denominador; i++)
             {
-                var bordaEsquerda = instancia.GetChildByName("BordaEsquerda");
-                var bordaDireita = instancia.GetChildByName("BordaDireita");
-                var bordaCima = instancia.GetChildByName("BordaCima");
-                var boardaBaixo = instancia.GetChildByName("BordaBaixo");
-                //var centro = instancia.GetChildByName("Centro");
+                var instancia = Instantiate(i < numerador ? prefabImage : prefabBase, instanciaParent);
+                instancia.SetActive(true);
 
-                float tamanhoBorda = tamanhoPedaco.x < tamanhoPedaco.y ? tamanhoPedaco.x * _porcentagemBorda : tamanhoPedaco.y * _porcentagemBorda;
-
-                Vector2 tamanhoBordaHorizontal = new Vector2(tamanhoBorda, 0f);
-                Vector2 tamanhoBordaVertical = new Vector2(0f, tamanhoBorda);
-
-                bordaCima.GetComponent<RectTransform>().sizeDelta = tamanhoBordaVertical;
-                boardaBaixo.GetComponent<RectTransform>().sizeDelta = tamanhoBordaVertical;
-
-                bordaEsquerda.GetComponent<RectTransform>().sizeDelta = tamanhoBordaHorizontal;
-                bordaDireita.GetComponent<RectTransform>().sizeDelta = tamanhoBordaHorizontal;
-
-                //float tamanhoBorda = borda.GetComponent<RectTransform>().rect.width;
-
-                //centro.GetComponent<RectTransform>().sizeDelta = new Vector2(tamanhoPedaco.x - tamanhoBorda * 2, 0f);
-
-                //Debug.Log($"{larguraBarra} {alturaBarra} {tamanhoPedaco} {tamanhoBorda} {linhas} {colunas}");
+                FormataCelula(instancia, tamanhoPedaco);
             }
-            catch (Exception e) 
+
+            numerador -= _fracao._denominador;
+
+            if (numerador > 0) Instantiate(_sinalMaisPrefab, _itensContainerRectTransform);
+
+        } while (numerador > 0);
+
+        /*
+        for (int i = 0; i < valorRealFracao - 1; i++)
+        {
+            var instanciaParent = Instantiate(_gridLayout, _itensContainerRectTransform);
+
+            for (int j = 0; j < _fracao._denominador; j++)
             {
-                Debug.LogError($"[BarraChocolateController][AtualizaFracoesUI] Borda ou centro do prefab chocolate nao encontrado: {e}");
+                var instancia = Instantiate(prefabImage, instanciaParent.transform);
+                instancia.SetActive(true);
+
+                FormataCelula(instancia, tamanhoPedaco);
             }
         }
 
+
+        var viewPrincipalParent = Instantiate(_gridLayout, _itensContainerRectTransform).GetComponent<RectTransform>();
+
+        // Altera grid filho principal
+        int sobreDoNumerador = Mathf.Max(1, _fracao._numerador % _fracao._denominador);
+
+        for (int i = 0; i < _fracao._denominador; i++)
+        {
+            var instancia = Instantiate(i < sobreDoNumerador ? prefabImage : prefabBase, viewPrincipalParent);
+            instancia.SetActive(true);
+
+            FormataCelula(instancia, tamanhoPedaco);
+        }
+        */
         AtualizaFracao();
         OnValorMudou?.Invoke(_fracao); 
+    }
+
+    private void FormataCelula(GameObject instancia, Vector2 tamanhoPedaco)
+    {
+        try
+        {
+            var bordaEsquerda = instancia.GetChildByName("BordaEsquerda");
+            var bordaDireita = instancia.GetChildByName("BordaDireita");
+            var bordaCima = instancia.GetChildByName("BordaCima");
+            var boardaBaixo = instancia.GetChildByName("BordaBaixo");
+
+            float tamanhoBorda = tamanhoPedaco.x < tamanhoPedaco.y ? tamanhoPedaco.x * _porcentagemBorda : tamanhoPedaco.y * _porcentagemBorda;
+
+            Vector2 tamanhoBordaHorizontal = new Vector2(tamanhoBorda, 0f);
+            Vector2 tamanhoBordaVertical = new Vector2(0f, tamanhoBorda);
+
+            bordaCima.GetComponent<RectTransform>().sizeDelta = tamanhoBordaVertical;
+            boardaBaixo.GetComponent<RectTransform>().sizeDelta = tamanhoBordaVertical;
+
+            bordaEsquerda.GetComponent<RectTransform>().sizeDelta = tamanhoBordaHorizontal;
+            bordaDireita.GetComponent<RectTransform>().sizeDelta = tamanhoBordaHorizontal;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[BarraChocolateController][AtualizaFracoesUI] Borda ou centro do prefab chocolate nao encontrado: {e}");
+        }
     }
 }

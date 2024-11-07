@@ -14,7 +14,7 @@ public class AtividadePizzaController : AbstractAtividadeController
     [SerializeField] private AcertoErroUIController _acertoErroUIController;
 
     [Header("Parametros")]
-    [SerializeField] private float _larguraPizzaController = 0.6f;
+    [SerializeField] private float _larguraPizzaController = 0.3f;
 
     [SerializeField] private List<GeradorFracaoController> _pizzaControllersLadoEsquerdo = new List<GeradorFracaoController>();
     [SerializeField] private List<GeradorFracaoController> _pizzaControllersLadoDireito = new List<GeradorFracaoController>();
@@ -75,7 +75,6 @@ public class AtividadePizzaController : AbstractAtividadeController
         Vector3 posicaoInicial = Vector3.forward * ((total * _larguraPizzaController + _espacoEntreObjetos * (total- 1)) * 0.5f - _larguraPizzaController/2f);
         Vector3 passo = Vector3.forward * (-_larguraPizzaController - _espacoEntreObjetos);
 
-
         for (int i = 0; i < total; i++)
         {
             var controller = Instantiate(prefab, _containerPizzas);
@@ -87,13 +86,7 @@ public class AtividadePizzaController : AbstractAtividadeController
             if (i < ladoEsquerdo.Count)
             {
                 _pizzaControllersLadoEsquerdo.Add(controller);
-                controller.SetFormatoDeExibicao(ladoEsquerdo[i]._mostrarPedacosComidos);
-                /*
-                if (i < ladoEsquerdo.Count - 1)
-                {
-                    var sinalMais = Instantiate(_sinalMaisPrefab, _containerPizzas);
-                    sinalMais.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
-                }*/
+                controller.SetParametrosGerador(ladoEsquerdo[i]._mostrarPedacosComidos, ladoEsquerdo[i]._permitirNumeradorMaiorDenominador, ladoEsquerdo[i]._atualizarPosicao);
 
                 GameObject sinal = null;
 
@@ -115,8 +108,9 @@ public class AtividadePizzaController : AbstractAtividadeController
             else
             {
                 _pizzaControllersLadoDireito.Add(controller);
-                controller.SetFormatoDeExibicao(ladoDireito[i - ladoEsquerdo.Count]._mostrarPedacosComidos);
+                var elemento = ladoDireito[i - ladoEsquerdo.Count];
 
+                controller.SetParametrosGerador(elemento._mostrarPedacosComidos, elemento._permitirNumeradorMaiorDenominador, elemento._atualizarPosicao);
 
                 GameObject sinal = null;
 
@@ -131,12 +125,6 @@ public class AtividadePizzaController : AbstractAtividadeController
 
                 if (sinal != null) sinal.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
             }
-            /*
-            if (i == ladoEsquerdo.Count - 1 && ladoDireito.Count != 0)
-            {
-                var sinalIgual = Instantiate(_sinalIgualPrefab, _containerPizzas);
-                sinalIgual.transform.localPosition = controller.transform.localPosition + passo * 0.5f;
-            }*/
         }
     }
 

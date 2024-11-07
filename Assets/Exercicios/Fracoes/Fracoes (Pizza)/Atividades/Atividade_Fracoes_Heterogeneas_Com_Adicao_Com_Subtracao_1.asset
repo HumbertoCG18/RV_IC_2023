@@ -25,12 +25,16 @@ MonoBehaviour:
     _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 1
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
   - _fracao:
       _numerador: 1
       _denominador: 3
     _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 0
+    _atualizarPosicao: 0
   _fracoesDesejadasLadoDireito:
   - _fracao:
       _numerador: 5
@@ -38,3 +42,5 @@ MonoBehaviour:
     _mostrarPedacosComidos: 1
     _subtrairProximo: 0
     _adicionarProximo: 0
+    _permitirNumeradorMaiorDenominador: 1
+    _atualizarPosicao: 1

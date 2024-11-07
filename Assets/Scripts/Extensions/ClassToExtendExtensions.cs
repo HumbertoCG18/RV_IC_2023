@@ -33,10 +33,7 @@ public static class ClassToExtendExtensions
 
     public static void DestroyChildren(this Transform transform)
     {
-        for (var i = transform.childCount - 1; i >= 0; i--)
-        {
-            Object.Destroy(transform.GetChild(i).gameObject);
-        }
+        foreach (Transform child in transform) Object.Destroy(child.gameObject);
     }
 
     public static void ResetTransformation(this Transform transform)
