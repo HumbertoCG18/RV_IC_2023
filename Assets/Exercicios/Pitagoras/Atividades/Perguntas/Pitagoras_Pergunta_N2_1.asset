@@ -12,16 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4256d9fded819af498b35946cef7e3f2, type: 3}
   m_Name: Pitagoras_Pergunta_N2_1
   m_EditorClassIdentifier: 
-  _pergunta: "O que \xE9 poss\xEDvel concluir ap\xF3s essas atividades?"
+  _audioDescricao:
+    _descricao: "O que \xE9 poss\xEDvel concluir ap\xF3s essas atividades?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 69ce89278dc34274e8f4e5d8564f2fce, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: b8ad5b0033881324db1e923d7ffc271d, type: 3}
   _alternativas:
-  - "Que a soma da \xE1rea do quadrado amarelo com o azul \xE9 igual a \xE1rea o
-    quadrado vermelho"
-  - "Que a soma das \xE1reas dos quadrados menores \xE9 diferente da \xE1rea do quadrado
-    maior "
-  - "Que a \xE1rea do quadrado maior \xE9 igual a diferen\xE7a entre a \xE1rea dos
-    quadrados menores "
-  - "Que a soma das \xE1reas dos quadrados menores \xE9 equivalente a \xE1rea do
-    quadrado maior"
+  - _descricao: "Que a soma da \xE1rea do quadrado amarelo com o azul \xE9 igual
+      a \xE1rea o quadrado vermelho"
+    _descricaoVozMasculina: {fileID: 8300000, guid: c3ea361c3ce789a48ae41d6084aedb17, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: d71e202bc15894c41950d8c909161023, type: 3}
+  - _descricao: "Que a soma das \xE1reas dos quadrados menores \xE9 diferente da
+      \xE1rea do quadrado maior"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 0008c6331e1216c418a4f39cd468ce77, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 0a9d4175f1832824da83e9c94b802626, type: 3}
+  - _descricao: "Que a \xE1rea do quadrado maior \xE9 igual a diferen\xE7a entre
+      a \xE1rea dos quadrados menores"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 78401a120851cb047bfc023b9584f000, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: d9fd19f7d9785cd4e9384547f88a3fd0, type: 3}
+  - _descricao: "Que a soma das \xE1reas dos quadrados menores \xE9 equivalente a
+      \xE1rea do quadrado maior"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 9ca5b14819932ad41b5c09993cd13240, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 0ed3f63914e58454ba94d85035043705, type: 3}
   _respostaEsperada: "Que a soma das \xE1reas dos quadrados menores \xE9 equivalente
     a \xE1rea do quadrado maior"
   _requerRespostaNumerica: 0

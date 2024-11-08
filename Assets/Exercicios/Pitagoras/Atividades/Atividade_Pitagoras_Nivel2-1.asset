@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Atividade_Pitagoras_Nivel2-1
   m_EditorClassIdentifier: 
   _audioDescricao:
-    _descricao: "Observe os 2 quadrados menos do tri\xE2ngulo ret\xE2ngulo do centro.
+    _descricao: "Observe os 2 quadrados menores do tri\xE2ngulo ret\xE2ngulo do centro.
       Desloque as pe\xE7as localizadas no canto direito de modo que elas cubram perfeitamente
       os quadrados menores."
     _descricaoVozMasculina: {fileID: 8300000, guid: baaed094f3b2de045b1ea1b77cef3589, type: 3}

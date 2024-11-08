@@ -40,7 +40,6 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.volume = volume;
         audioSource.clip = clip;
         audioSource.Play();
-
     }
 
     public void PlayDescricao(AudioDescricao audioDescricao)
@@ -51,7 +50,11 @@ public class AudioManager : Singleton<AudioManager>
             case TIPO_VOZ.Feminina: if (audioDescricao.AudioFeminino != null) PlayAudio(audioDescricao.AudioFeminino); break;
         }
 
-        PararAudioDescricao();
+        if (_audioDescricaoCoroutine != null)
+        {
+            StopCoroutine(_audioDescricaoCoroutine);
+            _audioDescricaoCoroutine = null;
+        }
 
         _audioDescricaoCoroutine = StartCoroutine(AcompanhaProgressoAudioCoroutine(_descricaoAudioSource));
     }
@@ -94,8 +97,9 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (_audioDescricaoCoroutine != null)
         {
-            _descricaoAudioSource.Stop();
             StopCoroutine(_audioDescricaoCoroutine);
+
+            _descricaoAudioSource.Stop();
             _audioDescricaoCoroutine = null;
 
             OnAudioTerminou?.Invoke();

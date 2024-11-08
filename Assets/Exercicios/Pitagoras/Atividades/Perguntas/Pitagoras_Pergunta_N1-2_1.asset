@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4256d9fded819af498b35946cef7e3f2, type: 3}
   m_Name: Pitagoras_Pergunta_N1-2_1
   m_EditorClassIdentifier: 
-  _pergunta: "Quantos cubos foram necess\xE1rios para preencher a \xE1rea azul?"
+  _audioDescricao:
+    _descricao: "Quantos cubos foram necess\xE1rios para preencher a \xE1rea azul?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 58b31aaf2488aca4690733e049110f0c, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 58b31aaf2488aca4690733e049110f0c, type: 3}
+  _alternativas: []
   _respostaEsperada: 25
   _requerRespostaNumerica: 1
   _requerRespostaIgual: 1

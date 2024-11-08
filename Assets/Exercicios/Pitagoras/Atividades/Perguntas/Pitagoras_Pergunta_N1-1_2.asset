@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4256d9fded819af498b35946cef7e3f2, type: 3}
   m_Name: Pitagoras_Pergunta_N1-1_2
   m_EditorClassIdentifier: 
-  _pergunta: "Quantos cubos voc\xEA utilizou para cobrir a superficie vermelha?"
+  _audioDescricao:
+    _descricao: "Quantos cubos voc\xEA utilizou para cobrir a superficie vermelha?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 1a708d889aa417449afa5d166cf905d8, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 992ea5727d8c34d40829a24df81d2a42, type: 3}
+  _alternativas: []
   _respostaEsperada: 16
   _requerRespostaNumerica: 1
   _requerRespostaIgual: 1

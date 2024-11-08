@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioDescricao:
     _descricao: "Observe os dois chocolates e as duas crian\xE7as. Se dividirmos
-      igualmente os dois peda\xE7os para as duas crian\xE7as, quantos peda\xE7os
-      cada uma recebe?  Arraste os peda\xE7os at\xE9 as crian\xE7as."
+      igualmente os dois peda\xE7os para as duas crian\xE7as, quantos chocolates
+      cada uma recebe?  Arraste os chocolates at\xE9 as crian\xE7as."
     _descricaoVozMasculina: {fileID: 8300000, guid: 14d2b14697899bb48be5a9ba4662c6a9, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 6a9086dfc2fb52649b643ba1326cba5b, type: 3}
   _quantidadeChocolates: 2

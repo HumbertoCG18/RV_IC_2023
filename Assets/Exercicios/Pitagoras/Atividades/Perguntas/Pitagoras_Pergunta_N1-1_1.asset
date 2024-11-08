@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4256d9fded819af498b35946cef7e3f2, type: 3}
   m_Name: Pitagoras_Pergunta_N1-1_1
   m_EditorClassIdentifier: 
-  _pergunta: "Quantos cubos voc\xEA utilizou para cobrir a superficie amarela?"
+  _audioDescricao:
+    _descricao: "Quantos cubos voc\xEA utilizou para cobrir a superficie amarela?"
+    _descricaoVozMasculina: {fileID: 8300000, guid: 3f8907e3f853df945800dee2e8f62280, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 3d6b29bdab38a8046a8336798c063080, type: 3}
+  _alternativas: []
   _respostaEsperada: 9
   _requerRespostaNumerica: 1
   _requerRespostaIgual: 1

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efff4c07f4e47e488cff04ede2c1af5, type: 3}
+  m_Name: Atvidade_Tutorial_1_1
+  m_EditorClassIdentifier: 
+  _audioDescricao:
+    _descricao: "Muito bem. Voc\xEA pode selecionar qual o tipo de voz que ir\xE1
+      narrar os textos das atividades selecionando os \xEDcones apontados pela seta
+      vermelha. Voc\xEA tamb\xE9m pode aumentar ou diminuir o tamanho dos textos
+      usando o Slider apontado pela seta amarela. Clique em avan\xE7ar para prosseguir
+      com o tutorial."
+    _descricaoVozMasculina: {fileID: 8300000, guid: cc6a30c8fc4b6324091c04bdda3927b2, type: 3}
+    _descricaoVozFeminina: {fileID: 8300000, guid: 827d66b2f93b29c49a7ab491eddbda5c, type: 3}
+  _nivelController: {fileID: 3486996426793542018, guid: 51feaa137dfd985489af05dacf00a72e, type: 3}

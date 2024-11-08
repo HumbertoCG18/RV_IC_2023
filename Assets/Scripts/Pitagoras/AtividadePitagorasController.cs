@@ -32,7 +32,7 @@ public class AtividadePitagorasController : AbstractAtividadeController
         }
     }
 
-    private void OnNivelConcluido()
+    public void OnNivelConcluido()
     {
         if (_iteradorPerguntaERespostaSO.Count != 0)
         {

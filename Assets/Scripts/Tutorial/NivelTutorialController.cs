@@ -9,6 +9,7 @@ public class NivelTutorialController : MonoBehaviour
     public Action OnNivelConcluido;
     public UnityEvent OnFinalizaProcesso;
 
+
     public void NivelConcluido() => OnNivelConcluido?.Invoke();
 
     public void FinalizaProcessos()
