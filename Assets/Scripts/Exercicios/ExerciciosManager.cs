@@ -249,4 +249,11 @@ public class ExerciciosManager : MonoBehaviour
 
         return _historicoDeExerciciosCompletados[indexExercicio - 1][atividadeAnterior.Count - 1];
     }
+
+    public void SetExerciciosFinalizados(bool valor)
+    {
+        _exerciciosFinalizados = valor;
+
+        if (!_telaInicial.activeInHierarchy) CarregaAtividades(_listaDeAtividadesController.Index);
+    }
 }

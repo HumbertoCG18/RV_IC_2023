@@ -403,6 +403,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "a5ebbd9d-a144-4aa3-8049-3254f1dd9730",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -612,6 +621,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Aim Flags",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20dfc4ff-a82b-4496-9168-dfaa11bb1b57",
+                    "path": "<XRController>{LeftHand}/menuButton",
+                    "interactions": "MultiTap(tapCount=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
