@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GerenciadorDeTamanhoDeTexto : MonoBehaviour
 {
     [SerializeField] private Transform _containerDeTextos;
+    [SerializeField] private Slider _sliderMudaTexto;
 
     private List<ComponenteDeTexto> _componentesDeTexto;
 
@@ -20,6 +22,9 @@ public class GerenciadorDeTamanhoDeTexto : MonoBehaviour
 
             txt.enableAutoSizing = false;
         }
+
+        _sliderMudaTexto.onValueChanged.AddListener(AlteraTamanhoDosTextos);
+        AlteraTamanhoDosTextos(_sliderMudaTexto.value);
     }
 
     public void AlteraTamanhoDosTextos(float porcentagem)

@@ -42,5 +42,5 @@ MonoBehaviour:
     _mostrarPedacosComidos: 0
     _subtrairProximo: 0
     _adicionarProximo: 0
-    _permitirNumeradorMaiorDenominador: 0
-    _atualizarPosicao: 0
+    _permitirNumeradorMaiorDenominador: 1
+    _atualizarPosicao: 1

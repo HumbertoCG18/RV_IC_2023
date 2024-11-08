@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static AudioDescricao;
 
 public class AudioManager : Singleton<AudioManager>
@@ -11,6 +12,8 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private TIPO_VOZ _tipoVoz;
 
     private int _indexAudioSourceSFX = 0;
+
+    public UnityEvent<TIPO_VOZ> OnTipoDeVozMudou;
 
     public void PlaySFX(AudioClip clip, float volume = 1f)
     {
@@ -43,6 +46,7 @@ public class AudioManager : Singleton<AudioManager>
     public void SetTipoVoz(TIPO_VOZ novoTipoVoz)
     {
         _tipoVoz = novoTipoVoz;
+        OnTipoDeVozMudou?.Invoke(_tipoVoz);
     }
 
     public void SetVozMasculina(bool value)
@@ -54,4 +58,6 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (value) SetTipoVoz(TIPO_VOZ.Feminina);
     }
+
+    public TIPO_VOZ VozAtual => _tipoVoz;
 }

@@ -14,19 +14,21 @@ public class ExerciciosManager : MonoBehaviour
     [Header("Parametros")]
     [SerializeField] private bool _passarAtividadesAutomaticamente = false;
 
-    [Header("UI Exercicios")]
-    [SerializeField] private TextMeshProUGUI _txtDescricaoExercicio;
+    [Header("UI")]
     [SerializeField] private UIContainerController _containerExercicios;
     [SerializeField] private GameObject _telaExerciciosConcluidos;
+    [SerializeField] private GameObject _telaInicial;
 
     [Header("UI Atividades")]
     [SerializeField] private TextMeshProUGUI _txtDescricaoAtividade;
     [SerializeField] private UIContainerController _containerAtividades;
-    [SerializeField] private GameObject _audioDescricaoView;
     [SerializeField] private GameObject _btnProximaAtividade;
     [SerializeField] private GameObject _btnProximoExercicio;
 
     public UnityEvent<ExerciciosManager> OnExerciciosFinalizados;
+    public UnityEvent<ExerciciosManager> OnExerciciosIniciados;
+
+
     [SerializeField] private bool _exerciciosFinalizados = false;
     private IteratorController<AtividadeSO> _listaDeAtividadesController;
 
@@ -48,6 +50,11 @@ public class ExerciciosManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _telaInicial.SetActive(true);
+    }
+
     public void IniciaExercicios()
     {
         Debug.Log($"[ExerciciosManager][IniciaExercicios]");
@@ -56,6 +63,7 @@ public class ExerciciosManager : MonoBehaviour
         _listaDeExerciciosController.Reset();
 
         CarregaExercicio(0);
+        OnExerciciosIniciados?.Invoke(this);
     }
 
     public void CarregaExercicio(int index)
@@ -91,11 +99,6 @@ public class ExerciciosManager : MonoBehaviour
     public void AtualizaInterface(ExercicioSO exercicioSO)
     {
         Debug.Log($"[ExerciciosManager][AtualizaInterface]");
-
-        if (_txtDescricaoExercicio != null)
-        {
-            _txtDescricaoExercicio.text = exercicioSO._audioDescricao.Descricao;
-        }
 
         if (_txtDescricaoAtividade != null)
         {
