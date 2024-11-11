@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioDescricao:
     _descricao: "Observe os tr\xEAs chocolates e as tr\xEAs crian\xE7as. Se dividirmos
-      igualmente os dois chocolates para as duas crian\xE7as, quantos chocolates
+      igualmente os tr\xEAs chocolates para as tr\xEAs crian\xE7as, quantos chocolates
       cada uma recebe? Arraste os chocolates at\xE9 as crian\xE7as."
     _descricaoVozMasculina: {fileID: 8300000, guid: 55a2985b69c05854c9932bdde0a06adf, type: 3}
     _descricaoVozFeminina: {fileID: 8300000, guid: 410a9adf334da364f97b6a499d7d55d0, type: 3}
