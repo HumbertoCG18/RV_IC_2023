@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class checagem : MonoBehaviour
+public class detectaPeca : MonoBehaviour
 {
 
     public int unidade, dezena, centena, questaoCount;
     public Collider unidadeCollider, dezenaCollider, centenaCollider;
     public TMP_Text unidadeDisplay, dezenaDisplay, centenaDisplay;
+    public GameObject detecta; 
 
     // Start is called before the first frame update
     void Start()
@@ -28,19 +29,28 @@ public class checagem : MonoBehaviour
         if (other.gameObject.CompareTag("Unidade") /*&& unidadeCollider.bounds.Contains(other.gameObject.transform.position)*/)
         {
             incUnidade();
+            Bounds unidadeBounds = unidadeCollider.bounds;
+            Debug.Log("Collider Position: " + unidadeCollider.transform.position);
+            Debug.Log("Object Position: " + other.gameObject.transform.position);
 
-            if(unidade >= 0 && unidade < 10)
+
+            if (unidade >= 0 && unidade < 10 && unidadeBounds.Contains(other.gameObject.transform.position))
             {
                 unidadeDisplay.text = (unidade.ToString());
                 Debug.Log("Unidade Incrementada: " + unidade);
+                Debug.Log("Peça teste dentro da unidade? " + unidadeBounds.Contains(detecta.gameObject.transform.position));
             }
-            else if(unidade <= 10)
+            else if(unidade <= 10 && unidadeBounds.Contains(other.gameObject.transform.position))
             {
                 unidadeDisplay.text = ("Peças demais!");
             }
-            else
+            else if (unidade < 0 && unidadeBounds.Contains(other.gameObject.transform.position))
             {
                 unidadeDisplay.text = ("Erro: Contagem negativa detectada, reinicie o exercício");
+            }
+            else
+            {
+
             }
         }
         else if (other.gameObject.CompareTag("Dezena") /*&& dezenaCollider.bounds.Contains(other.gameObject.transform.position)*/)

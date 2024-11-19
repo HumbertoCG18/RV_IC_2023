@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2741479273844961831}
   - component: {fileID: 5222235025645037581}
   - component: {fileID: 3340025228226983449}
+  - component: {fileID: 6374689685572778907}
   m_Layer: 0
   m_Name: AreaUnidade
-  m_TagString: Untagged
+  m_TagString: Unidade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +106,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 25, z: 2}
   m_Center: {x: 0, y: 12.5, z: 0}
+--- !u!114 &6374689685572778907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580952600238835897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215746d01d14c444a992785c5186be6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medida: 0
+  areaMedida: {fileID: 580952600238835897}
+  medidaDisplay: {fileID: 0}
 --- !u!1 &911147480631147332
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,8 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2559806866757353768}
-  - component: {fileID: 5635211220255836401}
-  - component: {fileID: 8778178944563074659}
+  - component: {fileID: 1625790405310126187}
   m_Layer: 0
   m_Name: Mesa Posicional
   m_TagString: Untagged
@@ -452,7 +467,7 @@ Transform:
   m_GameObject: {fileID: 2387105409975104917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.779}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -460,7 +475,7 @@ Transform:
   - {fileID: 3226789212824994122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5635211220255836401
+--- !u!114 &1625790405310126187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -469,40 +484,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2387105409975104917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b118b797710ef0849878807043ab9748, type: 3}
+  m_Script: {fileID: 11500000, guid: b7ff9ca7990542642a81418da5dc3b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidade: 0
-  dezena: 0
-  centena: 0
-  questaoCount: 0
-  unidadeCollider: {fileID: 3340025228226983449}
-  dezenaCollider: {fileID: 4539499873798851159}
-  centenaCollider: {fileID: 5299143573936708163}
-  unidadeDisplay: {fileID: 0}
-  dezenaDisplay: {fileID: 0}
-  centenaDisplay: {fileID: 0}
---- !u!65 &8778178944563074659
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2387105409975104917}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 0.75, z: 2}
-  m_Center: {x: 2.34, y: 0.9, z: -2.47}
+  DetectaUnidade: {fileID: 6374689685572778907}
+  DetectaDezena: {fileID: 8675925604252713110}
+  DetectaCentena: {fileID: 804888924266653272}
 --- !u!1 &2871137565846350271
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,9 +712,10 @@ GameObject:
   - component: {fileID: 8135005909204307740}
   - component: {fileID: 7639011144169101018}
   - component: {fileID: 5299143573936708163}
+  - component: {fileID: 804888924266653272}
   m_Layer: 0
   m_Name: AreaCentena
-  m_TagString: Untagged
+  m_TagString: Centena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -818,6 +806,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 25, z: 2}
   m_Center: {x: 0, y: 12.5, z: 0}
+--- !u!114 &804888924266653272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886300872299253821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215746d01d14c444a992785c5186be6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medida: 0
+  areaMedida: {fileID: 3886300872299253821}
+  medidaDisplay: {fileID: 0}
 --- !u!1 &3965338955483269354
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,9 +938,10 @@ GameObject:
   - component: {fileID: 4858652053978227335}
   - component: {fileID: 1413033881292560535}
   - component: {fileID: 4539499873798851159}
+  - component: {fileID: 8675925604252713110}
   m_Layer: 0
   m_Name: AreaDezena
-  m_TagString: Untagged
+  m_TagString: Dezena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1028,6 +1032,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 25, z: 2}
   m_Center: {x: 0, y: 12.5, z: 0}
+--- !u!114 &8675925604252713110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347397241246590665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215746d01d14c444a992785c5186be6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medida: 0
+  areaMedida: {fileID: 4347397241246590665}
+  medidaDisplay: {fileID: 0}
 --- !u!1 &4811147517358933174
 GameObject:
   m_ObjectHideFlags: 0

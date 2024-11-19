@@ -5,86 +5,65 @@ using UnityEngine;
 
 public class checagemQuestao : MonoBehaviour
 {
+    //private int unidade, dezena, centena;
+    //public checagem unidadeChecagem, dezenaChecagem, centenaChecagem;
+    public DetectaIndividual DetectaUnidade, DetectaDezena, DetectaCentena;
     private int unidade, dezena, centena;
-    public checagem unidadeChecagem, dezenaChecagem, centenaChecagem;
+
+    /*
+     if (smallCollider1 == null)
+            smallCollider1 = GameObject.Find("SmallCollider1").GetComponent<SmallColliderTrigger>();
+        if (smallCollider2 == null)
+            smallCollider2 = GameObject.Find("SmallCollider2").GetComponent<SmallColliderTrigger>();
+        if (smallCollider3 == null)
+            smallCollider3 = GameObject.Find("SmallCollider3").GetComponent<SmallColliderTrigger>();
+    }
+     */
+
     // Start is called before the first frame update
     void Start()
     {
-        unidade = 0;
-        dezena = 0;
-        centena = 0;
+        if(DetectaUnidade != null)
+        {
+            DetectaUnidade = GameObject.Find("AreaUnidade").GetComponent<DetectaIndividual>();
+        }
+        if(DetectaDezena != null)
+        {
+            DetectaDezena = GameObject.Find("AreaDezena").GetComponent<DetectaIndividual>();
+        }
+        if(DetectaCentena != null)
+        {
+            DetectaCentena = GameObject.Find("AreaCentena").GetComponent<DetectaIndividual>();
+        }
+
+        unidade = DetectaUnidade.getMedida();
+        dezena = DetectaDezena.getMedida();
+        centena = DetectaCentena.getMedida();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void incUnidade()
-    {
-        if (unidade < 10)
+        //Se houverem mudanças na unidade, dezena ou centena, atualiza o valor alterado.
+        if(unidade != DetectaUnidade.getMedida())
         {
-            unidade++;
-            Debug.Log("Unidade Incrementada");
+            unidade = DetectaUnidade.getMedida();
+            Debug.Log("Unidade: " + unidade);
         }
-    }
 
-    void decUnidade()
-    {
-        if (unidade >= 0)
+        if(dezena != DetectaDezena.getMedida())
         {
-            unidade--;
-            Debug.Log("Unidade Decrementada");
+            dezena = DetectaDezena.getMedida();
+            Debug.Log("Dezena: " + dezena);
         }
-    }
 
-    void incDezena()
-    {
-        if (dezena <= 10)
+        if(centena != DetectaCentena.getMedida())
         {
-            dezena++;
-            Debug.Log("Dezena Incrementada");
+            centena = DetectaCentena.getMedida();
+            Debug.Log("Centena: " + centena);
         }
+
+
     }
 
-    void decDezena()
-    {
-        if (dezena >= 0)
-        {
-            dezena--;
-            Debug.Log("Dezena Decrementada");
-        }
-    }
-
-    void incCentena()
-    {
-        if (centena <= 10)
-        {
-            centena++;
-            Debug.Log("Centena Incrementada");
-        }
-    }
-
-    void decCentena()
-    {
-        if (centena >= 0)
-        {
-            centena--;
-            Debug.Log("Centena Decrementada");
-        }
-    }
-
-    int getUnidade()
-    {
-        return unidade;
-    }
-    int getDezena()
-    {
-        return dezena;
-    }
-    int getCentena()
-    {
-        return centena;
-    }
 }
